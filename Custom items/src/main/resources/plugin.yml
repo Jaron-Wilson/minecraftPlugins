@@ -1,0 +1,88 @@
+name: Main
+version: ${project.version}
+main: me.jaron.plugin.Main
+api-version: 1.17
+authors: [ SyntaxError ]
+description: Source code for the Custom Items in the videos
+commands:
+  giveall:
+    description: gives all
+    usage: /<command>
+  givegrapplinghook:
+    description: gives a grappling hook to the player
+    usage: /<command>
+  giveteleportsword:
+    description: gives a teleport sword to the player
+    usage: /<command>
+  givethegiftingfish:
+    description: gives the gifting fish to the player
+    usage: /<command>
+  giveexplosivebow:
+    description: gives an explosive bow to the player
+    usage: /<command>
+  giveinfinitewaterbucket:
+    description: gives an infinite water bucket to the player
+    usage: /<command>
+  giveinfinitelavabucket:
+    description: gives an infinite lava bucket to the player
+    usage: /<command>
+  givemachinegunbow:
+    description: gives a machine gun bow to the player
+    usage: /<command>
+  givemultibreakpickaxe:
+    description: gives a multibreak pickaxe to the player
+    usage: /<command>
+  givemidaspickaxe:
+    description: gives a midas pickaxe to the player
+    usage: /<command>
+  giveboomerang:
+    description: gives a boomerang to the player
+    usage: /<command>
+  givehomingbow:
+    description: gives a homing bow to the player
+    usage: /<command>
+  giverocketlauncher:
+    description: gives a rocket launcher to the player
+    usage: /<command>
+  givethrowingaxe:
+    description: gives a throwing axe to the player
+    usage: /<command>
+  giveundeadsword:
+    description: gives the player an undead sword
+    usage: /<command>
+  givethrowabletnt:
+    description: gives the player a throwable tnt
+    usage: /<command>
+  givelightningaxe:
+    description: gives the player a lightning axe
+    usage: /<command>
+  giveautosmeltpickaxe:
+    description: gives the player an autosmelt pickaxe
+    usage: /<command>
+  givesmokebow:
+    description: gives the player a smoke bow
+    usage: /<command>
+  givefireball:
+    description: gives the player a fireball
+    usage: /<command>
+  givetripleshotbow:
+    description: gives the player a triple shot bow
+    usage: /<command>
+  givebomberelytra:
+    description: gives the player a bomber elytra
+    usage: /<command>
+  giveautoshootchestplate:
+    description: gives the player an auto shoot chestplate
+    usage: /<command>
+  giveairstrikebow:
+    description: gives the player an air strike bow
+    usage: /<command>
+  givechunkminerpickaxe:
+    description: gives the player a chunk miner pickaxe
+    usage: /<command>
+  giveorecompass:
+    description: gives the player an ore compass
+    usage: /<command>
+  givezombieknightspawnegg:
+    description: gives the player a zombie knight spawn egg
+    usage: /<command>
