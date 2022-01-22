@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.clickWeapons;
 
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;

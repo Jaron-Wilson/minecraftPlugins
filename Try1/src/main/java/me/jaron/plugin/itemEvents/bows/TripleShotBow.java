@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.bows;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;

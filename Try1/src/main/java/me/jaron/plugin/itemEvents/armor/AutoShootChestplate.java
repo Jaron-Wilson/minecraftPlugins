@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.armor;
 
 import me.jaron.plugin.Main;
 import me.jaron.plugin.managers.ItemManager;

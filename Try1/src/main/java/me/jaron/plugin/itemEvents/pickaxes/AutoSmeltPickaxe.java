@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.pickaxes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

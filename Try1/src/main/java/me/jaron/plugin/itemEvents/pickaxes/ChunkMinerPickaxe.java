@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.pickaxes;
 
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.ChatColor;

@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.bows;
 
 import me.jaron.plugin.Main;
 import org.bukkit.Particle;

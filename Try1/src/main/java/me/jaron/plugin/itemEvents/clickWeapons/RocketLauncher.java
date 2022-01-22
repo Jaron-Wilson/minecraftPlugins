@@ -1,4 +1,4 @@
-package me.jaron.plugin.itemEvents;
+package me.jaron.plugin.itemEvents.clickWeapons;
 
 import me.jaron.plugin.Main;
 import org.bukkit.Location;
