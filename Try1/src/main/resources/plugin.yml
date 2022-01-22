@@ -62,9 +62,9 @@ commands:
   givemidaspickaxe:
     description: gives a midas pickaxe to the player
     usage: /<command>
-#  giveboomerang:
-#    description: gives a boomerang to the player
-#    usage: /<command>
+  giveboomerang:
+    description: gives a boomerang to the player
+    usage: /<command>
   givehomingbow:
     description: gives a homing bow to the player
     usage: /<command>
