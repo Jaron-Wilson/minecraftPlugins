@@ -1,0 +1,7 @@
+name: Damagedplayer
+version: 1.0
+main: me.jaron.damagedplayer.Damagedplayer
+api-version: 1.16
+
+commands:
+  start:
