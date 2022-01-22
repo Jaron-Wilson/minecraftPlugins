@@ -1,0 +1,13 @@
+name: Creeperspawntest
+version: ${project.version}
+main: me.jaron.creepertest.creeperspawntest.Creeperspawntest
+api-version: 1.16
+
+commands:
+  createnpc:
+    destription: HEllo
+  npcz:
+    description: NPC Citizens
+    usage: /<command>
+depend:
+   - Citizens
