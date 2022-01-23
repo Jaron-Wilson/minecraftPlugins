@@ -14,5 +14,5 @@ Here are images:
 <details open>
   <summary>Hardened Diamond</summary>
   <p>Here is to craft a diamond for the specials, and it is shapeless </p>
-  ![image](https://user-images.githubusercontent.com/78304954/150661077-d226444f-c533-42c7-bb73-c8ef9e08dc85.png)
+  <p>![image](https://user-images.githubusercontent.com/78304954/150661077-d226444f-c533-42c7-bb73-c8ef9e08dc85.png)</p>
 </details>
