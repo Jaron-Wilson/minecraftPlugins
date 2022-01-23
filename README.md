@@ -25,113 +25,77 @@ To build it into a jar (intellij):
       <p>
       
 commands: <br>
-#  MOBS <br>
+MOBS <br>
   necromancer: <br>
     description: Create a boss that will attack you! <br>
-    usage: /<command> <br>
   revenant: <br>
     description: Creates a boss <br>
-    usage: /<command> <br>
   zombieboss: <br>
     description: Creates a zombieboss! <br>
-    usage: /<command> <br>
   skeletonboss: <br>
     description: Creates a skeletonboss! <br>
-    usage: /<command> <br>
   necromancerapprentice: <br>
     description: create a boss apprentice <br>
-    usage: /<command> <br>
   spawnBosses: <br>
     description: spawns all bosses <br>
-    usage: /<command> <br>
   spawn: <br>
-    usage: /<command> <br>
 #  npc: <br>
 #    description: npc <br>
-#    usage: /npc <br>
-# <br>
-# CUSTOM ITEMS <br>
+ CUSTOM ITEMS <br>
   giveall: <br>
     description: gives all <br>
-    usage: /<command> <br>
   givegrapplinghook: <br>
     description: gives a grappling hook to the player <br>
-    usage: /<command> <br>
   giveteleportsword: <br>
     description: gives a teleport sword to the player <br>
-    usage: /<command> <br>
   givethegiftingfish: <br>
     description: gives the gifting fish to the player <br>
-    usage: /<command> <br>
   giveexplosivebow: <br>
     description: gives an explosive bow to the player <br>
-    usage: /<command> <br>
   giveinfinitewaterbucket: <br>
     description: gives an infinite water bucket to the player <br>
-    usage: /<command> <br>
   giveinfinitelavabucket: <br>
     description: gives an infinite lava bucket to the player <br>
-    usage: /<command> <br>
   givemachinegunbow: <br>
     description: gives a machine gun bow to the player <br>
-    usage: /<command> <br>
   givemultibreakpickaxe: <br>
     description: gives a multibreak pickaxe to the player <br>
-    usage: /<command> <br>
   givemidaspickaxe: <br>
     description: gives a midas pickaxe to the player <br>
-    usage: /<command> <br>
   giveboomerang: <br>
     description: gives a boomerang to the player <br>
-    usage: /<command> <br>
   givehomingbow: <br>
     description: gives a homing bow to the player <br>
-    usage: /<command> <br>
   giverocketlauncher: <br>
     description: gives a rocket launcher to the player <br>
-    usage: /<command> <br>
   givethrowingaxe: <br>
     description: gives a throwing axe to the player <br>
-    usage: /<command> <br>
   giveundeadsword: <br>
     description: gives the player an undead sword <br>
-    usage: /<command> <br>
   givethrowabletnt: <br>
     description: gives the player a throwable tnt <br>
-    usage: /<command> <br>
   givelightningaxe: <br>
     description: gives the player a lightning axe <br>
-    usage: /<command> <br>
   giveautosmeltpickaxe: <br>
     description: gives the player an autosmelt pickaxe <br>
-    usage: /<command> <br>
   givesmokebow: <br>
     description: gives the player a smoke bow <br>
-    usage: /<command> <br>
   givefireball: <br>
     description: gives the player a fireball <br>
-    usage: /<command> <br>
   givetripleshotbow: <br>
     description: gives the player a triple shot bow <br>
-    usage: /<command> <br>
   givebomberelytra: <br>
     description: gives the player a bomber elytra <br>
-    usage: /<command> <br>
   giveautoshootchestplate: <br>
     description: gives the player an auto shoot chestplate <br>
-    usage: /<command> <br>
   giveairstrikebow: <br>
     description: gives the player an air strike bow <br>
-    usage: /<command> <br>
   givechunkminerpickaxe: <br>
     description: gives the player a chunk miner pickaxe <br>
-    usage: /<command> <br>
   giveorecompass: <br>
     description: gives the player an ore compass <br>
-    usage: /<command> <br>
   givezombieknightspawnegg: <br>
     description: gives the player a zombie knight spawn egg <br>
-    usage: /<command> <br>
       </p>
    </details>
 I also added Custom Recipes and Smelting Recipes for the items, I will later post a video on how I did them.
