@@ -18,12 +18,14 @@ public class ItemBlocksEventManager implements Listener {
             if (event.getClickedBlock() == null ||
                     event.getItem() == null ||
                     event.getItem().getItemMeta() == null ||
-                    event.getItem().getItemMeta().getLore() == null ||
-                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta() == null ||
-                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore() == null ||
-                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null
-            ){
-                System.out.println("");
+                    event.getItem().getItemMeta().getLore() == null) {
+
+                if (ItemRecipeManager.HardenedDiamondBlock.getItemMeta() == null ||
+                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore() == null ||
+                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null ){
+                    
+                    System.out.println("");
+                }
             }
 
             if(event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)){

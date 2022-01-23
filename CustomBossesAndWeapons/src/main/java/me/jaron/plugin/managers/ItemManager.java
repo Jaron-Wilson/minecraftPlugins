@@ -135,6 +135,7 @@ public class ItemManager {
         item.setItemMeta(meta);
         TheGiftingFish = item;
     }
+
     private static void createExplosiveBow(){
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
@@ -164,6 +165,11 @@ public class ItemManager {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
         InfiniteWaterBucket = item;
+
+//        ShapelessRecipe infinite_water_bucket_recipe = new ShapelessRecipe(NamespacedKey.minecraft("infinite_water_bucket"), item);
+//        infinite_water_bucket_recipe.addIngredient(new RecipeChoice.ExactChoice(HardenedDiamond));
+//        infinite_water_bucket_recipe.addIngredient(1, Material.WATER_BUCKET);
+//        Bukkit.getServer().addRecipe(infinite_water_bucket_recipe);
     }
     private static void createInfiniteLavaBucket(){
         ItemStack item = new ItemStack(Material.LAVA_BUCKET, 1);
