@@ -25,7 +25,8 @@ Here are images:
 </details>
    <details close>
       <summary>Hardened Diamond Blocks</summary>
-      <a href=https://user-images.githubusercontent.com/78304954/150661426-eeab9b21-d344-42a0-b84a-d4ad7ebb632f.png>Furnace</a> In Blast furnace, Use a Hardened Diamond in it, it will take up to 1-3 minutes have not times.<br>
+      In Blast furnace, Use a Hardened Diamond in it, it will take up to 1-3 minutes have not timed.
+      <a href=https://user-images.githubusercontent.com/78304954/150661426-eeab9b21-d344-42a0-b84a-d4ad7ebb632f.png>Furnace</a><br>
    </details>
    
 </details>
