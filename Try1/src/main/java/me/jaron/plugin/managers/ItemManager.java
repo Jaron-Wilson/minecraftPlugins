@@ -1,17 +1,21 @@
 package me.jaron.plugin.managers;
 
+import me.jaron.plugin.customRecipies.ItemRecipeManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static me.jaron.plugin.customRecipies.ItemRecipeManager.HardenedDiamond;
+import static me.jaron.plugin.customRecipies.ItemRecipeManager.HardenedDiamondBlock;
 
 public class ItemManager {
 
@@ -83,6 +87,12 @@ public class ItemManager {
         meta.setUnbreakable(true);
         item.setItemMeta(meta);
         GrapplngHook = item;
+
+        ShapedRecipe grappling_hook_recipe = new ShapedRecipe(NamespacedKey.minecraft("grappling_hook"), item);
+        grappling_hook_recipe.shape("  N", " NH", "N H");
+        grappling_hook_recipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamond));
+        grappling_hook_recipe.setIngredient('N', Material.STICK);
+        Bukkit.getServer().addRecipe(grappling_hook_recipe);
     }
     private static void createTeleportSword(){
         ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
@@ -103,7 +113,14 @@ public class ItemManager {
         meta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, speed);
         item.setItemMeta(meta);
         TeleportSword = item;
+
+        ShapedRecipe teleport_sword_Recipe = new ShapedRecipe(NamespacedKey.minecraft("teleport_sword"), item);
+        teleport_sword_Recipe.shape(" H ", " H ", " N ");
+        teleport_sword_Recipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamondBlock));
+        teleport_sword_Recipe.setIngredient('N', Material.STICK);
+        Bukkit.getServer().addRecipe(teleport_sword_Recipe);
     }
+
     private static void createTheGiftingFish(){
         ItemStack item = new ItemStack(Material.PUFFERFISH, 1);
         ItemMeta meta = item.getItemMeta();
@@ -127,6 +144,12 @@ public class ItemManager {
         meta.setLore(lore);
         item.setItemMeta(meta);
         ExplosiveBow = item;
+
+        ShapedRecipe explosive_bow_recipe = new ShapedRecipe(NamespacedKey.minecraft("explosive_bow"), item);
+        explosive_bow_recipe.shape("NH ", "N H", "NH ");
+        explosive_bow_recipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamond));
+        explosive_bow_recipe.setIngredient('N', Material.STICK);
+        Bukkit.getServer().addRecipe(explosive_bow_recipe);
     }
     private static void createInfiniteWaterBucket(){
         ItemStack item = new ItemStack(Material.WATER_BUCKET, 1);

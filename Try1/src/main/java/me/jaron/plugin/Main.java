@@ -2,6 +2,7 @@ package me.jaron.plugin;
 
 import me.jaron.plugin.commands.Commands;
 import me.jaron.plugin.commands.ItemCommands;
+import me.jaron.plugin.customRecipies.ItemRecipeManager;
 import me.jaron.plugin.itemEvents.*;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHookCooldown;
@@ -21,6 +22,7 @@ import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Item;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -35,6 +37,9 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         System.out.println("§8Plugin started Properly!");
+
+//        Recipes
+        ItemRecipeManager.init();
 
 //          MOBS Commands
         getCommand("necromancer").setExecutor(new Commands());
