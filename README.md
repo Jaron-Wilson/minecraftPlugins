@@ -18,8 +18,8 @@ To build it into a jar (intellij):
 <details close> 
    <summary>Make into a jar/plugin</summary>
    <a href=https://user-images.githubusercontent.com/78304954/150655726-7cbedf42-03e5-414b-b0cb-1e654becf87f.png>(Image)</a>
-</details>
-   The directory npcthings is one for custom death animations, but will not work for 1.18 YET. Will figure out how to do after all the weapons.
+</details><br>
+   The directory npcthings is one for custom death animations, but will not work for 1.18 YET. Will figure out how to do after all the weapons.<br><br>
    <details close>
       <summary>All Commands:</summary>
       <p>
@@ -97,7 +97,7 @@ To build it into a jar (intellij):
   givezombieknightspawnegg: <br>
     description: gives the player a zombie knight spawn egg <br><br>
       </p>
-   </details>
+   </details><br>
    <details close>
       <summary>Custom Materials Recipes</summary>
 I also added Custom Recipes and Smelting Recipes for the items, I will later post a video on how I did them.
@@ -131,10 +131,12 @@ Here are images:
          <a href=https://user-images.githubusercontent.com/78304954/150661574-956b0603-3cfd-47d1-993f-ee26a9f9161f.png>Grappling Recipe</a>
       </details>
       
-   </details>
-   <details close> 
+   </details><br>
+<div>
+<details close> 
    <summary>Custom Mobs</summary>
       <p>/mobManager/ Is where I keep all my cutom mobs and they were made by me but with the help of Syntax Errors video it was made possible.</p>
 </details>
+</div>
  
 </details>
