@@ -12,6 +12,7 @@ ALL THESE HAVE TO BE SEPARATE PROJECTS! Each folder is a project.
 <details open> 
    <summary> TRY1 Project: </summary>
    <p>Try1 Is a project that I a doing and The custom items is from SyntaxError, and I made it so you will not get errors and no null pointers.<p>
+   <a href=https://www.youtube.com/c/SyntaxErrorYT>SyntaxError's Youtube</a>
 
 To build it into a jar (intellij):
 <details close> 
