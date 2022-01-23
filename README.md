@@ -130,6 +130,11 @@ Here are images:
          <p>This is going to make you jump in the direction of the way you click the fishing rod.<p>
          <a href=https://user-images.githubusercontent.com/78304954/150691390-aa3ca388-8218-4505-87e7-13d00310dd01.png>Grappling Recipe</a>
       </details>
+      <details close>
+         <summary>Explosive Bow</summary>
+         <p>Creates an explosive bow.<p>
+         <a href=https://user-images.githubusercontent.com/78304954/150691762-16f91721-2379-454b-acb1-ec292b9676ae.png>Grappling Recipe</a>
+      </details>
       
    </details><br>
    
