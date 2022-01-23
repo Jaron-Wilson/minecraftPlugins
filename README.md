@@ -17,6 +17,6 @@ Here are images:
 <details close>
   <summary>Hardened Diamond</summary>
   <p>Here is to craft a diamond for the specials, and it is shapeless </p>
-  <a href=https://user-images.githubusercontent.com/78304954/150661077-d226444f-c533-42c7-bb73-c8ef9e08dc85.png>shapeless</a>
+  <a href=https://user-images.githubusercontent.com/78304954/150661077-d226444f-c533-42c7-bb73-c8ef9e08dc85.png>shapeless</a> <br>
    <a href=https://user-images.githubusercontent.com/78304954/150661198-9c187493-a3d2-45ff-9eee-2a11ba835c67.png>smelting USE NORMAL DIAMONDS!</a>
 </details>
