@@ -22,7 +22,10 @@ Here are images:
    <a href=https://user-images.githubusercontent.com/78304954/150661198-9c187493-a3d2-45ff-9eee-2a11ba835c67.png>Smelting</a> USE NORMAL DIAMONDS! (Furnace) <br>
      <p><h3>It will go slower than this!</h3> 
      <a href=https://user-images.githubusercontent.com/78304954/150661259-788bf054-ad8b-4051-9364-e92837bbbad0.mp4>Click to see </a>how to make in furnace.<p><br>
-
-
 </details>
+   <details close>
+      <summary>Hardened Diamond Blocks</summary>
+      <a href=https://user-images.githubusercontent.com/78304954/150661426-eeab9b21-d344-42a0-b84a-d4ad7ebb632f.png>Furnace</a> In Blast furnace, Use a Hardened Diamond in it, it will take up to 1-3 minutes have not times.<br>
+   </details>
+   
 </details>
