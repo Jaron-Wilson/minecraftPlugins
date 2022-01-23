@@ -19,7 +19,7 @@ To build it into a jar (intellij):
    <summary>Make into a jar/plugin</summary>
    <a href=https://user-images.githubusercontent.com/78304954/150655726-7cbedf42-03e5-414b-b0cb-1e654becf87f.png>(Image)</a>
 </details>
-   
+   The directory npcthings is one for custom death animations, but will not work for 1.18 YET. Will figure out how to do after all the weapons.
    
 I also added Custom Recipes and Smelting Recipes for the items, I will later post a video on how I did them.
 Here are images:
