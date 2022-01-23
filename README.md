@@ -34,12 +34,12 @@ Here are images:
       <p>Most of these items are in hypixel too! Thanks to SyntaxError we now have them!</p>
       <details close>
          <summary>Teleport Sword</summary>
-         <p>This sword is going to teleport you 8 blocks infront of you.<p><br>
+         <p>This sword is going to teleport you 8 blocks infront of you.<p>
          <a href=https://user-images.githubusercontent.com/78304954/150661538-36a5a01c-5fb0-49a7-9658-c98aa36114c9.png>Sword's Recipe</a>
       </details>
       <details close>
          <summary>Grappling Hook</summary>
-         <p>This is going to make you jump in the direction of the way you click the fishing rod.<p><br>
+         <p>This is going to make you jump in the direction of the way you click the fishing rod.<p>
          <a href=https://user-images.githubusercontent.com/78304954/150661574-956b0603-3cfd-47d1-993f-ee26a9f9161f.png>Grappling Recipe</a>
       </details>
       
