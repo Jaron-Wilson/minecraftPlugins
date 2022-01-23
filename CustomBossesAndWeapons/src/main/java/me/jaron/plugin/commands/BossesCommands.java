@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
-public class Commands implements CommandExecutor {
+public class BossesCommands implements CommandExecutor {
 
     static Main plugin;
 //    Try1 plugin = new Try1();

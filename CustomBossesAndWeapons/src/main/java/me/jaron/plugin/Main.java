@@ -1,6 +1,6 @@
 package me.jaron.plugin;
 
-import me.jaron.plugin.commands.Commands;
+import me.jaron.plugin.commands.BossesCommands;
 import me.jaron.plugin.commands.ItemCommands;
 import me.jaron.plugin.customRecipies.ItemRecipeManager;
 import me.jaron.plugin.itemEvents.*;
@@ -22,7 +22,6 @@ import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Item;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -42,13 +41,13 @@ public final class Main extends JavaPlugin implements Listener {
         ItemRecipeManager.init();
 
 //          MOBS Commands
-        getCommand("necromancer").setExecutor(new Commands());
-        getCommand("revenant").setExecutor(new Commands());
-        getCommand("zombieboss").setExecutor(new Commands());
-        getCommand("skeletonboss").setExecutor(new Commands());
-        getCommand("necromancerapprentice").setExecutor(new Commands());
-        getCommand("spawnBosses").setExecutor(new Commands());
-        getCommand("spawn").setExecutor(new Commands());
+        getCommand("necromancer").setExecutor(new BossesCommands());
+        getCommand("revenant").setExecutor(new BossesCommands());
+        getCommand("zombieboss").setExecutor(new BossesCommands());
+        getCommand("skeletonboss").setExecutor(new BossesCommands());
+        getCommand("necromancerapprentice").setExecutor(new BossesCommands());
+        getCommand("spawnBosses").setExecutor(new BossesCommands());
+        getCommand("spawn").setExecutor(new BossesCommands());
 //        Mobs Events
         getServer().getPluginManager().registerEvents(new Necromancer(this), this);
         getServer().getPluginManager().registerEvents(new Revenant(this), this);
