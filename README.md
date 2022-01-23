@@ -9,7 +9,7 @@ ALL THESE HAVE TO BE SEPARATE PROJECTS! Each folder is a project.
 To build it into a jar:
 <details close> 
    <summary>Make into a jar/plugin</summary>
-   <a href=https://user-images.githubusercontent.com/78304954/150655726-7cbedf42-03e5-414b-b0cb-1e654becf87f.png> Building into a jar </a>
+   <a href=https://user-images.githubusercontent.com/78304954/150655726-7cbedf42-03e5-414b-b0cb-1e654becf87f.png>(Image)</a>
 </details>
    
    
