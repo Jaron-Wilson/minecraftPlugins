@@ -28,8 +28,8 @@ public class OreCompass implements Listener {
     HashMap<Player, Location> blockLocation = new HashMap<>();
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
                 if (ItemManager.OreCompass.getItemMeta() == null || ItemManager.OreCompass.getItemMeta().getLore() == null) {
                     System.out.println("not using Ore");
@@ -72,10 +72,10 @@ public class OreCompass implements Listener {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event){
-        if(blockLocation.containsValue(event.getBlock().getLocation())){
-            for(Player player : blockLocation.keySet()){
-                if(blockLocation.get(player).equals(event.getBlock().getLocation())){
+    public void onBreak(BlockBreakEvent event) {
+        if (blockLocation.containsValue(event.getBlock().getLocation())) {
+            for (Player player : blockLocation.keySet()) {
+                if (blockLocation.get(player).equals(event.getBlock().getLocation())) {
                     player.sendMessage(ChatColor.RED + "The ore your compass was pointing to was mined!");
                     player.setCompassTarget(event.getPlayer().getWorld().getSpawnLocation());
                     blockLocation.remove(player);
@@ -85,8 +85,8 @@ public class OreCompass implements Listener {
     }
 
     @EventHandler
-    public void onLogOut(PlayerQuitEvent event){
-        if(blockLocation.containsKey(event.getPlayer())){
+    public void onLogOut(PlayerQuitEvent event) {
+        if (blockLocation.containsKey(event.getPlayer())) {
             event.getPlayer().sendMessage(ChatColor.RED + "Your Ore Compass has been reset!");
             event.getPlayer().setCompassTarget(event.getPlayer().getWorld().getSpawnLocation());
             blockLocation.remove(event.getPlayer());
@@ -94,8 +94,8 @@ public class OreCompass implements Listener {
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent event){
-        if(blockLocation.containsKey(event.getEntity())){
+    public void onDeath(PlayerDeathEvent event) {
+        if (blockLocation.containsKey(event.getEntity())) {
             event.getEntity().sendMessage(ChatColor.RED + "Your Ore Compass has been reset!");
             event.getEntity().setCompassTarget(event.getEntity().getWorld().getSpawnLocation());
             blockLocation.remove(event.getEntity());

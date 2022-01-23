@@ -18,12 +18,12 @@ public class GrapplingHook implements Listener {
     public static ItemStack grapplingHooks;
 
     @EventHandler
-    public void onFish(PlayerFishEvent event){
+    public void onFish(PlayerFishEvent event) {
 
         Player player = event.getPlayer();
 
-        if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null 
-        && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§7Travel in style with this tool...")) {
+        if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§7Travel in style with this tool...")) {
             if (event.getState().equals(PlayerFishEvent.State.REEL_IN)) {
                 if (GrapplingHookCooldown.checkCooldown(player)) {
                     Location playerLocation = player.getLocation();

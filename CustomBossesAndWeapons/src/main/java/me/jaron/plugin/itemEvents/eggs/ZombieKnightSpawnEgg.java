@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class ZombieKnightSpawnEgg implements Listener {
 
-    public static void createZombieKnight(Location location){
+    public static void createZombieKnight(Location location) {
         if (location.getWorld() == null) {
             System.out.println("location.getWorld() is null");
         }
@@ -37,8 +37,8 @@ public class ZombieKnightSpawnEgg implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
             if (event.getClickedBlock() == null ||
                     event.getItem() == null ||
@@ -47,22 +47,21 @@ public class ZombieKnightSpawnEgg implements Listener {
                     ItemManager.ZombieKnightSpawnEgg.getItemMeta() == null ||
                     ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore() == null ||
                     ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore().get(0) == null
-            ){
+            ) {
                 System.out.println("ZombieKnight was not clicked");
             }
 
-            if(event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)){
-                if(event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
-                        && event.getItem().getItemMeta().getLore().contains(ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore().get(0))){
+            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+                if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
+                        && event.getItem().getItemMeta().getLore().contains(ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore().get(0))) {
                     Location spawnLocation;
-                    if(event.getClickedBlock().isPassable()){
+                    if (event.getClickedBlock().isPassable()) {
                         spawnLocation = event.getClickedBlock().getLocation().add(0.5, 0, 0.5);
-                    }
-                    else{
+                    } else {
                         spawnLocation = event.getClickedBlock().getRelative(event.getBlockFace()).getLocation().add(0.5, 0, 0.5);
                     }
                     createZombieKnight(spawnLocation);
-                    if(!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+                    if (!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
                         event.getItem().setAmount(event.getItem().getAmount() - 1);
                     }
                     event.setCancelled(true);

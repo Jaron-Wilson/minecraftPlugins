@@ -19,14 +19,14 @@ public class DamageMultiplierSword implements Listener {
 
     Main plugin;
 
-    public DamageMultiplierSword(Main plugin){
+    public DamageMultiplierSword(Main plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent event){
-        if(event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getLore() != null
-                && event.getCurrentItem().getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")){
+    public void onClick(InventoryClickEvent event) {
+        if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getLore() != null
+                && event.getCurrentItem().getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")) {
             String zombie = plugin.getConfig().getString("undeadsword.zombie");
             String skeleton = plugin.getConfig().getString("undeadsword.skeleton");
             ItemMeta meta = event.getCurrentItem().getItemMeta();
@@ -39,9 +39,9 @@ public class DamageMultiplierSword implements Listener {
     }
 
     @EventHandler
-    public void onPickUp(PlayerPickupItemEvent event){
-        if(event.getItem().getItemStack().getItemMeta() != null && event.getItem().getItemStack().getItemMeta().getLore() != null
-                && event.getItem().getItemStack().getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")){
+    public void onPickUp(PlayerPickupItemEvent event) {
+        if (event.getItem().getItemStack().getItemMeta() != null && event.getItem().getItemStack().getItemMeta().getLore() != null
+                && event.getItem().getItemStack().getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")) {
             String zombie = plugin.getConfig().getString("undeadsword.zombie");
             String skeleton = plugin.getConfig().getString("undeadsword.skeleton");
             ItemMeta meta = event.getItem().getItemStack().getItemMeta();
@@ -54,10 +54,10 @@ public class DamageMultiplierSword implements Listener {
     }
 
     @EventHandler
-    public void onSwap(PlayerItemHeldEvent event){
-        if(event.getPlayer().getInventory().getItem(event.getNewSlot()) != null && event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta() != null
+    public void onSwap(PlayerItemHeldEvent event) {
+        if (event.getPlayer().getInventory().getItem(event.getNewSlot()) != null && event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta() != null
                 && event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta().getLore() != null
-                && event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")){
+                && event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")) {
             String zombie = plugin.getConfig().getString("undeadsword.zombie");
             String skeleton = plugin.getConfig().getString("undeadsword.skeleton");
             ItemMeta meta = event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta();
@@ -70,8 +70,8 @@ public class DamageMultiplierSword implements Listener {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event){
-        if(event.getDamager() instanceof Player) {
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
             if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
                     && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Damage Multiplier")) {

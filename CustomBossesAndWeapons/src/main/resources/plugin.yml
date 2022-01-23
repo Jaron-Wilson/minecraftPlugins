@@ -6,7 +6,7 @@ description: Basic
 
 
 commands:
-#  MOBS
+  #  MOBS
   necromancer:
     description: Create a boss that will attack you!
     usage: /<command>
@@ -27,11 +27,11 @@ commands:
     usage: /<command>
   spawn:
     usage: /<command>
-#  npc:
-#    description: npc
-#    usage: /npc
-#
-# CUSTOM ITEMS
+  #  npc:
+  #    description: npc
+  #    usage: /npc
+  #
+  # CUSTOM ITEMS
   giveall:
     description: gives all
     usage: /<command>

@@ -14,12 +14,12 @@ public class GrapplingHookCooldown {
     }
 
     public static void setCooldown(Player player, int seconds) {
-        double delay = (double)(System.currentTimeMillis() + (seconds * 1000));
+        double delay = (double) (System.currentTimeMillis() + (seconds * 1000));
         cooldowns.put(player.getUniqueId(), delay);
     }
 
     public static boolean checkCooldown(Player player) {
-        if(!cooldowns.containsKey(player.getUniqueId()) || cooldowns.get(player.getUniqueId()) <= System.currentTimeMillis()){
+        if (!cooldowns.containsKey(player.getUniqueId()) || cooldowns.get(player.getUniqueId()) <= System.currentTimeMillis()) {
             return true;
         }
         return false;

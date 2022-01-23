@@ -15,20 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultibreakPickaxe implements Listener {
-    
+
     List<Block> blocks = new ArrayList<>();
 
     BlockFace blockface = null;
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
+    public void onClick(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             blockface = event.getBlockFace();
         }
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event){
+    public void onBreak(BlockBreakEvent event) {
         if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
             System.out.println("Not using: MultibreakPickaxe");
         } else {

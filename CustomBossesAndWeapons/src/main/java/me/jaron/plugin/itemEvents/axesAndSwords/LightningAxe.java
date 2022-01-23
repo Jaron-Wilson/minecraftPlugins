@@ -16,14 +16,14 @@ import java.util.List;
 public class LightningAxe implements Listener {
 
     @EventHandler
-    public void onHit(EntityDamageByEntityEvent event){
-        if(event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity){
+    public void onHit(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
 
             Player player = (Player) event.getDamager();
             LivingEntity livingentity = (LivingEntity) event.getEntity();
 
-            if(player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Stormbreaker")){
+            if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Stormbreaker")) {
 
                 player.getWorld().strikeLightningEffect(event.getEntity().getLocation());
 
@@ -38,13 +38,13 @@ public class LightningAxe implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if(event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Stormbreaker")){
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                    && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Stormbreaker")) {
 
-                for(Entity entity : event.getPlayer().getNearbyEntities(12, 12, 12)){
-                    if(entity instanceof LivingEntity){
+                for (Entity entity : event.getPlayer().getNearbyEntities(12, 12, 12)) {
+                    if (entity instanceof LivingEntity) {
 
                         LivingEntity livingentity = (LivingEntity) entity;
 

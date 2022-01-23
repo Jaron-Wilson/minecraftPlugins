@@ -11,7 +11,7 @@ import java.util.Collection;
 public class MidasPickaxe implements Listener {
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event){
+    public void onBreak(BlockBreakEvent event) {
         if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
             System.out.println("not using MidasPickaxe");
         } else {

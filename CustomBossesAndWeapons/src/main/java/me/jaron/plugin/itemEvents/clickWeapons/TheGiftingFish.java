@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class TheGiftingFish implements Listener {
 
-        DamageMultiplierSword damageMultiplierSword;
+    DamageMultiplierSword damageMultiplierSword;
     private ItemStack[] giftsack = {
             new ItemStack(Material.DIAMOND, 1),
             new ItemStack(Material.REDSTONE, 1),
@@ -26,7 +26,7 @@ public class TheGiftingFish implements Listener {
     };
 
     @EventHandler
-    public void OnPlayerInteract(PlayerInteractEvent event){
+    public void OnPlayerInteract(PlayerInteractEvent event) {
         if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
             System.out.println("Not using: The GiftingFish");
         } else {

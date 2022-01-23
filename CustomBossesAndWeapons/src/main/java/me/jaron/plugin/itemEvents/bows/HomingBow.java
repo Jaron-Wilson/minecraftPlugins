@@ -15,7 +15,7 @@ public class HomingBow implements Listener {
 
     Main plugin;
 
-    public HomingBow(Main plugin){
+    public HomingBow(Main plugin) {
         this.plugin = plugin;
     }
 

@@ -94,7 +94,8 @@ public class ItemManager {
         grappling_hook_recipe.setIngredient('N', Material.STICK);
         Bukkit.getServer().addRecipe(grappling_hook_recipe);
     }
-    private static void createTeleportSword(){
+
+    private static void createTeleportSword() {
         ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§5Teleport Sword");
@@ -122,7 +123,7 @@ public class ItemManager {
         Bukkit.getServer().addRecipe(teleport_sword_Recipe);
     }
 
-    private static void createTheGiftingFish(){
+    private static void createTheGiftingFish() {
         ItemStack item = new ItemStack(Material.PUFFERFISH, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§cThe Gifting Fish");
@@ -136,7 +137,7 @@ public class ItemManager {
         TheGiftingFish = item;
     }
 
-    private static void createExplosiveBow(){
+    private static void createExplosiveBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§5Explosive Bow");
@@ -153,7 +154,8 @@ public class ItemManager {
         explosive_bow_recipe.setIngredient('N', Material.STICK);
         Bukkit.getServer().addRecipe(explosive_bow_recipe);
     }
-    private static void createInfiniteWaterBucket(){
+
+    private static void createInfiniteWaterBucket() {
         ItemStack item = new ItemStack(Material.WATER_BUCKET, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§5Infinite Water Bucket");
@@ -171,7 +173,8 @@ public class ItemManager {
 //        infinite_water_bucket_recipe.addIngredient(1, Material.WATER_BUCKET);
 //        Bukkit.getServer().addRecipe(infinite_water_bucket_recipe);
     }
-    private static void createInfiniteLavaBucket(){
+
+    private static void createInfiniteLavaBucket() {
         ItemStack item = new ItemStack(Material.LAVA_BUCKET, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§5Infinite Lava Bucket");
@@ -184,7 +187,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         InfiniteLavaBucket = item;
     }
-    private static void createMachineGunBow(){
+
+    private static void createMachineGunBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§9Machine Gun Bow");
@@ -196,7 +200,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         MachineGunBow = item;
     }
-    private static void createMultibreakPickaxe(){
+
+    private static void createMultibreakPickaxe() {
         ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Multibreak Pickaxe");
@@ -208,7 +213,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         MultibreakPickaxe = item;
     }
-    private static void createMidasPickaxe(){
+
+    private static void createMidasPickaxe() {
         ItemStack item = new ItemStack(Material.GOLDEN_PICKAXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Midas Pickaxe");
@@ -221,7 +227,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         MidasPickaxe = item;
     }
-    private static void createBoomerang(){
+
+    private static void createBoomerang() {
         ItemStack item = new ItemStack(Material.BONE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Boomerang");
@@ -234,7 +241,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         Boomerang = item;
     }
-    private static void createHomingBow(){
+
+    private static void createHomingBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Homing Bow");
@@ -247,7 +255,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         HomingBow = item;
     }
-    private static void createRocketLauncher(){
+
+    private static void createRocketLauncher() {
         ItemStack item = new ItemStack(Material.GOLDEN_SHOVEL, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Rocket Launcher");
@@ -268,7 +277,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         RocketLauncher = item;
     }
-    private static void createThrowingAxe(){
+
+    private static void createThrowingAxe() {
         ItemStack item = new ItemStack(Material.NETHERITE_AXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Throwing Axe");
@@ -284,7 +294,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         ThrowingAxe = item;
     }
-    private static void createUndeadSword(){
+
+    private static void createUndeadSword() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Undead Sword");
@@ -304,7 +315,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         UndeadSword = item;
     }
-    private static void createThrowableTNT(){
+
+    private static void createThrowableTNT() {
         ItemStack item = new ItemStack(Material.TNT, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Throwable TNT");
@@ -317,7 +329,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         ThrowableTNT = item;
     }
-    private static void createLightningAxe(){
+
+    private static void createLightningAxe() {
         ItemStack item = new ItemStack(Material.IRON_AXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Lightning Axe");
@@ -336,7 +349,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         LightningAxe = item;
     }
-    private static void createAutoSmeltPickaxe(){
+
+    private static void createAutoSmeltPickaxe() {
         ItemStack item = new ItemStack(Material.NETHERITE_PICKAXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6AutoSmelt Pickaxe");
@@ -347,7 +361,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         AutoSmeltPickaxe = item;
     }
-    private static void createSmokeBow(){
+
+    private static void createSmokeBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Smoke Bow");
@@ -361,7 +376,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         SmokeBow = item;
     }
-    private static void createFireball(){
+
+    private static void createFireball() {
         ItemStack item = new ItemStack(Material.FIRE_CHARGE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Fireball");
@@ -372,7 +388,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         Fireball = item;
     }
-    private static void createTripleShotBow(){
+
+    private static void createTripleShotBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Triple Shot Bow");
@@ -385,7 +402,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         TripleShotBow = item;
     }
-    private static void createBomberElytra(){
+
+    private static void createBomberElytra() {
         ItemStack item = new ItemStack(Material.ELYTRA, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Bomber Elytra");
@@ -400,7 +418,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         BomberElytra = item;
     }
-    private static void createAutoShootChestplate(){
+
+    private static void createAutoShootChestplate() {
         ItemStack item = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Auto Shoot Chestplate");
@@ -413,7 +432,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         AutoShootChestplate = item;
     }
-    private static void createAirStrikeBow(){
+
+    private static void createAirStrikeBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Air Strike Bow");
@@ -425,7 +445,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         AirStrikeBow = item;
     }
-    private static void createChunkMinerPickaxe(){
+
+    private static void createChunkMinerPickaxe() {
         ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Chunk Miner Pickaxe");
@@ -440,7 +461,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         ChunkMinerPickaxe = item;
     }
-    private static void createOreCompass(){
+
+    private static void createOreCompass() {
         ItemStack item = new ItemStack(Material.COMPASS, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Ore Compass");
@@ -452,7 +474,8 @@ public class ItemManager {
         item.setItemMeta(meta);
         OreCompass = item;
     }
-    private static void createZombieKnightSpawnEgg(){
+
+    private static void createZombieKnightSpawnEgg() {
         ItemStack item = new ItemStack(Material.ZOMBIE_SPAWN_EGG, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6Zombie Knight Spawn Egg");

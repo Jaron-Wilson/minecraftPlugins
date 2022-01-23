@@ -16,10 +16,10 @@ public class ThrowableTNT implements Listener {
     List<FallingBlock> throwedtnt = new ArrayList<>();
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if(event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Throwable TNT")){
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                    && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Throwable TNT")) {
                 FallingBlock tnt = event.getPlayer().getWorld().spawnFallingBlock(event.getPlayer().getEyeLocation(), Material.TNT, (byte) 0);
                 tnt.setDropItem(false);
                 throwedtnt.add(tnt);
@@ -30,9 +30,9 @@ public class ThrowableTNT implements Listener {
     }
 
     @EventHandler
-    public void onFall(EntityChangeBlockEvent event){
-        if(event.getEntity() instanceof FallingBlock){
-            if(throwedtnt.contains(event.getEntity())){
+    public void onFall(EntityChangeBlockEvent event) {
+        if (event.getEntity() instanceof FallingBlock) {
+            if (throwedtnt.contains(event.getEntity())) {
                 event.getEntity().getWorld().createExplosion(event.getEntity().getLocation(), 50, false, false);
                 event.setCancelled(true);
                 event.getEntity().remove();

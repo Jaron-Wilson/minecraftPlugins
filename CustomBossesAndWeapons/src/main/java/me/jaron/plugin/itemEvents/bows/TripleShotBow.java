@@ -9,11 +9,11 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 public class TripleShotBow implements Listener {
 
     @EventHandler
-    public void onShoot(EntityShootBowEvent event){
-        if(event.getProjectile() instanceof Arrow){
-            if(event.getEntity() instanceof Player){
-                if(event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null
-                        && event.getBow().getItemMeta().getLore().contains("§6Item Ability: Three Shot")){
+    public void onShoot(EntityShootBowEvent event) {
+        if (event.getProjectile() instanceof Arrow) {
+            if (event.getEntity() instanceof Player) {
+                if (event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null
+                        && event.getBow().getItemMeta().getLore().contains("§6Item Ability: Three Shot")) {
 
                     Arrow arrow = (Arrow) event.getProjectile();
 

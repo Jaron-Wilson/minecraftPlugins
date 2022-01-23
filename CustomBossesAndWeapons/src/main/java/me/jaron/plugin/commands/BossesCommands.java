@@ -24,38 +24,38 @@ public class BossesCommands implements CommandExecutor {
             Player player = (Player) sender;
 
 //            if (!player.hasPermission("op")) {
-                if (player.isOp()) {
+            if (player.isOp()) {
 
-                    if (command.getName().equalsIgnoreCase("necromancer")) {
-                        Necromancer.createNecromancer(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("revenant")) {
-                        Revenant.createRevenant(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("zombieboss")) {
-                        ZombieMob.createZombieMob(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("skeletonboss")) {
-                        SkeletonMob.createSkeletonMob(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("necromancerapprentice")) {
-                        NecromancersApprentice.createNecromancerApprentice(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("spawnBosses")) {
-                        Necromancer.createNecromancer(player.getLocation());
-                        Revenant.createRevenant(player.getLocation());
-                        ZombieMob.createZombieMob(player.getLocation());
-                        SkeletonMob.createSkeletonMob(player.getLocation());
-                        NecromancersApprentice.createNecromancerApprentice(player.getLocation());
-                    }
-                    if (command.getName().equalsIgnoreCase("spawn")) {
-                        CoolBeamBoss.createNecromancer(player.getLocation());
-                    }
-
-                } else {
-                    sender.sendMessage(ChatColor.GOLD + "Can't use this command");
+                if (command.getName().equalsIgnoreCase("necromancer")) {
+                    Necromancer.createNecromancer(player.getLocation());
                 }
+                if (command.getName().equalsIgnoreCase("revenant")) {
+                    Revenant.createRevenant(player.getLocation());
+                }
+                if (command.getName().equalsIgnoreCase("zombieboss")) {
+                    ZombieMob.createZombieMob(player.getLocation());
+                }
+                if (command.getName().equalsIgnoreCase("skeletonboss")) {
+                    SkeletonMob.createSkeletonMob(player.getLocation());
+                }
+                if (command.getName().equalsIgnoreCase("necromancerapprentice")) {
+                    NecromancersApprentice.createNecromancerApprentice(player.getLocation());
+                }
+                if (command.getName().equalsIgnoreCase("spawnBosses")) {
+                    Necromancer.createNecromancer(player.getLocation());
+                    Revenant.createRevenant(player.getLocation());
+                    ZombieMob.createZombieMob(player.getLocation());
+                    SkeletonMob.createSkeletonMob(player.getLocation());
+                    NecromancersApprentice.createNecromancerApprentice(player.getLocation());
+                }
+                if (command.getName().equalsIgnoreCase("spawn")) {
+                    CoolBeamBoss.createNecromancer(player.getLocation());
+                }
+
+            } else {
+                sender.sendMessage(ChatColor.GOLD + "Can't use this command");
             }
-            return false;
         }
+        return false;
+    }
 }

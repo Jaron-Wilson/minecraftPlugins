@@ -17,25 +17,24 @@ public class SmokeBow implements Listener {
 
     Main plugin;
 
-    public SmokeBow(Main plugin){
+    public SmokeBow(Main plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onShoot(EntityShootBowEvent event){
-        if(event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null &&
-                event.getBow().getItemMeta().getLore().contains("§6Item Ability: Wither Smoke")){
+    public void onShoot(EntityShootBowEvent event) {
+        if (event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null &&
+                event.getBow().getItemMeta().getLore().contains("§6Item Ability: Wither Smoke")) {
 
-            if(event.getEntity() instanceof Player){
+            if (event.getEntity() instanceof Player) {
 
                 event.getProjectile().setCustomName("Smoke Bow");
 
-                new BukkitRunnable(){
-                    public void run(){
-                        if(!event.getProjectile().isDead() && !event.getProjectile().isOnGround()){
+                new BukkitRunnable() {
+                    public void run() {
+                        if (!event.getProjectile().isDead() && !event.getProjectile().isOnGround()) {
                             event.getProjectile().getWorld().spawnParticle(Particle.SMOKE_NORMAL, event.getProjectile().getLocation(), 25);
-                        }
-                        else{
+                        } else {
                             cancel();
                         }
                     }
@@ -45,15 +44,15 @@ public class SmokeBow implements Listener {
     }
 
     @EventHandler
-    public void onHit(ProjectileHitEvent event){
-        if(event.getEntity().getCustomName() != null && event.getEntity().getCustomName().equals("Smoke Bow")){
+    public void onHit(ProjectileHitEvent event) {
+        if (event.getEntity().getCustomName() != null && event.getEntity().getCustomName().equals("Smoke Bow")) {
 
             event.getEntity().getWorld().spawnParticle(Particle.SMOKE_LARGE, event.getEntity().getLocation(), 1000);
 
-            for(Entity entity : event.getEntity().getNearbyEntities(4, 4, 4)){
-                if(entity instanceof LivingEntity){
+            for (Entity entity : event.getEntity().getNearbyEntities(4, 4, 4)) {
+                if (entity instanceof LivingEntity) {
                     LivingEntity livingentity = (LivingEntity) entity;
-                    if(livingentity != event.getEntity().getShooter()){
+                    if (livingentity != event.getEntity().getShooter()) {
                         livingentity.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 0));
                     }
                 }

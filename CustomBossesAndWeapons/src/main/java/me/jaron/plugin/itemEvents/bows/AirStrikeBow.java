@@ -19,11 +19,11 @@ import java.util.Random;
 public class AirStrikeBow implements Listener {
 
     @EventHandler
-    public void onShoot(EntityShootBowEvent event){
-        if(event.getEntity() instanceof Player){
-            if(event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null
-                    && event.getBow().getItemMeta().getLore().contains(ItemManager.AirStrikeBow.getItemMeta().getLore().get(0))){
-                if(event.getProjectile() instanceof Arrow){
+    public void onShoot(EntityShootBowEvent event) {
+        if (event.getEntity() instanceof Player) {
+            if (event.getBow() != null && event.getBow().getItemMeta() != null && event.getBow().getItemMeta().getLore() != null
+                    && event.getBow().getItemMeta().getLore().contains(ItemManager.AirStrikeBow.getItemMeta().getLore().get(0))) {
+                if (event.getProjectile() instanceof Arrow) {
                     Arrow arrow = (Arrow) event.getProjectile();
                     arrow.setCustomName("Air Strike Bow");
                 }
@@ -32,31 +32,30 @@ public class AirStrikeBow implements Listener {
     }
 
     @EventHandler
-    public void onHit(ProjectileHitEvent event){
-        if(event.getEntity() instanceof Arrow){
+    public void onHit(ProjectileHitEvent event) {
+        if (event.getEntity() instanceof Arrow) {
             Arrow arrow = (Arrow) event.getEntity();
-            if(arrow.getCustomName() != null && arrow.getCustomName().equals("Air Strike Bow")){
+            if (arrow.getCustomName() != null && arrow.getCustomName().equals("Air Strike Bow")) {
                 Location hitLocation = arrow.getLocation();
                 Random r = new Random();
-                for(Entity entity : arrow.getNearbyEntities(5, 5, 5)){
-                    if(entity instanceof Player){
+                for (Entity entity : arrow.getNearbyEntities(5, 5, 5)) {
+                    if (entity instanceof Player) {
                         Player player = (Player) entity;
                         player.sendTitle(ChatColor.RED + "Air Strike Incoming!", ChatColor.DARK_RED + "Just stand right there!", 10, 60, 10);
                         player.playSound(player.getLocation(), Sound.ENTITY_TNT_PRIMED, 5, 5);
                     }
                 }
-                for(int i = 0; i < 10; i++){
+                for (int i = 0; i < 10; i++) {
                     Arrow airStrikeArrow = arrow.getWorld().spawn(hitLocation.clone().add(r.nextInt(5 + 5) - 5, 100, r.nextInt(5 + 5) - 5), Arrow.class);
                     airStrikeArrow.setCustomName("Air Strike Arrow");
                     airStrikeArrow.setShooter(arrow.getShooter());
                 }
-            }
-            else if(arrow.getCustomName() != null && arrow.getCustomName().equals("Air Strike Arrow")){
+            } else if (arrow.getCustomName() != null && arrow.getCustomName().equals("Air Strike Arrow")) {
                 arrow.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, arrow.getLocation(), 10);
                 arrow.getWorld().playSound(arrow.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 5, 5);
-                for(Entity entity : arrow.getNearbyEntities(3, 3, 3)){
-                    if(entity instanceof LivingEntity){
-                        if(entity != arrow.getShooter()){
+                for (Entity entity : arrow.getNearbyEntities(3, 3, 3)) {
+                    if (entity instanceof LivingEntity) {
+                        if (entity != arrow.getShooter()) {
                             LivingEntity livingEntity = (LivingEntity) entity;
                             livingEntity.damage(10, (Entity) arrow.getShooter());
                         }

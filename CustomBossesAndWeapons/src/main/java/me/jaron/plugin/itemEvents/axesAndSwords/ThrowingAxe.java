@@ -22,16 +22,16 @@ public class ThrowingAxe implements Listener {
 
     Main plugin;
 
-    public ThrowingAxe(Main plugin){
+    public ThrowingAxe(Main plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)){
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             Player player = event.getPlayer();
-            if(player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Throw §eRIGHT CLICK")){
+            if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Throw §eRIGHT CLICK")) {
 
                 String lore = player.getInventory().getItemInMainHand().getItemMeta().getLore().get(4);
                 List<String> loresplit = new ArrayList(Arrays.asList(lore.split(" ")));
@@ -56,11 +56,11 @@ public class ThrowingAxe implements Listener {
                 Location dest = player.getLocation().add(player.getLocation().getDirection().multiply(10));
                 Vector vector = dest.subtract(player.getLocation()).toVector();
 
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     int distance = 30;
                     int i = 0;
 
-                    public void run(){
+                    public void run() {
 
                         EulerAngle rot = as.getRightArmPose();
                         EulerAngle rotnew = rot.add(20, 0, 0);
@@ -68,31 +68,29 @@ public class ThrowingAxe implements Listener {
 
                         as.teleport(as.getLocation().add(vector.normalize()));
 
-                        if(as.getTargetBlockExact(1) != null && !as.getTargetBlockExact(1).isPassable()){
-                            if(!as.isDead()){
+                        if (as.getTargetBlockExact(1) != null && !as.getTargetBlockExact(1).isPassable()) {
+                            if (!as.isDead()) {
                                 as.remove();
-                                if(player.getInventory().firstEmpty() != -1){
+                                if (player.getInventory().firstEmpty() != -1) {
                                     player.getInventory().addItem(ItemManager.ThrowingAxe);
-                                }
-                                else{
+                                } else {
                                     player.getWorld().dropItemNaturally(player.getLocation(), ItemManager.ThrowingAxe);
                                 }
                                 cancel();
                             }
                         }
 
-                        for(Entity entity : as.getLocation().getChunk().getEntities()){
-                            if(!as.isDead()){
-                                if(as.getLocation().distanceSquared(entity.getLocation()) <= 1){
-                                    if(entity != player && entity != as){
-                                        if(entity instanceof LivingEntity){
+                        for (Entity entity : as.getLocation().getChunk().getEntities()) {
+                            if (!as.isDead()) {
+                                if (as.getLocation().distanceSquared(entity.getLocation()) <= 1) {
+                                    if (entity != player && entity != as) {
+                                        if (entity instanceof LivingEntity) {
                                             LivingEntity livingentity = (LivingEntity) entity;
                                             livingentity.damage(Integer.parseInt(finaldamage), player);
                                             as.remove();
-                                            if(player.getInventory().firstEmpty() != -1){
+                                            if (player.getInventory().firstEmpty() != -1) {
                                                 player.getInventory().addItem(ItemManager.ThrowingAxe);
-                                            }
-                                            else{
+                                            } else {
                                                 player.getWorld().dropItemNaturally(player.getLocation(), ItemManager.ThrowingAxe);
                                             }
                                             cancel();
@@ -102,13 +100,12 @@ public class ThrowingAxe implements Listener {
                             }
                         }
 
-                        if(i > distance){
-                            if(!as.isDead()){
+                        if (i > distance) {
+                            if (!as.isDead()) {
                                 as.remove();
-                                if(player.getInventory().firstEmpty() != -1){
+                                if (player.getInventory().firstEmpty() != -1) {
                                     player.getInventory().addItem(ItemManager.ThrowingAxe);
-                                }
-                                else{
+                                } else {
                                     player.getWorld().dropItemNaturally(player.getLocation(), ItemManager.ThrowingAxe);
                                 }
                                 cancel();

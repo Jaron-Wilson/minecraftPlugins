@@ -26,9 +26,9 @@ public class Boomerang implements Listener {
 
         Player player = event.getPlayer();
 
-            if (player.getInventory().getItemInMainHand().getItemMeta() == null || player.getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
-                System.out.println("not using Boomerang");
-            } else {
+        if (player.getInventory().getItemInMainHand().getItemMeta() == null || player.getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
+            System.out.println("not using Boomerang");
+        } else {
             if (player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Boomerang Powers:")) {
 
                 ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);

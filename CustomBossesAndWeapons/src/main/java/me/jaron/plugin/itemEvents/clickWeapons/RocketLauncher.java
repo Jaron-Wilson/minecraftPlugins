@@ -23,13 +23,13 @@ public class RocketLauncher implements Listener {
 
     Main plugin;
 
-    public RocketLauncher(Main plugin){
+    public RocketLauncher(Main plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+    public void onClick(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
                     && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability: Ricochet Rocket §eRIGHT CLICK")) {
 
@@ -59,8 +59,7 @@ public class RocketLauncher implements Listener {
                     public void run() {
                         if (firework.isDead()) {
                             cancel();
-                        }
-                        else{
+                        } else {
                             firework.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, firework.getLocation(), 10);
                             firework.getWorld().playSound(firework.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 5, 5);
                             for (Entity entity : firework.getNearbyEntities(5, 5, 5)) {
@@ -82,21 +81,21 @@ public class RocketLauncher implements Listener {
     }
 
     @EventHandler
-    public void onHit(ProjectileHitEvent event){
-        if(event.getEntity() instanceof Firework && event.getEntity().getCustomName() != null){
+    public void onHit(ProjectileHitEvent event) {
+        if (event.getEntity() instanceof Firework && event.getEntity().getCustomName() != null) {
             Firework firework = (Firework) event.getEntity();
             firework.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, firework.getLocation(), 10);
             firework.getWorld().playSound(firework.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 5, 5);
             firework.setVelocity(new Vector(firework.getFacing().getModX(), firework.getFacing().getModY(), firework.getFacing().getModZ()));
-            for(Entity entity : firework.getNearbyEntities(5, 5, 5)){
-                if(entity instanceof LivingEntity) {
+            for (Entity entity : firework.getNearbyEntities(5, 5, 5)) {
+                if (entity instanceof LivingEntity) {
                     LivingEntity livingentity = (LivingEntity) entity;
-                    if(!livingentity.equals(event.getEntity().getShooter()) && !livingentity.equals(firework)) {
+                    if (!livingentity.equals(event.getEntity().getShooter()) && !livingentity.equals(firework)) {
                         livingentity.damage(Integer.parseInt(firework.getCustomName()) / 2);
                     }
                 }
             }
-            if(event.getHitEntity() != null){
+            if (event.getHitEntity() != null) {
                 Firework newfirework = (Firework) firework.getWorld().spawnEntity(firework.getLocation(), EntityType.FIREWORK);
                 FireworkMeta meta = newfirework.getFireworkMeta();
                 meta.setPower(firework.getFireworkMeta().getPower() - (firework.getTicksLived() / 10) - 1);
@@ -112,8 +111,7 @@ public class RocketLauncher implements Listener {
                     public void run() {
                         if (newfirework.isDead()) {
                             cancel();
-                        }
-                        else{
+                        } else {
                             newfirework.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, newfirework.getLocation(), 10);
                             newfirework.getWorld().playSound(newfirework.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 5, 5);
                             for (Entity entity : newfirework.getNearbyEntities(5, 5, 5)) {

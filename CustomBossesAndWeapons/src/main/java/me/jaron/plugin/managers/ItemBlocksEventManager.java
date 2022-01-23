@@ -12,8 +12,8 @@ import org.bukkit.inventory.EquipmentSlot;
 public class ItemBlocksEventManager implements Listener {
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
             if (event.getClickedBlock() == null ||
                     event.getItem() == null ||
@@ -22,16 +22,16 @@ public class ItemBlocksEventManager implements Listener {
 
                 if (ItemRecipeManager.HardenedDiamondBlock.getItemMeta() == null ||
                         ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore() == null ||
-                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null ){
-                    
+                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null) {
+
                     System.out.println("");
                 }
             }
 
-            if(event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)){
-                if(event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getDisplayName() != null
-                        && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Hardened Diamond Block")){
-                   event.setCancelled(true);
+            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+                if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getDisplayName() != null
+                        && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Hardened Diamond Block")) {
+                    event.setCancelled(true);
                 }
             }
         }

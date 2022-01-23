@@ -15,17 +15,17 @@ import java.util.Set;
 public class TeleportSword implements Listener {
 
     @EventHandler
-    public void OnPlayerInteract(PlayerInteractEvent event){
+    public void OnPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR)){
-            if(player != null
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            if (player != null
                     && player.getInventory() != null
                     && player.getInventory().getItemInMainHand() != null
                     && player.getInventory().getItemInMainHand().getItemMeta() != null
                     && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability (Right Click):")){
-                Block block = player.getTargetBlock((Set<Material>)null, 8);
+                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability (Right Click):")) {
+                Block block = player.getTargetBlock((Set<Material>) null, 8);
                 Location location = block.getLocation();
                 float pitch = player.getEyeLocation().getPitch();
                 float yaw = player.getEyeLocation().getYaw();
