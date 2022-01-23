@@ -27,74 +27,74 @@ To build it into a jar (intellij):
 # commands: <br>
 # MOBS <br>
   necromancer: <br>
-    description: Create a boss that will attack you! <br>
+    description: Create a boss that will attack you! <br><br>
   revenant: <br>
-    description: Creates a boss <br>
+    description: Creates a boss <br><br>
   zombieboss: <br>
-    description: Creates a zombieboss! <br>
+    description: Creates a zombieboss! <br><br>
   skeletonboss: <br>
-    description: Creates a skeletonboss! <br>
+    description: Creates a skeletonboss! <br><br>
   necromancerapprentice: <br>
-    description: create a boss apprentice <br>
+    description: create a boss apprentice <br><br>
   spawnBosses: <br>
-    description: spawns all bosses <br>
+    description: spawns all bosses <br><br>
   spawn: <br>
          
 # CUSTOM ITEMS <br>
   giveall: <br>
-    description: gives all <br>
+    description: gives all <br><br>
   givegrapplinghook: <br>
-    description: gives a grappling hook to the player <br>
+    description: gives a grappling hook to the player <br><br>
   giveteleportsword: <br>
-    description: gives a teleport sword to the player <br>
+    description: gives a teleport sword to the player <br><br>
   givethegiftingfish: <br>
-    description: gives the gifting fish to the player <br>
+    description: gives the gifting fish to the player <br><br>
   giveexplosivebow: <br>
-    description: gives an explosive bow to the player <br>
+    description: gives an explosive bow to the player <br><br>
   giveinfinitewaterbucket: <br>
-    description: gives an infinite water bucket to the player <br>
+    description: gives an infinite water bucket to the player <br><br>
   giveinfinitelavabucket: <br>
-    description: gives an infinite lava bucket to the player <br>
+    description: gives an infinite lava bucket to the player <br><br>
   givemachinegunbow: <br>
-    description: gives a machine gun bow to the player <br>
+    description: gives a machine gun bow to the player <br><br>
   givemultibreakpickaxe: <br>
-    description: gives a multibreak pickaxe to the player <br>
+    description: gives a multibreak pickaxe to the player <br><br>
   givemidaspickaxe: <br>
-    description: gives a midas pickaxe to the player <br>
+    description: gives a midas pickaxe to the player <br><br>
   giveboomerang: <br>
-    description: gives a boomerang to the player <br>
+    description: gives a boomerang to the player <br><br>
   givehomingbow: <br>
-    description: gives a homing bow to the player <br>
+    description: gives a homing bow to the player <br><br>
   giverocketlauncher: <br>
-    description: gives a rocket launcher to the player <br>
+    description: gives a rocket launcher to the player <br><br>
   givethrowingaxe: <br>
-    description: gives a throwing axe to the player <br>
+    description: gives a throwing axe to the player <br><br>
   giveundeadsword: <br>
-    description: gives the player an undead sword <br>
+    description: gives the player an undead sword <br><br>
   givethrowabletnt: <br>
-    description: gives the player a throwable tnt <br>
+    description: gives the player a throwable tnt <br><br>
   givelightningaxe: <br>
-    description: gives the player a lightning axe <br>
+    description: gives the player a lightning axe <br><br>
   giveautosmeltpickaxe: <br>
-    description: gives the player an autosmelt pickaxe <br>
+    description: gives the player an autosmelt pickaxe <br><br>
   givesmokebow: <br>
-    description: gives the player a smoke bow <br>
+    description: gives the player a smoke bow <br><br>
   givefireball: <br>
-    description: gives the player a fireball <br>
+    description: gives the player a fireball <br><br>
   givetripleshotbow: <br>
-    description: gives the player a triple shot bow <br>
+    description: gives the player a triple shot bow <br><br>
   givebomberelytra: <br>
-    description: gives the player a bomber elytra <br>
+    description: gives the player a bomber elytra <br><br>
   giveautoshootchestplate: <br>
-    description: gives the player an auto shoot chestplate <br>
+    description: gives the player an auto shoot chestplate <br><br>
   giveairstrikebow: <br>
-    description: gives the player an air strike bow <br>
+    description: gives the player an air strike bow <br><br>
   givechunkminerpickaxe: <br>
-    description: gives the player a chunk miner pickaxe <br>
+    description: gives the player a chunk miner pickaxe <br><br>
   giveorecompass: <br>
-    description: gives the player an ore compass <br>
+    description: gives the player an ore compass <br><br>
   givezombieknightspawnegg: <br>
-    description: gives the player a zombie knight spawn egg <br>
+    description: gives the player a zombie knight spawn egg <br><br>
       </p>
    </details>
 I also added Custom Recipes and Smelting Recipes for the items, I will later post a video on how I did them.
