@@ -123,7 +123,7 @@ Here are images:
       <details close>
          <summary>Teleport Sword</summary>
          <p>This sword is going to teleport you 8 blocks infront of you.<p>
-         <a href=https://user-images.githubusercontent.com/78304954/150661538-36a5a01c-5fb0-49a7-9658-c98aa36114c9.png>Sword's Recipe</a>
+         <a href=https://user-images.githubusercontent.com/78304954/150690504-a2dd580a-1d22-440b-8431-c08cc0257587.png>Sword's Recipe</a>
       </details>
       <details close>
          <summary>Grappling Hook</summary>
