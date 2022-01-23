@@ -29,4 +29,20 @@ Here are images:
       <a href=https://user-images.githubusercontent.com/78304954/150661426-eeab9b21-d344-42a0-b84a-d4ad7ebb632f.png>Furnace</a><br>
    </details>
    
+   <details>
+      <summary>Custom items Recipe</summary>
+      <p>Most of these items are in hypixel too! Thanks to SyntaxError we now have them!</p>
+      <details close>
+         <summary>Teleport Sword</summary>
+         <p>This sword is going to teleport you 8 blocks infront of you.<p><br>
+         <a href=https://user-images.githubusercontent.com/78304954/150661538-36a5a01c-5fb0-49a7-9658-c98aa36114c9.png></a>
+      </details>
+      <details close>
+         <summary>Grappling Hook</summary>
+         <p>This is going to make you jump in the direction of the way you click the fishing rod.<p><br>
+         <a href=https://user-images.githubusercontent.com/78304954/150661574-956b0603-3cfd-47d1-993f-ee26a9f9161f.png></a>
+      </details>
+      
+   </details>
+   
 </details>
