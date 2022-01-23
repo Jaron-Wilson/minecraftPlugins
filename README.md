@@ -98,6 +98,8 @@ To build it into a jar (intellij):
     description: gives the player a zombie knight spawn egg <br><br>
       </p>
    </details>
+   <details close>
+      <summary>Custom Materials Recipes</summary>
 I also added Custom Recipes and Smelting Recipes for the items, I will later post a video on how I did them.
 Here are images:
 <details close>
@@ -113,9 +115,10 @@ Here are images:
       In Blast furnace, Use a Hardened Diamond in it, it will take up to 1-3 minutes have not timed.
       <a href=https://user-images.githubusercontent.com/78304954/150661426-eeab9b21-d344-42a0-b84a-d4ad7ebb632f.png>Furnace</a><br>
    </details>
-   
+
+   </details>
    <details>
-      <summary>Custom items Recipe</summary>
+      <summary>Custom Items Recipes</summary>
       <p>Most of these items are in hypixel too! Thanks to SyntaxError we now have them!</p>
       <details close>
          <summary>Teleport Sword</summary>
