@@ -115,9 +115,10 @@ public class ItemManager {
         TeleportSword = item;
 
         ShapedRecipe teleport_sword_Recipe = new ShapedRecipe(NamespacedKey.minecraft("teleport_sword"), item);
-        teleport_sword_Recipe.shape(" H ", " H ", " N ");
-        teleport_sword_Recipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamondBlock));
+        teleport_sword_Recipe.shape("EHE", "EHE", "ENE");
+        teleport_sword_Recipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamond));
         teleport_sword_Recipe.setIngredient('N', Material.STICK);
+        teleport_sword_Recipe.setIngredient('E', Material.ENDER_PEARL);
         Bukkit.getServer().addRecipe(teleport_sword_Recipe);
     }
 

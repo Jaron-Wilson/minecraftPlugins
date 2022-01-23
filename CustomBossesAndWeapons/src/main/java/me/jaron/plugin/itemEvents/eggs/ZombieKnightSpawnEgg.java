@@ -22,7 +22,7 @@ public class ZombieKnightSpawnEgg implements Listener {
         Zombie zombie = location.getWorld().spawn(location, Zombie.class);
 
         if (zombie.getEquipment() == null) {
-            System.out.println("Zombie null");
+            System.out.println("Zombie equipment null");
         }
 
 

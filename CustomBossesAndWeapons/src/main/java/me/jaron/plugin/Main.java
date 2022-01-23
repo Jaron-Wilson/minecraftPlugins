@@ -19,6 +19,7 @@ import me.jaron.plugin.itemEvents.pickaxes.AutoSmeltPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.ChunkMinerPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.MidasPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
+import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
 import org.bukkit.ChatColor;
@@ -59,6 +60,8 @@ public final class Main extends JavaPlugin implements Listener {
 //        getServer().getPluginManager().registerEvents(new CorpseInteract(), this);
 //        getServer().getPluginManager().registerEvents(new DeathEventCorpse(), this);
 
+        /*Item EventsManager*/
+        getServer().getPluginManager().registerEvents(new ItemBlocksEventManager(), this);
         /*ITEMS!*/
         ItemManager.init();
 
