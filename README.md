@@ -128,17 +128,14 @@ Here are images:
       <details close>
          <summary>Grappling Hook</summary>
          <p>This is going to make you jump in the direction of the way you click the fishing rod.<p>
-         <a href=![image](https://user-images.githubusercontent.com/78304954/150691405-9d3fd7c3-9eeb-46b0-80e9-f34e2046fca7.png)>sss</a>
-
          <a href=https://user-images.githubusercontent.com/78304954/150691390-aa3ca388-8218-4505-87e7-13d00310dd01.png>Grappling Recipe</a>
       </details>
       
    </details><br>
-<div>
+   
 <details close> 
    <summary>Custom Mobs</summary>
       <p>/mobManager/ Is where I keep all my cutom mobs and they were made by me but with the help of Syntax Errors video it was made possible.</p>
 </details>
-</div>
  
 </details>
