@@ -24,7 +24,7 @@ To build it into a jar (intellij):
       <summary>All Commands:</summary>
       <p>
       
-# commands: <br>
+# COMMANDS: <br>
 # MOBS <br>
   necromancer: <br>
     description: Create a boss that will attack you! <br><br>
@@ -39,6 +39,7 @@ To build it into a jar (intellij):
   spawnBosses: <br>
     description: spawns all bosses <br><br>
   spawn: <br>
+    description:Spawns Apprentice<br><br>
          
 # CUSTOM ITEMS <br>
   giveall: <br>
