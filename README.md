@@ -24,8 +24,8 @@ To build it into a jar (intellij):
       <summary>All Commands:</summary>
       <p>
       
-commands: <br>
-MOBS <br>
+# commands: <br>
+# MOBS <br>
   necromancer: <br>
     description: Create a boss that will attack you! <br>
   revenant: <br>
@@ -39,9 +39,8 @@ MOBS <br>
   spawnBosses: <br>
     description: spawns all bosses <br>
   spawn: <br>
-#  npc: <br>
-#    description: npc <br>
- CUSTOM ITEMS <br>
+         
+# CUSTOM ITEMS <br>
   giveall: <br>
     description: gives all <br>
   givegrapplinghook: <br>
