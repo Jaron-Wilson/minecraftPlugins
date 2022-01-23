@@ -52,5 +52,5 @@ Here are images:
       </details>
       
    </details>
-   
+    <p>/mobManager/ Is where I keep all my cutom mobs and they were made by me but with the help of Syntax Errors video it was made possible.</p>
 </details>
