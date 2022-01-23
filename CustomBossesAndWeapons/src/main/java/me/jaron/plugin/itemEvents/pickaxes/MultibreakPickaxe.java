@@ -29,11 +29,13 @@ public class MultibreakPickaxe implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
-            System.out.println("Not using: MultibreakPickaxe");
-        } else {
+        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null ||
+        event.getPlayer().getInventory().getItemInOffHand().getItemMeta() != null || event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore() != null
+        ) {
+//            System.out.println("Not using: MultibreakPickaxe");
+//        } else {
             Block block = event.getBlock();
-            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Multibreak:")) {
+            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Multibreak:") || event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore().contains("§6Multibreak:")) {
                 if (blockface.equals(BlockFace.UP) || blockface.equals(BlockFace.DOWN)) {
                     Block block1 = block.getRelative(BlockFace.EAST);
                     Block block2 = block.getRelative(BlockFace.WEST);

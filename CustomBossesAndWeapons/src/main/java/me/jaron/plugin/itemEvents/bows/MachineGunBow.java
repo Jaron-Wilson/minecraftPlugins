@@ -24,7 +24,7 @@ public class MachineGunBow implements Listener {
     public void onClick(PlayerInteractEvent event) {
         if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
-                System.out.println("not using §9Machine Gun Bow");
+//                System.out.println("not using §9Machine Gun Bow");
             } else {
                 if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§9Machine Gun Bow")) {
                     new BukkitRunnable() {

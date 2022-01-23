@@ -18,17 +18,15 @@ public class ItemBlocksEventManager implements Listener {
             if (event.getClickedBlock() == null ||
                     event.getItem() == null ||
                     event.getItem().getItemMeta() == null ||
-                    event.getItem().getItemMeta().getLore() == null) {
+                    event.getItem().getItemMeta().getLore() == null ||
+                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta() == null ||
+                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore() == null ||
+                    ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null
+            ) {
 
-                if (ItemRecipeManager.HardenedDiamondBlock.getItemMeta() == null ||
-                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore() == null ||
-                        ItemRecipeManager.HardenedDiamondBlock.getItemMeta().getLore().get(0) == null) {
-
-                    System.out.println("");
-                }
             }
 
-            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND) || event.getHand().equals(EquipmentSlot.OFF_HAND)) {
                 if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getDisplayName() != null
                         && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Hardened Diamond Block")) {
                     event.setCancelled(true);

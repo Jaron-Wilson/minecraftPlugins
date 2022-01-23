@@ -24,7 +24,11 @@ public class TeleportSword implements Listener {
                     && player.getInventory().getItemInMainHand() != null
                     && player.getInventory().getItemInMainHand().getItemMeta() != null
                     && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null
-                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability (Right Click):")) {
+                    && player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Item Ability (Right Click):") ||
+                        player.getInventory().getItemInOffHand() != null
+                    && player.getInventory().getItemInOffHand().getItemMeta() != null
+                    && player.getInventory().getItemInOffHand().getItemMeta().getLore() != null
+                    && player.getInventory().getItemInOffHand().getItemMeta().getLore().contains("§6Item Ability (Right Click):")) {
                 Block block = player.getTargetBlock((Set<Material>) null, 8);
                 Location location = block.getLocation();
                 float pitch = player.getEyeLocation().getPitch();

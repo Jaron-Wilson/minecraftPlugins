@@ -48,7 +48,8 @@ public class ZombieKnightSpawnEgg implements Listener {
                     ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore() == null ||
                     ItemManager.ZombieKnightSpawnEgg.getItemMeta().getLore().get(0) == null
             ) {
-                System.out.println("ZombieKnight was not clicked");
+                return;
+//                System.out.println("ZombieKnight was not clicked");
             }
 
             if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {

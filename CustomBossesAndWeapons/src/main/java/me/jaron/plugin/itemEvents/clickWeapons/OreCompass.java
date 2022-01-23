@@ -31,9 +31,7 @@ public class OreCompass implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
-                if (ItemManager.OreCompass.getItemMeta() == null || ItemManager.OreCompass.getItemMeta().getLore() == null) {
-                    System.out.println("not using Ore");
-                } else {
+                if (ItemManager.OreCompass.getItemMeta() != null || ItemManager.OreCompass.getItemMeta().getLore() != null) {
                     if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
                             && event.getItem().getItemMeta().getLore().contains(ItemManager.OreCompass.getItemMeta().getLore().get(0))) {
                         List<Block> adjacentBlocks = new ArrayList<>();
