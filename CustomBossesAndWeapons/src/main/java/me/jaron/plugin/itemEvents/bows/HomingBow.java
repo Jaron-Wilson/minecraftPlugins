@@ -24,9 +24,9 @@ public class HomingBow implements Listener {
         Entity arrow = event.getProjectile();
         Player player = (Player) event.getEntity();
 
-        if (player.getInventory().getItemInMainHand().getItemMeta() == null || player.getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
-            System.out.println("not using Homing Bow");
-        } else {
+        if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getLore() != null || player.getInventory().getItemInOffHand().getItemMeta() != null && player.getInventory().getItemInOffHand().getItemMeta().getLore() != null) {
+//           System.out.println("not using Homing Bow");
+//        } else {
             if (player.getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Homing Arrows:")) {
 
                 new BukkitRunnable() {
