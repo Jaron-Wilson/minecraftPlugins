@@ -29,8 +29,8 @@ public class MultibreakPickaxe implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null ||
-        event.getPlayer().getInventory().getItemInOffHand().getItemMeta() != null || event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore() != null
+        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null ||
+                event.getPlayer().getInventory().getItemInOffHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore() != null
         ) {
 //            System.out.println("Not using: MultibreakPickaxe");
 //        } else {
@@ -135,6 +135,11 @@ public class MultibreakPickaxe implements Listener {
                         }
                     }
                     blocks.clear();
+                }
+            } else {
+                boolean message = false;
+                if (message == true) {
+                    System.out.println();
                 }
             }
         }

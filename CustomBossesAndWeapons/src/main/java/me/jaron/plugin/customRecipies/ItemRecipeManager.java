@@ -1,7 +1,5 @@
 package me.jaron.plugin.customRecipies;
 
-import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
-import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,10 +11,19 @@ public class ItemRecipeManager {
 
     public static ItemStack HardenedDiamond;
     public static ItemStack HardenedDiamondBlock;
+    public static ItemStack RefinedBlock;
+    public static ItemStack Refined_Iron;
+    public static ItemStack Refined_Gold;
+    public static ItemStack Refined_Quarts;
+
 
     public static void init() {
         createHardenedDiamond();
         createHardenedDiamondBlock();
+        createRefinedBlock();
+        createRefinedIron();
+        createRefinedGold();
+        createRefinedQuarts();
     }
 
     private static void createHardenedDiamond() {
@@ -60,6 +67,76 @@ public class ItemRecipeManager {
         shapedRecipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamond));
         shapedRecipe.setIngredient('N', Material.NETHERITE_BLOCK);
         Bukkit.getServer().addRecipe(shapedRecipe);
+    }
+
+    private static void createRefinedBlock() {
+        ItemStack item = new ItemStack(Material.QUARTZ_BLOCK, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName("§4Refined Block");
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
+        }
+        RefinedBlock = item;
+
+//        BlastingRecipe RefinedBlockSmelt = new BlastingRecipe(NamespacedKey.minecraft("refined_block_smelt"), item,
+//                new RecipeChoice.ExactChoice(Refined_Iron), 0.0f, 10 * 200);
+//        Bukkit.getServer().addRecipe(RefinedBlockSmelt);
+
+        ShapedRecipe shapedRecipe = new ShapedRecipe(NamespacedKey.minecraft("refined_block"), item);
+        shapedRecipe.shape("HHH", "HNH", "HHH");
+        shapedRecipe.setIngredient('H', new RecipeChoice.ExactChoice(HardenedDiamond));
+        shapedRecipe.setIngredient('N', new RecipeChoice.ExactChoice(HardenedDiamondBlock));
+        Bukkit.getServer().addRecipe(shapedRecipe);
+    }
+
+    private static void createRefinedIron() {
+        ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName("§4Refined Iron");
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
+        }
+        Refined_Iron = item;
+
+        FurnaceRecipe Refined_Iron_smelt = new FurnaceRecipe(NamespacedKey.minecraft("refined_iron_smelt"), item,
+                Material.IRON_INGOT, 1.0f, 10 * 2);
+        Bukkit.getServer().addRecipe(Refined_Iron_smelt);
+    }
+
+    private static void createRefinedGold() {
+        ItemStack item = new ItemStack(Material.GOLD_INGOT, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName("§4Refined Gold");
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
+        }
+        Refined_Gold = item;
+
+        BlastingRecipe RefinedGoldBlockSmelt = new BlastingRecipe(NamespacedKey.minecraft("refined_gold_smelt"), item,
+                Material.GOLD_INGOT, 0.0f, 10 * 20);
+        Bukkit.getServer().addRecipe(RefinedGoldBlockSmelt);
+    }
+
+    private static void createRefinedQuarts() {
+        ItemStack item = new ItemStack(Material.QUARTZ, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName("§4Refined Quartz");
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
+        }
+        Refined_Quarts = item;
+
+        BlastingRecipe RefinedQuartzBlockSmelt = new BlastingRecipe(NamespacedKey.minecraft("refined_quartz_smelt"), item,
+                Material.QUARTZ, 0.0f, 10 * 200);
+        Bukkit.getServer().addRecipe(RefinedQuartzBlockSmelt);
     }
 
 }
