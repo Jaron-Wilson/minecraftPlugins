@@ -133,7 +133,7 @@ Here are images:
       <details close>
          <summary>Explosive Bow</summary>
          <p>Creates an explosive bow.<p>
-         <a href=https://user-images.githubusercontent.com/78304954/150691762-16f91721-2379-454b-acb1-ec292b9676ae.png>Explosive Bow Recipe</a>
+         <a href=>Explosive Bow Recipe</a>
       </details>
       
    </details><br>
