@@ -10,6 +10,7 @@ ALL THESE HAVE TO BE SEPARATE PROJECTS! Each folder is a project.
    </details>
 
 <details open> 
+   <a href="https://docs.google.com/document/d/1T7PFGx8Vla2FvG17kedqE-mD5uR1JRngFGKuj_LzYp8/edit?usp=sharing">Link to all photos</a>
    <summary> CustomBossesAndWeapons Project: </summary>
    <p>CustomBossesAndWeapons Is a project that I a doing and The custom items is from SyntaxError, and I made it so you will not get errors and no null pointers.<p>
    <a href=https://www.youtube.com/c/SyntaxErrorYT>SyntaxError's Youtube</a>
