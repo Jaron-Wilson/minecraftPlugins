@@ -41,13 +41,6 @@ public class ItemBlocksEventManager implements Listener {
                             event.setCancelled(true);
                         }
                     }
-                    if (event.getHand() != null && event.getHand() == EquipmentSlot.OFF_HAND) {
-                        if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getDisplayName() != null) {
-                            if (event.getItem().getItemMeta().getDisplayName().equals("§4Refined Block")) {
-                                event.setCancelled(true);
-                            }
-                        }
-                    }
                 }
             }
         }

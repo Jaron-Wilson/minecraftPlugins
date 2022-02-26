@@ -14,7 +14,7 @@ public class GrapplingHookCooldown {
     }
 
     public static void setCooldown(Player player, int seconds) {
-        double delay = (double) (System.currentTimeMillis() + (seconds * 1000));
+        double delay = (double) (System.currentTimeMillis() + (seconds * 1000L));
         cooldowns.put(player.getUniqueId(), delay);
     }
 
