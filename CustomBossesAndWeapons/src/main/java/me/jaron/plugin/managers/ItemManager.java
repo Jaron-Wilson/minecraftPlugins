@@ -43,6 +43,7 @@ public class ItemManager {
     public static ItemStack ChunkMinerPickaxe;
     public static ItemStack OreCompass;
     public static ItemStack ZombieKnightSpawnEgg;
+    public static ItemStack NecromancerSpawnEgg;
 
     public static void init() {
         createGrapplingHook();
@@ -71,6 +72,7 @@ public class ItemManager {
         createChunkMinerPickaxe();
         createOreCompass();
         createZombieKnightSpawnEgg();
+        createNecromancerSpawnEgg();
     }
 
     private static void createGrapplingHook() {
@@ -644,5 +646,24 @@ public class ItemManager {
         zombie_knight_recipe.addIngredient(Material.ZOMBIE_HEAD);
         zombie_knight_recipe.addIngredient(Material.EGG);
         Bukkit.getServer().addRecipe(zombie_knight_recipe);
+    }
+
+
+    private static void createNecromancerSpawnEgg() {
+        ItemStack item = new ItemStack(Material.ZOMBIE_SPAWN_EGG, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§6Necromancer Spawn Egg");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a Necromancer");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        NecromancerSpawnEgg = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("necromancer"), item);
+        necromancer_recipe.shape("HEH");
+        necromancer_recipe.setIngredient('H', new RecipeChoice.ExactChoice(ZombieKnightSpawnEgg));
+        necromancer_recipe.setIngredient('E',Material.EGG);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
     }
 }

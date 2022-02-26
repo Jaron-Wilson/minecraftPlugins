@@ -9,12 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemRecipeManager {
 
-    public static ItemStack HardenedDiamond;
-    public static ItemStack HardenedDiamondBlock;
-    public static ItemStack RefinedBlock;
-    public static ItemStack Refined_Iron;
-    public static ItemStack Refined_Gold;
-    public static ItemStack Refined_Quarts;
+    public static ItemStack HardenedDiamond, HardenedDiamondBlock, RefinedBlock, Refined_Iron, Refined_Gold, Refined_Quarts;
 
 
     public static void init() {

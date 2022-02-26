@@ -1,15 +1,11 @@
 package me.jaron.plugin.managers;
 
 import me.jaron.plugin.customRecipies.ItemRecipeManager;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-
-import java.util.Objects;
 
 public class ItemBlocksEventManager implements Listener {
 
