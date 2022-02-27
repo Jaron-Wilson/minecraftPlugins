@@ -1,6 +1,7 @@
 package me.jaron.plugin.mobManager.mobs;
 
 import me.jaron.plugin.Main;
+import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
@@ -8,18 +9,26 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-public class Revenant implements Listener {
+import static me.jaron.plugin.mobManager.mobs.Necromancer.createNecromancer;
+
+public class Reverent implements Listener {
 
     static Main plugin;
 
-    public Revenant(Main plugin) {
-        Revenant.plugin = plugin;
+    public Reverent(Main plugin) {
+        Reverent.plugin = plugin;
     }
 
     public static void createRevenant(Location location) {
@@ -116,4 +125,73 @@ public class Revenant implements Listener {
         }
     }
 
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+
+            if (event.getClickedBlock() == null ||
+                    event.getItem() == null ||
+                    event.getItem().getItemMeta() == null ||
+                    event.getItem().getItemMeta().getLore() == null ||
+                    ItemManager.ReverentSpawnEgg.getItemMeta() == null ||
+                    ItemManager.ReverentSpawnEgg.getItemMeta().getLore() == null ||
+                    ItemManager.ReverentSpawnEgg.getItemMeta().getLore().get(0) == null
+            ) {
+                return;
+//                System.out.println("was not clicked");
+            }
+
+            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+                if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
+                        && event.getItem().getItemMeta().getLore().contains(ItemManager.ReverentSpawnEgg.getItemMeta().getLore().get(0))) {
+                    Location spawnLocation;
+                    if (event.getClickedBlock().isPassable()) {
+                        spawnLocation = event.getClickedBlock().getLocation().add(0.5, 0, 0.5);
+                    } else {
+                        spawnLocation = event.getClickedBlock().getRelative(event.getBlockFace()).getLocation().add(0.5, 0, 0.5);
+                    }
+                    createRevenant(spawnLocation);
+                    if (!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+                        event.getItem().setAmount(event.getItem().getAmount() - 1);
+                    }
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
+
+//    @EventHandler
+//    public void onInteract(PlayerInteractEvent event) {
+//        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+//
+//            if (event.getClickedBlock() == null ||
+//                    event.getItem() == null ||
+//                    event.getItem().getItemMeta() == null ||
+//                    event.getItem().getItemMeta().getLore() == null ||
+//                    ItemManager.ReverentSpawnEgg.getItemMeta() == null ||
+//                    ItemManager.ReverentSpawnEgg.getItemMeta().getLore() == null ||
+//                    ItemManager.ReverentSpawnEgg.getItemMeta().getLore().get(0) == null
+//            ) {
+//                return;
+////                System.out.println("was not clicked");
+//            }
+//
+//            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+//                if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
+//                        && event.getItem().getItemMeta().getLore().contains(ItemManager.ReverentSpawnEgg.getItemMeta().getLore().get(0))) {
+//                    Location spawnLocation;
+//                    if (event.getClickedBlock().isPassable()) {
+//                        spawnLocation = event.getClickedBlock().getLocation().add(0.5, 0, 0.5);
+//                    } else {
+//                        spawnLocation = event.getClickedBlock().getRelative(event.getBlockFace()).getLocation().add(0.5, 0, 0.5);
+//                    }
+//                    createNecromancer(spawnLocation);
+//                    if (!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+//                        event.getItem().setAmount(event.getItem().getAmount() - 1);
+//                    }
+//                    event.setCancelled(true);
+//                }
+//            }
+//        }
+//    }
 }

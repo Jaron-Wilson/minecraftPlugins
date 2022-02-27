@@ -1,6 +1,7 @@
 package me.jaron.plugin.mobManager.mobs;
 
 import me.jaron.plugin.Main;
+import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
@@ -8,7 +9,10 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -81,23 +85,27 @@ public class CoolBeamBoss implements Listener {
                             }.runTaskTimer(plugin, 0L, 2L);
                         }
                         if (i % 10 == 0) {
+                            int count = 5;
                             Random r = new Random();
                             witherSkeleton.getWorld().playSound(witherSkeleton.getLocation(), Sound.ENTITY_EVOKER_PREPARE_SUMMON, 5, 5);
                             for (int x = 0; x < 4; x++) {
-                                Guardian guardian = witherSkeleton.getWorld().spawn(witherSkeleton.getLocation().add(r.nextInt(1 + 1) - 1, 0, r.nextInt(1 + 1) - 1), Guardian.class);
-                                guardian.setCustomName(ChatColor.RED + "Cool Beam!");
-                                guardian.setCustomNameVisible(true);
-                                guardian.setLaser(true);
-                                guardian.setCollidable(false);
-                                guardian.setAbsorptionAmount(90);
-                                guardian.setAI(true);
-                                guardian.setRemoveWhenFarAway(true);
-                                guardian.setGlowing(true);
-                                guardian.setMaxHealth(10);
+                                if (count >= 0) {
+                                    count--;
+                                    Guardian guardian = witherSkeleton.getWorld().spawn(witherSkeleton.getLocation().add(r.nextInt(1 + 1) - 1, 0, r.nextInt(1 + 1) - 1), Guardian.class);
+                                    guardian.setCustomName(ChatColor.RED + "Cool Beam!");
+                                    guardian.setCustomNameVisible(true);
+                                    guardian.setLaser(true);
+                                    guardian.setCollidable(false);
+                                    guardian.setAbsorptionAmount(90);
+                                    guardian.setAI(true);
+                                    guardian.setRemoveWhenFarAway(true);
+                                    guardian.setGlowing(true);
+                                    guardian.setMaxHealth(10);
 
+                                }
                             }
+                            i++;
                         }
-                        i++;
                     }
                 } else {
                     cancel();
@@ -114,6 +122,41 @@ public class CoolBeamBoss implements Listener {
                 event.getEntity().remove();
             }
 
+        }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+
+            if (event.getClickedBlock() == null ||
+                    event.getItem() == null ||
+                    event.getItem().getItemMeta() == null ||
+                    event.getItem().getItemMeta().getLore() == null ||
+                    ItemManager.CoolBeamSpawnEgg.getItemMeta() == null ||
+                    ItemManager.CoolBeamSpawnEgg.getItemMeta().getLore() == null ||
+                    ItemManager.CoolBeamSpawnEgg.getItemMeta().getLore().get(0) == null
+            ) {
+                return;
+//                System.out.println("was not clicked");
+            }
+
+            if (event.getHand() != null && event.getHand().equals(EquipmentSlot.HAND)) {
+                if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null
+                        && event.getItem().getItemMeta().getLore().contains(ItemManager.CoolBeamSpawnEgg.getItemMeta().getLore().get(0))) {
+                    Location spawnLocation;
+                    if (event.getClickedBlock().isPassable()) {
+                        spawnLocation = event.getClickedBlock().getLocation().add(0.5, 0, 0.5);
+                    } else {
+                        spawnLocation = event.getClickedBlock().getRelative(event.getBlockFace()).getLocation().add(0.5, 0, 0.5);
+                    }
+                    createNecromancer(spawnLocation);
+                    if (!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+                        event.getItem().setAmount(event.getItem().getAmount() - 1);
+                    }
+                    event.setCancelled(true);
+                }
+            }
         }
     }
 

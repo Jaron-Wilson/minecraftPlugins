@@ -17,33 +17,12 @@ import static me.jaron.plugin.customRecipies.ItemRecipeManager.*;
 
 public class ItemManager {
 
-    public static ItemStack GrapplngHook;
-    public static ItemStack TeleportSword;
-    public static ItemStack TheGiftingFish;
-    public static ItemStack ExplosiveBow;
-    public static ItemStack InfiniteWaterBucket;
-    public static ItemStack InfiniteLavaBucket;
-    public static ItemStack MachineGunBow;
-    public static ItemStack MultibreakPickaxe;
-    public static ItemStack MidasPickaxe;
-    public static ItemStack Boomerang;
-    public static ItemStack HomingBow;
-    public static ItemStack RocketLauncher;
-    public static ItemStack ThrowingAxe;
-    public static ItemStack UndeadSword;
-    public static ItemStack ThrowableTNT;
-    public static ItemStack LightningAxe;
-    public static ItemStack AutoSmeltPickaxe;
-    public static ItemStack SmokeBow;
-    public static ItemStack Fireball;
-    public static ItemStack TripleShotBow;
-    public static ItemStack BomberElytra;
-    public static ItemStack AutoShootChestplate;
-    public static ItemStack AirStrikeBow;
-    public static ItemStack ChunkMinerPickaxe;
-    public static ItemStack OreCompass;
-    public static ItemStack ZombieKnightSpawnEgg;
-    public static ItemStack NecromancerSpawnEgg;
+    public static ItemStack GrapplngHook, TeleportSword, TheGiftingFish, ExplosiveBow, InfiniteWaterBucket,
+            InfiniteLavaBucket, MachineGunBow, MultibreakPickaxe, MidasPickaxe, Boomerang, HomingBow, RocketLauncher,
+            ThrowingAxe, UndeadSword, ThrowableTNT, LightningAxe, AutoSmeltPickaxe, SmokeBow, Fireball, TripleShotBow,
+            BomberElytra, AutoShootChestplate, AirStrikeBow, ChunkMinerPickaxe, OreCompass, ZombieKnightSpawnEgg,
+            NecromancerSpawnEgg, CoolBeamSpawnEgg, NecromancerApprenticeSpawnEgg, ReverentSpawnEgg, MiniZombieBoss, MiniSkeletonBoss
+            ;
 
     public static void init() {
         createGrapplingHook();
@@ -72,7 +51,13 @@ public class ItemManager {
         createChunkMinerPickaxe();
         createOreCompass();
         createZombieKnightSpawnEgg();
+
         createNecromancerSpawnEgg();
+        createCoolBeamSpawnEgg();
+        createNecromancerApprenticeSpawnEgg();
+        createReverentSpawnEgg();
+        createSkeletonMobSpawnEgg();
+        createZombieMobSpawnEgg();
     }
 
     private static void createGrapplingHook() {
@@ -661,9 +646,101 @@ public class ItemManager {
         NecromancerSpawnEgg = item;
 
         ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("necromancer"), item);
-        necromancer_recipe.shape("HEH");
-        necromancer_recipe.setIngredient('H', new RecipeChoice.ExactChoice(ZombieKnightSpawnEgg));
+        necromancer_recipe.shape("HE ");
+        necromancer_recipe.setIngredient('H', Material.WITHER_SKELETON_SKULL);
         necromancer_recipe.setIngredient('E',Material.EGG);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
+    }
+
+    private static void createNecromancerApprenticeSpawnEgg() {
+        ItemStack item = new ItemStack(Material.ZOMBIE_SPAWN_EGG, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§6Necromancer's Apprentice Spawn Egg");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a Necromancer's Apprentice");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        NecromancerApprenticeSpawnEgg = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("necromancer_apprentice"), item);
+        necromancer_recipe.shape("HEH");
+        necromancer_recipe.setIngredient('H', new RecipeChoice.ExactChoice(NecromancerSpawnEgg));
+        necromancer_recipe.setIngredient('E',Material.EGG);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
+    }
+
+    private static void createCoolBeamSpawnEgg() {
+        ItemStack item = new ItemStack(Material.HUSK_SPAWN_EGG, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§6CoolBeam Spawn Egg");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a CoolBeam Boss");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        CoolBeamSpawnEgg = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("coolbeam"), item);
+        necromancer_recipe.shape("HEH");
+        necromancer_recipe.setIngredient('H', new RecipeChoice.ExactChoice(NecromancerSpawnEgg));
+        necromancer_recipe.setIngredient('E',Material.EGG);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
+    }
+
+    private static void createReverentSpawnEgg() {
+        ItemStack item = new ItemStack(Material.STICK, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§6Reverent Spawn Stick");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a Reverent");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        ReverentSpawnEgg = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("reverent"), item);
+        necromancer_recipe.shape("HER");
+        necromancer_recipe.setIngredient('H', Material.ZOMBIE_HEAD);
+        necromancer_recipe.setIngredient('E',Material.STICK);
+        necromancer_recipe.setIngredient('R',Material.ROTTEN_FLESH);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
+    }
+
+    private static void createSkeletonMobSpawnEgg() {
+        ItemStack item = new ItemStack(Material.BEE_SPAWN_EGG, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§6Skeleton Spawn Egg");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a Skeleton");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        MiniSkeletonBoss = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("skeleton_boss"), item);
+        necromancer_recipe.shape("HER");
+        necromancer_recipe.setIngredient('H', Material.SKELETON_SKULL);
+        necromancer_recipe.setIngredient('E',Material.EGG);
+        necromancer_recipe.setIngredient('R',Material.BONE);
+        Bukkit.getServer().addRecipe(necromancer_recipe);
+    }
+
+    private static void createZombieMobSpawnEgg() {
+        ItemStack item = new ItemStack(Material.HUSK_SPAWN_EGG, 1);
+        ItemMeta meta = item.getItemMeta();
+        if(meta != null){meta.setDisplayName("§9Zombie Boss Spawn Egg");}
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Spawns in a Zombie Boss");
+        assert meta != null;
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        MiniZombieBoss = item;
+
+        ShapedRecipe necromancer_recipe = new ShapedRecipe(NamespacedKey.minecraft("zombie_boss"), item);
+        necromancer_recipe.shape("ER");
+        necromancer_recipe.setIngredient('E',Material.EGG);
+        necromancer_recipe.setIngredient('R',Material.ROTTEN_FLESH);
         Bukkit.getServer().addRecipe(necromancer_recipe);
     }
 }

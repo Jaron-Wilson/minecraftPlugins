@@ -22,10 +22,8 @@ import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -53,7 +51,7 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new BossesCommands());
 //        Mobs Events
         getServer().getPluginManager().registerEvents(new Necromancer(this), this);
-        getServer().getPluginManager().registerEvents(new Revenant(this), this);
+        getServer().getPluginManager().registerEvents(new Reverent(this), this);
         getServer().getPluginManager().registerEvents(new ZombieMob(this), this);
         getServer().getPluginManager().registerEvents(new SkeletonMob(this), this);
         getServer().getPluginManager().registerEvents(new NecromancersApprentice(this), this);

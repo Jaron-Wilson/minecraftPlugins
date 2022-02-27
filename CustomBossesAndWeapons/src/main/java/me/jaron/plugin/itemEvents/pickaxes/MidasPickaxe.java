@@ -9,7 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Collection;
 
 public class MidasPickaxe implements Listener {
-
+    int count = 0;
+    boolean messages = false;
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null ||
@@ -23,6 +24,15 @@ public class MidasPickaxe implements Listener {
                     event.setDropItems(false);
                     event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.GOLD_INGOT, 1));
                 }
+            }else{
+                if (count >= 1 && messages == true) {
+                    System.out.println(event.getBlock().getLocation());
+                }
+            }
+        }else {
+
+            if (count >= 1 && messages == true) {
+                System.out.println(event.getBlock().getLocation());
             }
         }
     }

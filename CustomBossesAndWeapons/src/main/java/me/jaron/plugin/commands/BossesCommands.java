@@ -30,7 +30,7 @@ public class BossesCommands implements CommandExecutor {
                     Necromancer.createNecromancer(player.getLocation());
                 }
                 if (command.getName().equalsIgnoreCase("revenant")) {
-                    Revenant.createRevenant(player.getLocation());
+                    Reverent.createRevenant(player.getLocation());
                 }
                 if (command.getName().equalsIgnoreCase("zombieboss")) {
                     ZombieMob.createZombieMob(player.getLocation());
@@ -43,7 +43,7 @@ public class BossesCommands implements CommandExecutor {
                 }
                 if (command.getName().equalsIgnoreCase("spawnBosses")) {
                     Necromancer.createNecromancer(player.getLocation());
-                    Revenant.createRevenant(player.getLocation());
+                    Reverent.createRevenant(player.getLocation());
                     ZombieMob.createZombieMob(player.getLocation());
                     SkeletonMob.createSkeletonMob(player.getLocation());
                     NecromancersApprentice.createNecromancerApprentice(player.getLocation());
