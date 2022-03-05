@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.clickWeapons;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -21,9 +20,9 @@ import java.util.List;
 
 public class RocketLauncher implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public RocketLauncher(Main plugin) {
+    public RocketLauncher(MainClass plugin) {
         this.plugin = plugin;
     }
 

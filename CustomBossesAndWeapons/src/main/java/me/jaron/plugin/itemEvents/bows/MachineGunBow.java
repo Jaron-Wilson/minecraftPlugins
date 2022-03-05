@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.bows;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -14,9 +14,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class MachineGunBow implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public MachineGunBow(Main plugin) {
+    public MachineGunBow(MainClass plugin) {
         this.plugin = plugin;
     }
 

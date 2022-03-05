@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.axesAndSwords;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,9 +20,9 @@ import java.util.List;
 
 public class ThrowingAxe implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public ThrowingAxe(Main plugin) {
+    public ThrowingAxe(MainClass plugin) {
         this.plugin = plugin;
     }
 

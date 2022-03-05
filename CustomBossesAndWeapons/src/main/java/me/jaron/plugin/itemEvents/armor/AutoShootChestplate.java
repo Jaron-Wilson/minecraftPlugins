@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.armor;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
@@ -12,10 +12,10 @@ import java.util.Random;
 
 public class AutoShootChestplate extends BukkitRunnable {
 
-    Main plugin;
+    MainClass plugin;
     List<LivingEntity> shotAt = new ArrayList<>();
 
-    public AutoShootChestplate(Main plugin) {
+    public AutoShootChestplate(MainClass plugin) {
         this.plugin = plugin;
     }
 

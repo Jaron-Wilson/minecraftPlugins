@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.bows;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -15,9 +15,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class SmokeBow implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public SmokeBow(Main plugin) {
+    public SmokeBow(MainClass plugin) {
         this.plugin = plugin;
     }
 

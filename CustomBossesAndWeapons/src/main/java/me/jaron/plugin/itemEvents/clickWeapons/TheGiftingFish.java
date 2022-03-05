@@ -27,7 +27,7 @@ public class TheGiftingFish implements Listener {
 
     @EventHandler
     public void OnPlayerInteract(PlayerInteractEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null || event.getPlayer().getInventory().getItemInOffHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore() == null) {
+        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() == null || event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() == null) {
 
         }else {
             Player player = event.getPlayer();

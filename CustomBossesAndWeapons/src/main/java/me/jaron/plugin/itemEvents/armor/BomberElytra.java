@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.armor;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,9 +19,9 @@ import java.util.List;
 
 public class BomberElytra implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public BomberElytra(Main plugin) {
+    public BomberElytra(MainClass plugin) {
         this.plugin = plugin;
     }
 

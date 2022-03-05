@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.clickWeapons;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
@@ -15,9 +15,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Fireballs implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public Fireballs(Main plugin) {
+    public Fireballs(MainClass plugin) {
         this.plugin = plugin;
     }
 

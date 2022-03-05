@@ -2,6 +2,7 @@ package me.jaron.plugin;
 
 import me.jaron.plugin.commands.BossesCommands;
 import me.jaron.plugin.commands.ItemCommands;
+import me.jaron.plugin.commands.VanishCommand;
 import me.jaron.plugin.customRecipies.ItemRecipeManager;
 import me.jaron.plugin.itemEvents.*;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
@@ -19,17 +20,30 @@ import me.jaron.plugin.itemEvents.pickaxes.AutoSmeltPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.ChunkMinerPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.MidasPickaxe;
 import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
+import me.jaron.plugin.listeners.FallDamageListener;
+import me.jaron.plugin.listeners.JoinEvent;
+import me.jaron.plugin.listeners.OffHandEvent;
+import me.jaron.plugin.listeners.PlayerMoveListener;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
+import me.jaron.plugin.tabManagers.TabManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-public final class Main extends JavaPlugin implements Listener {
+import java.util.ArrayList;
 
+public final class MainClass extends JavaPlugin implements Listener {
 
+    public ArrayList<Player> jumping_players = new ArrayList<>();
+    public ArrayList<Player> invisible_list = new ArrayList<>();
+    public TabManager tab;
 //    private boolean active = false;
     //or maybe if you want listener
     //Bukkit.getPluginManager().registerEvents(new SecondaryClass(this), this);
@@ -38,8 +52,25 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         System.out.println("§8Plugin started Properly!");
 
+        this.tab = new TabManager(this);
+
+        tab.addHeader("&c&l JARON\n&9 JoinME");
+        tab.addHeader("&a&6 HELLO\n NO");
+
+
+        tab.showTab();
+
+
 //        Recipes
         ItemRecipeManager.init();
+
+        //load config
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
+        //Register listeners
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
+        getServer().getPluginManager().registerEvents(new FallDamageListener(this), this);
 
 //          MOBS Commands
         getCommand("necromancer").setExecutor(new BossesCommands());
@@ -125,6 +156,17 @@ public final class Main extends JavaPlugin implements Listener {
 
         GrapplingHookCooldown.setupCooldown();
 
+        this.getServer().getPluginManager().registerEvents(new DetectBlock(this), this);
+        this.getServer().getPluginManager().registerEvents(this, this);
+
+
+        getCommand("vanish").setExecutor(new VanishCommand(this));
+
+        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new OffHandEvent(this), this);
+
+
+
     }
 
     @Override
@@ -134,4 +176,31 @@ public final class Main extends JavaPlugin implements Listener {
 //        System.out.println("------------------SAVED-----------------------");
     }
 
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (label.equalsIgnoreCase("config")) {
+//            if (!sender.hasPermission("randomblock.reload")) {
+//                sender.sendMessage("NOPE");
+//                return true;
+//            }
+            if (args.length == 0) {
+                //randomblcok
+                sender.sendMessage("Usage: /config reload");
+                return true;
+            }
+            if (args.length > 0) {
+                //reload
+                if (args[0].equalsIgnoreCase("reload")) {
+                    for (String msg : this.getConfig().getStringList("reload.message")) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                                msg));
+                    }
+
+                    this.reloadConfig();
+
+                }
+            }
+        }
+        return false;
+    }
 }

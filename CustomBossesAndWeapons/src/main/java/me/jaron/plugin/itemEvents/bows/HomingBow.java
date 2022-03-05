@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.bows;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class HomingBow implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public HomingBow(Main plugin) {
+    public HomingBow(MainClass plugin) {
         this.plugin = plugin;
     }
 

@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.clickWeapons;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,9 +15,9 @@ import org.bukkit.util.Vector;
 
 public class Boomerang implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public Boomerang(Main plugin) {
+    public Boomerang(MainClass plugin) {
         this.plugin = plugin;
     }
 

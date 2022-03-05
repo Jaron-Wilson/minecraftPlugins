@@ -13,12 +13,11 @@ public class MidasPickaxe implements Listener {
     boolean messages = false;
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null ||
-                event.getPlayer().getInventory().getItemInOffHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore() != null
+        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
         ) {
 //            System.out.println("not using MidasPickaxe");
 //        } else {
-            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Golden Touch:") || event.getPlayer().getInventory().getItemInOffHand().getItemMeta().getLore().contains("§6Golden Touch:")) {
+            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Golden Touch:")) {
                 Collection<ItemStack> drops = event.getBlock().getDrops();
                 if (!(drops.size() == 0)) {
                     event.setDropItems(false);

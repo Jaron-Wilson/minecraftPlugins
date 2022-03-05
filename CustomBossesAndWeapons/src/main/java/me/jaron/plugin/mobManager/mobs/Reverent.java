@@ -1,6 +1,6 @@
 package me.jaron.plugin.mobManager.mobs;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
@@ -11,23 +11,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-import static me.jaron.plugin.mobManager.mobs.Necromancer.createNecromancer;
-
 public class Reverent implements Listener {
 
-    static Main plugin;
+    static MainClass plugin;
 
-    public Reverent(Main plugin) {
+    public Reverent(MainClass plugin) {
         Reverent.plugin = plugin;
     }
 

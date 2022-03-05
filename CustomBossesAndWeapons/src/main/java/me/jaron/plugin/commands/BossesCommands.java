@@ -1,7 +1,7 @@
 package me.jaron.plugin.commands;
 
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.mobManager.mobs.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class BossesCommands implements CommandExecutor {
 
-    static Main plugin;
+    static MainClass plugin;
 //    Try1 plugin = new Try1();
 
 

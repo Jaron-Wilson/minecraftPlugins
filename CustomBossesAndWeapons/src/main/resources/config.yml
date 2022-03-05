@@ -1,3 +1,30 @@
 undeadsword:
   zombie: 100
   skeleton: 100
+
+enable: true #enable or disable launchpads
+
+message: false #have a message sent when they launch
+launch-message: '&9Whooooosh!!'
+
+#FULL BLOCK NAME LIST: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+top-block: 'AIR' #typically a pressure plate or carpet
+under-block: 'SLIME_BLOCK'
+
+disable-fall-damage: true
+
+time-delays:
+  dirt/stone/cobblestone: 60
+  gravel/sand: 25
+  endstone: 70
+
+reload:
+  message:
+    #You can add more if you like!
+    - "&a Reloaded&c have fun"
+#    -
+
+offhand-message:
+  enable: true
+  message:
+  - "&a Sorry Offhand Disabled"

@@ -1,6 +1,6 @@
 package me.jaron.plugin.itemEvents.axesAndSwords;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
@@ -17,9 +17,9 @@ import java.util.List;
 
 public class DamageMultiplierSword implements Listener {
 
-    Main plugin;
+    MainClass plugin;
 
-    public DamageMultiplierSword(Main plugin) {
+    public DamageMultiplierSword(MainClass plugin) {
         this.plugin = plugin;
     }
 

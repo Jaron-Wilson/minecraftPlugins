@@ -1,6 +1,6 @@
 package me.jaron.plugin.mobManager.mobs;
 
-import me.jaron.plugin.Main;
+import me.jaron.plugin.MainClass;
 import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
@@ -25,9 +25,9 @@ import static me.jaron.plugin.mobManager.mobs.Necromancer.createNecromancer;
 
 public class NecromancersApprentice implements Listener {
 
-    static Main plugin;
+    static MainClass plugin;
 
-    public NecromancersApprentice(Main plugin) {
+    public NecromancersApprentice(MainClass plugin) {
         NecromancersApprentice.plugin = plugin;
     }
 

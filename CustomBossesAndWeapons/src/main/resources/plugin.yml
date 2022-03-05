@@ -1,6 +1,6 @@
 name: CustomBosses
 version: '${project.version}'
-main: me.jaron.plugin.Main
+main: me.jaron.plugin.MainClass
 api-version: 1.18
 description: Basic
 
@@ -113,3 +113,9 @@ commands:
   givezombieknightspawnegg:
     description: gives the player a zombie knight spawn egg
     usage: /<command>
+  config:
+    description: reloads config
+  vanish:
+    description: Vanishes You
+  create:
+    description: eh
