@@ -117,5 +117,3 @@ commands:
     description: reloads config
   vanish:
     description: Vanishes You
-  create:
-    description: eh
