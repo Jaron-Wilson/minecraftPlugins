@@ -3,7 +3,7 @@
 //import io.netty.channel.Channel;
 //import io.netty.channel.ChannelHandlerContext;
 //import io.netty.handler.codec.MessageToMessageDecoder;
-//import me.jaron.plugin.Main;
+//import me.jaron.plugin.MainClass;
 //import net.minecraft.network.protocol.game.PacketPlayInUseEntity;
 //import org.bukkit.Bukkit;
 //import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
@@ -54,7 +54,7 @@
 //                public void run() {
 //                    Bukkit.getPluginManager().callEvent(new RightClickCorpse(player, CourpeEntity.corpseEntities.get(entityID)));
 //                }
-//            }.runTask(Main.getPlugin(Main.class));
+//            }.runTask(MainClass.getPlugin(MainClass.class));
 //        }
 //    }
 //

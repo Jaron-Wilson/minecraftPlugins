@@ -28,3 +28,6 @@ offhand-message:
   enable: true
   message:
   - "&a Sorry Offhand Disabled"
+#  -
+Message2: "Hello There"
+Message: "General Kenobiiii"

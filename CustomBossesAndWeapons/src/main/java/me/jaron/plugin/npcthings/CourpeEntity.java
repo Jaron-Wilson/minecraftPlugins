@@ -2,7 +2,7 @@
 //
 //import com.mojang.authlib.GameProfile;
 //import com.mojang.authlib.properties.Property;
-//import me.jaron.plugin.Main;
+//import me.jaron.plugin.MainClass;
 //import net.minecraft.core.BlockPosition;
 //import net.minecraft.network.protocol.game.*;
 //import net.minecraft.network.syncher.DataWatcher;
@@ -60,7 +60,7 @@
 //        // Step 5: Hide NameTag
 //        ScoreboardTeam team = new ScoreboardTeam(
 //                ((CraftScoreboard) Bukkit.getScoreboardManager().getMainScoreboard()).getHandle(), player.getName());
-//        team.setNameTagVisibility(ScoreboardTeamBase.EnumNameTagVisibility.b);
+//        team.a(ScoreboardTeamBase.EnumNameTagVisibility.b);
 //
 //        PacketPlayOutScoreboardTeam score1 = PacketPlayOutScoreboardTeam.a(team);
 //        PacketPlayOutScoreboardTeam score2 = PacketPlayOutScoreboardTeam.a(team, true);

@@ -117,3 +117,12 @@ commands:
     description: reloads config
   vanish:
     description: Vanishes You
+  fp:
+    usage: /<command>
+    description: Run commands
+  createnpc:
+    description: ss
+  destroynpc:
+    description: s
+  gui:
+    description: s

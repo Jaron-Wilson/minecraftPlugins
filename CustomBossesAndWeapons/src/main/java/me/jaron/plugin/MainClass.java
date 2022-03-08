@@ -1,12 +1,16 @@
 package me.jaron.plugin;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import me.jaron.plugin.commands.BossesCommands;
 import me.jaron.plugin.commands.ItemCommands;
 import me.jaron.plugin.commands.VanishCommand;
 import me.jaron.plugin.customRecipies.ItemRecipeManager;
-import me.jaron.plugin.itemEvents.*;
+import me.jaron.plugin.inventorys.GUICommand;
+import me.jaron.plugin.inventorys.GUIMoveItem;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHookCooldown;
+import me.jaron.plugin.itemEvents.InfiniteBuckets;
 import me.jaron.plugin.itemEvents.armor.AutoShootChestplate;
 import me.jaron.plugin.itemEvents.armor.BomberElytra;
 import me.jaron.plugin.itemEvents.axesAndSwords.DamageMultiplierSword;
@@ -27,30 +31,97 @@ import me.jaron.plugin.listeners.PlayerMoveListener;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
+import me.jaron.plugin.npc.*;
+import me.jaron.plugin.npcs.FPCommand;
+import me.jaron.plugin.npcs.NPCManager;
 import me.jaron.plugin.tabManagers.TabManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public final class MainClass extends JavaPlugin implements Listener {
+
+    public static DataManager data;
+    private Config config;
+
+    public static FileConfiguration getData() {
+        return data.getConfig();
+    }
+
+    public static void saveData() {
+        data.saveConfig();
+    }
 
     public ArrayList<Player> jumping_players = new ArrayList<>();
     public ArrayList<Player> invisible_list = new ArrayList<>();
     public TabManager tab;
+    public CustomInventory inventory;
 //    private boolean active = false;
     //or maybe if you want listener
     //Bukkit.getPluginManager().registerEvents(new SecondaryClass(this), this);
 
+
+    private static MainClass instance;
+
+    public NPCManager npcManager;
+
+    public static MainClass getInstance() {
+        return instance;
+    }
+
+    private void setInstance(MainClass instance) {
+        this.instance = instance;
+    }
+
+
     @Override
     public void onEnable() {
         System.out.println("§8Plugin started Properly!");
+
+
+        setInstance(this);
+        this.getCommand("fp").setExecutor(new FPCommand());
+        this.npcManager = new NPCManager();
+
+
+//        getServer().getPluginManager().registerEvents(new EventsClass(), this);
+        getServer().getPluginManager().registerEvents(new CustomInventory(), this);
+        getCommand("gui").setExecutor(new GUICommand());
+
+        getServer().getPluginManager().registerEvents(new GUIMoveItem(), this);
+
+
+        data = new DataManager(this);
+
+        if (data.getConfig().contains("data")) {
+            loadNPC();
+        }
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            PacketReader reader = new PacketReader();
+            reader.inject(player);
+        }
+
+        this.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+        this.getServer().getPluginManager().registerEvents(new ClickNPC(this), this);
+        this.getCommand("createnpc").setExecutor(new AddNPC());
+        this.getCommand("destroynpc").setExecutor(new DestroyNPC());
+        this.getServer().getPluginManager().registerEvents(new MovementListener(), this);
+        this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
+        this.getCommand("createnpc").setTabCompleter(new SkinTab());
+
+
+
 
         this.tab = new TabManager(this);
 
@@ -173,6 +244,16 @@ public final class MainClass extends JavaPlugin implements Listener {
     public void onDisable() {
         // Plugin shutdown logic
         System.out.println(ChatColor.GRAY + "Project disabled");
+
+
+//        this.getServer().getPluginManager().registerEvents(new OnQuit(), this);
+//        for (Player player : Bukkit.getOnlinePlayers()) {
+//            PacketReader reader = new PacketReader();
+//            reader.unInject(player);
+//            for (EntityPlayer npc : NPC.getNpcs())
+//                NPC.removeNPC(player, npc);
+//        }
+
 //        System.out.println("------------------SAVED-----------------------");
     }
 
@@ -203,4 +284,30 @@ public final class MainClass extends JavaPlugin implements Listener {
         }
         return false;
     }
+
+
+
+    public void loadNPC() {
+        FileConfiguration file = data.getConfig();
+        if (file.getConfigurationSection("data") != null) {
+            file.getConfigurationSection("data").getKeys(false).forEach(npc -> {
+
+                Location location = new Location(Bukkit.getWorld(file.getString("data." + npc + ".world")),
+                        file.getInt("data." + npc + ".x"),
+                        file.getInt("data." + npc + ".y"),
+                        file.getInt("data." + npc + ".z"));
+                location.setPitch((float) file.getDouble("data." + npc + ".p"));
+                location.setYaw((float) file.getDouble("data." + npc + ".yaw"));
+
+                String name = file.getString("data." + npc + ".name");
+                GameProfile gameProfile = new GameProfile(UUID.randomUUID(), ChatColor.DARK_AQUA + "" + name);
+                gameProfile.getProperties().put("textures", new Property("textures",
+                        file.getString("data." + npc + ".text"),
+                        file.getString("data." + npc + ".signature")));
+
+                NPC.loadNPC(location, gameProfile);
+            });
+        }
+    }
+
 }

@@ -2,17 +2,11 @@ package me.jaron.plugin.itemEvents.GrapplingHookFiles;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GrapplingHook implements Listener {
     public static ItemStack grapplingHooks;
