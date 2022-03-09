@@ -1,4 +1,4 @@
-package me.jaron.plugin.inventorys;
+package me.jaron.plugin.guis;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

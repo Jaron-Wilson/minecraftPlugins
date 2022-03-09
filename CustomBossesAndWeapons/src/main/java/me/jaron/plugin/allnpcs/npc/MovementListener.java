@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import net.minecraft.network.protocol.game.PacketPlayOutEntity;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityHeadRotation;

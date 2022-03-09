@@ -1,6 +1,5 @@
-package me.jaron.plugin.npcs;
+package me.jaron.plugin.allnpcs.npcs;
 
-import org.bukkit.entity.NPC;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FakePlayersMain extends JavaPlugin {

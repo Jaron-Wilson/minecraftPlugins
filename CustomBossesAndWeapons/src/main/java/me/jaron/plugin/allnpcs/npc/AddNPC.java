@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

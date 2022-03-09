@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

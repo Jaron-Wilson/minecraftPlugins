@@ -1,4 +1,4 @@
-package me.jaron.plugin.npcs;
+package me.jaron.plugin.allnpcs.npcs;
 
 import me.jaron.plugin.MainClass;
 import org.bukkit.command.Command;

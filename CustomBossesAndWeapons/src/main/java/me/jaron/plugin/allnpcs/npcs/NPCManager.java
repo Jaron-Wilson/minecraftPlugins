@@ -1,4 +1,4 @@
-package me.jaron.plugin.npcs;
+package me.jaron.plugin.allnpcs.npcs;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;

@@ -126,3 +126,7 @@ commands:
     description: s
   gui:
     description: s
+  bangui:
+    description: Open the Ban GUI
+  vault:
+    description: vault

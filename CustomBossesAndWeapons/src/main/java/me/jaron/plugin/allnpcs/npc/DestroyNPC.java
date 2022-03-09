@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.command.Command;

@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import me.jaron.plugin.MainClass;
 import net.minecraft.server.level.EntityPlayer;

@@ -2,12 +2,19 @@ package me.jaron.plugin;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import me.jaron.plugin.allnpcs.npc.*;
+import me.jaron.plugin.allnpcs.npcs.FPCommand;
+import me.jaron.plugin.allnpcs.npcs.NPCManager;
 import me.jaron.plugin.commands.BossesCommands;
 import me.jaron.plugin.commands.ItemCommands;
 import me.jaron.plugin.commands.VanishCommand;
 import me.jaron.plugin.customRecipies.ItemRecipeManager;
-import me.jaron.plugin.inventorys.GUICommand;
-import me.jaron.plugin.inventorys.GUIMoveItem;
+import me.jaron.plugin.guis.GUICommand;
+import me.jaron.plugin.guis.GUIMoveItem;
+import me.jaron.plugin.guis.ban.commands.BanGUICommand;
+import me.jaron.plugin.guis.ban.listener.BanInventoryListener;
+import me.jaron.plugin.guis.vaults.commands.OpenCommand;
+import me.jaron.plugin.guis.vaults.listeners.Listeners;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
 import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHookCooldown;
 import me.jaron.plugin.itemEvents.InfiniteBuckets;
@@ -31,9 +38,6 @@ import me.jaron.plugin.listeners.PlayerMoveListener;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.mobManager.mobs.*;
-import me.jaron.plugin.npc.*;
-import me.jaron.plugin.npcs.FPCommand;
-import me.jaron.plugin.npcs.NPCManager;
 import me.jaron.plugin.tabManagers.TabManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -47,17 +51,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public final class MainClass extends JavaPlugin implements Listener {
 
     public static DataManager data;
     private Config config;
-
     public static FileConfiguration getData() {
         return data.getConfig();
     }
-
     public static void saveData() {
         data.saveConfig();
     }
@@ -66,41 +69,42 @@ public final class MainClass extends JavaPlugin implements Listener {
     public ArrayList<Player> invisible_list = new ArrayList<>();
     public TabManager tab;
     public CustomInventory inventory;
-//    private boolean active = false;
-    //or maybe if you want listener
-    //Bukkit.getPluginManager().registerEvents(new SecondaryClass(this), this);
-
-
     private static MainClass instance;
-
     public NPCManager npcManager;
-
     public static MainClass getInstance() {
         return instance;
     }
-
     private void setInstance(MainClass instance) {
         this.instance = instance;
     }
+
 
 
     @Override
     public void onEnable() {
         System.out.println("§8Plugin started Properly!");
 
+        this.tab = new TabManager(this);
+        tab.addHeader("&c&l JARON");
+//        tab.addHeader("&a&6 HELLO\n Join the &bDiscord");
+        tab.showTab();
 
+
+//        Fake Player
         setInstance(this);
         this.getCommand("fp").setExecutor(new FPCommand());
         this.npcManager = new NPCManager();
-
-
-//        getServer().getPluginManager().registerEvents(new EventsClass(), this);
+//              GUI'a
         getServer().getPluginManager().registerEvents(new CustomInventory(), this);
         getCommand("gui").setExecutor(new GUICommand());
-
         getServer().getPluginManager().registerEvents(new GUIMoveItem(), this);
-
-
+////        Vault
+        getCommand("vault").setExecutor(new OpenCommand());
+        getServer().getPluginManager().registerEvents(new Listeners(), this);
+//        Ban Gui
+        getCommand("bangui").setExecutor(new BanGUICommand());
+        getServer().getPluginManager().registerEvents(new BanInventoryListener(), this);
+//        NPCS
         data = new DataManager(this);
 
         if (data.getConfig().contains("data")) {
@@ -119,17 +123,6 @@ public final class MainClass extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new MovementListener(), this);
         this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
         this.getCommand("createnpc").setTabCompleter(new SkinTab());
-
-
-
-
-        this.tab = new TabManager(this);
-
-        tab.addHeader("&c&l JARON\n&9 JoinME");
-        tab.addHeader("&a&6 HELLO\n NO");
-
-
-        tab.showTab();
 
 
 //        Recipes
@@ -243,7 +236,7 @@ public final class MainClass extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        System.out.println(ChatColor.GRAY + "Project disabled");
+        System.out.println("Project disabled");
 
 
 //        this.getServer().getPluginManager().registerEvents(new OnQuit(), this);
@@ -285,8 +278,6 @@ public final class MainClass extends JavaPlugin implements Listener {
         return false;
     }
 
-
-
     public void loadNPC() {
         FileConfiguration file = data.getConfig();
         if (file.getConfigurationSection("data") != null) {
@@ -309,5 +300,22 @@ public final class MainClass extends JavaPlugin implements Listener {
             });
         }
     }
+
+    //Provide a player and return a menu system for that player
+    //create one if they don't already have one
+//    public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
+//        PlayerMenuUtility playerMenuUtility;
+//        if (!(playerMenuUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
+//
+//            //This player doesn't. Make one for them add add it to the hashmap
+//            playerMenuUtility = new PlayerMenuUtility(p);
+//            playerMenuUtilityMap.put(p, playerMenuUtility);
+//
+//            return playerMenuUtility;
+//        } else {
+//            return playerMenuUtilityMap.get(p); //Return the object by using the provided player
+//        }
+//    }
+
 
 }

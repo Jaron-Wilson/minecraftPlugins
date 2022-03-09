@@ -1,4 +1,4 @@
-package me.jaron.plugin.npc;
+package me.jaron.plugin.allnpcs.npc;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
