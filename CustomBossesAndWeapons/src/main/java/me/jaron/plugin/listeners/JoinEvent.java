@@ -25,7 +25,7 @@ public class JoinEvent implements Listener {
             player.hidePlayer(plugin, plugin.invisible_list.get(i));
         }
 
-        plugin.tab.addFooter("&bPlayers Online: " + Bukkit.getOnlinePlayers().size());
+//        plugin.tab.addFooter("&bPlayers Online: " + Bukkit.getOnlinePlayers().size());
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             public void run() {
@@ -42,7 +42,7 @@ public class JoinEvent implements Listener {
         for (int i = 0; i < plugin.invisible_list.size(); i++) {
             player.hidePlayer(plugin, plugin.invisible_list.get(i));
         }
-                plugin.tab.addFooter("&bPlayers Online: " + Bukkit.getOnlinePlayers().size());
+//                plugin.tab.addFooter("&bPlayers Online: " + Bukkit.getOnlinePlayers().size());
 
     }
 

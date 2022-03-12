@@ -2,32 +2,50 @@ undeadsword:
   zombie: 100
   skeleton: 100
 
-enable: true #enable or disable launchpads
+#LAUNCH PADS
+launchpads:
+  enable: true #enable or disable launchpads
+  message: false #have a message sent when they launch
+  launch-message: '&9Whooooosh!!'
 
-message: false #have a message sent when they launch
-launch-message: '&9Whooooosh!!'
+  #FULL BLOCK NAME LIST: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  top-block: 'AIR' #typically, a pressure plate or carpet
+  under-block: 'SLIME_BLOCK'
+  disable-fall-damage: true
 
-#FULL BLOCK NAME LIST: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-top-block: 'AIR' #typically a pressure plate or carpet
-under-block: 'SLIME_BLOCK'
+#NODES/ BREAK BLOCKS
+nodes:
+  time-delays:
+    dirt/stone/cobblestone: 60
+    gravel/sand: 25
+    endstone: 70
+#    ENABLE RELOADING OF BLOCKS
+  enable: true
+  messages: true
+  message: "If you want to not have it stay there, then press shift and destroy it"
+#  Make it an indestructible block
+  breakmaterial: "bedrock"
+#  ADD BLOCKS IN UPPERCASE AND SPACES TO _
 
-disable-fall-damage: true
+  dirttypes:
+    - "DIRT"
+    - "STONE"
+    - "GRASS_BLOCK"
 
-time-delays:
-  dirt/stone/cobblestone: 60
-  gravel/sand: 25
-  endstone: 70
-
+#CONFIG RELOADS
 reload:
   message:
     #You can add more if you like!
     - "&a Reloaded&c have fun"
 #    -
 
+#OFFHAND
 offhand-message:
   enable: true
   message:
   - "&a Sorry Offhand Disabled"
 #  -
-Message2: "Hello There"
-Message: "General Kenobiiii"
+
+#NPC
+#Message2: "Hello There"
+#Message: "General Kenobiiii"

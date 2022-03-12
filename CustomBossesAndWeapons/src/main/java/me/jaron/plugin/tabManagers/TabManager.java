@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -34,13 +35,14 @@ public class TabManager {
                     if(headers.isEmpty() && footers.isEmpty()) return;
                     if(headerCount >= headers.size()) headerCount = 0;
                     if(footerCount >= footers.size()) footerCount = 0;
+
                     for(Player player : Bukkit.getOnlinePlayers()) {
                         String header = headers.size() == 0 ? "" : headers.get(headerCount);
                         String footer = footers.size() == 0 ? "" : footers.get(footerCount);
-//                        for(Map.Entry<String, Function<Player, String>> entry : placeHolders.entrySet()) {
-//                            header = header.replace(entry.getKey(),entry.getValue().apply(player));
-//                            footer = footer.replace(entry.getKey(),entry.getValue().apply(player));
-//                        }
+                        for(Map.Entry<String, Function<Player, String>> entry : placeHolders.entrySet()) {
+                            header = header.replace(entry.getKey(),entry.getValue().apply(player));
+                            footer = footer.replace(entry.getKey(),entry.getValue().apply(player));
+                        }
                         player.setPlayerListHeaderFooter(header, footer);
                     }
                     headerCount++;

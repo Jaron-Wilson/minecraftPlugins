@@ -26,6 +26,7 @@ public class BanInventoryListener implements Listener {
                 Player whoToBan = MainClass.getInstance().getServer().getPlayerExact(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
 
                 BanMenuUtils.openPlayerMenu(player, whoToBan);
+                e.setCancelled(true);
             }
 
         }else if(e.getView().getTitle().equalsIgnoreCase("Ban This Noob")){
@@ -40,9 +41,10 @@ public class BanInventoryListener implements Listener {
                     player.sendMessage(ChatColor.GREEN + "Banned Player");
                     break;
             }
+            //make it so they cant move items
+            e.setCancelled(true);
         }
-        //make it so they cant move items
-        e.setCancelled(true);
+
     }
 
 }

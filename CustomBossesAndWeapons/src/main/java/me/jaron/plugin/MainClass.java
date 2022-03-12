@@ -35,10 +35,20 @@ import me.jaron.plugin.listeners.FallDamageListener;
 import me.jaron.plugin.listeners.JoinEvent;
 import me.jaron.plugin.listeners.OffHandEvent;
 import me.jaron.plugin.listeners.PlayerMoveListener;
+import me.jaron.plugin.managers.ConfigManager;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
+import me.jaron.plugin.managers.MoneyManager;
+import me.jaron.plugin.minigames.tag.listeners.TaggedEvent;
+import me.jaron.plugin.minigames.tag.models.Game;
+import me.jaron.plugin.minigames.tag.tagcommand.TagCommand;
 import me.jaron.plugin.mobManager.mobs.*;
+import me.jaron.plugin.moneyManagers.MoneyData;
+import me.jaron.plugin.privateChests.listeners.ChestOpen;
+import me.jaron.plugin.privateChests.listeners.ChestPlace;
 import me.jaron.plugin.tabManagers.TabManager;
+import me.jaron.plugin.moneyManagers.MobKillEvent;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -47,17 +57,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public final class MainClass extends JavaPlugin implements Listener {
 
     public static DataManager data;
-    private Config config;
     public static FileConfiguration getData() {
         return data.getConfig();
     }
@@ -65,12 +74,12 @@ public final class MainClass extends JavaPlugin implements Listener {
         data.saveConfig();
     }
 
-    public ArrayList<Player> jumping_players = new ArrayList<>();
-    public ArrayList<Player> invisible_list = new ArrayList<>();
+    public ArrayList<Player> jumping_players, invisible_list = new ArrayList<>();
     public TabManager tab;
     public CustomInventory inventory;
-    private static MainClass instance;
     public NPCManager npcManager;
+
+    private static MainClass instance;
     public static MainClass getInstance() {
         return instance;
     }
@@ -78,63 +87,174 @@ public final class MainClass extends JavaPlugin implements Listener {
         this.instance = instance;
     }
 
+    public Game game = new Game();
 
+    public Economy eco;
+    private ConfigManager configManager;
+    public PluginManager pm = getServer().getPluginManager();
 
     @Override
     public void onEnable() {
+        loadConfigurationManager();
+        loadMobsRegister();
+        loadItemsRegister();
+        tabManager();
+        loadNPCListeners();
+        loadLaunchPad();
+
+        if (!setUpEconomy()) {
+        System.out.println(ChatColor.RED +
+                "MUST HAVE VAULT AND AN ECONOMY PLUGIN INSTALLED");
+        getServer().getPluginManager().disablePlugin(this);
+        return;
+    }
+        pm.registerEvents(new MobKillEvent(this), this);
+        
         System.out.println("§8Plugin started Properly!");
-
-        this.tab = new TabManager(this);
-        tab.addHeader("&c&l JARON");
-//        tab.addHeader("&a&6 HELLO\n Join the &bDiscord");
-        tab.showTab();
-
-
-//        Fake Player
-        setInstance(this);
-        this.getCommand("fp").setExecutor(new FPCommand());
-        this.npcManager = new NPCManager();
 //              GUI'a
-        getServer().getPluginManager().registerEvents(new CustomInventory(), this);
-        getCommand("gui").setExecutor(new GUICommand());
-        getServer().getPluginManager().registerEvents(new GUIMoveItem(), this);
+        pm.registerEvents(new CustomInventory(), this);
+        this.getCommand("gui").setExecutor(new GUICommand());
+        pm.registerEvents(new GUIMoveItem(), this);
 ////        Vault
-        getCommand("vault").setExecutor(new OpenCommand());
-        getServer().getPluginManager().registerEvents(new Listeners(), this);
+        this.getCommand("vault").setExecutor(new OpenCommand());
+        pm.registerEvents(new Listeners(), this);
 //        Ban Gui
-        getCommand("bangui").setExecutor(new BanGUICommand());
-        getServer().getPluginManager().registerEvents(new BanInventoryListener(), this);
-//        NPCS
-        data = new DataManager(this);
+        this.getCommand("bangui").setExecutor(new BanGUICommand());
+        pm.registerEvents(new BanInventoryListener(), this);
 
-        if (data.getConfig().contains("data")) {
-            loadNPC();
-        }
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            PacketReader reader = new PacketReader();
-            reader.inject(player);
-        }
-
-        this.getServer().getPluginManager().registerEvents(new OnJoin(), this);
-        this.getServer().getPluginManager().registerEvents(new ClickNPC(this), this);
-        this.getCommand("createnpc").setExecutor(new AddNPC());
-        this.getCommand("destroynpc").setExecutor(new DestroyNPC());
-        this.getServer().getPluginManager().registerEvents(new MovementListener(), this);
-        this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
-        this.getCommand("createnpc").setTabCompleter(new SkinTab());
-
-
-//        Recipes
+//        Recipes, Items
         ItemRecipeManager.init();
+        ItemManager.init();
 
         //load config
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        //Register listeners
-        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
-        getServer().getPluginManager().registerEvents(new FallDamageListener(this), this);
+        /*Item EventsManager*/
+        pm.registerEvents(new ItemBlocksEventManager(), this);
+        pm.registerEvents(new DetectBlock(this), this);
+        
+        pm.registerEvents(this, this);
+        
+        getCommand("vanish").setExecutor(new VanishCommand(this));
+        pm.registerEvents(new JoinEvent(this), this);
+        pm.registerEvents(new OffHandEvent(this), this);
+        
+        
+        pm.registerEvents(new ChestOpen(), this);
+        pm.registerEvents(new ChestPlace(), this);
+
+//        TAG
+        pm.registerEvents(new TaggedEvent(this), this);
+        getCommand("tag").setExecutor(new TagCommand(this));
+
+        BukkitTask AutoShootChestplate = new AutoShootChestplate(this).runTaskTimer(this, 0, 40);
+        GrapplingHookCooldown.setupCooldown();
+    }
+
+    private void loadNPCListeners() {
+
+
+//        Fake Player
+        this.setInstance(this);
+        this.getCommand("fakeplayer").setExecutor(new FPCommand());
+        this.npcManager = new NPCManager();
+        
+        //        NPCS
+        data = new DataManager(this);
+        if (data.getConfig().contains("data")) {
+            loadNPC();
+        }
+
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            PacketReader reader = new PacketReader();
+            reader.inject(player);
+        }
+       pm.registerEvents(new OnJoin(), this);
+       pm.registerEvents(new ClickNPC(this), this);
+        this.getCommand("createnpc").setExecutor(new AddNPC());
+        this.getCommand("destroynpc").setExecutor(new DestroyNPC());
+       pm.registerEvents(new MovementListener(), this);
+        this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
+        this.getCommand("createnpc").setTabCompleter(new SkinTab());
+    }
+
+
+
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+        System.out.println("Project disabled");
+        if (game.isPlaying()) {
+            game.end();
+        }
+
+//       pm.registerEvents(new OnQuit(), this);
+//        for (Player player : Bukkit.getOnlinePlayers()) {
+//            PacketReader reader = new PacketReader();
+//            reader.unInject(player);
+//            for (EntityPlayer npc : NPC.getNpcs())
+//                NPC.removeNPC(player, npc);
+//        }
+
+//        System.out.println("------------------SAVED-----------------------");
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (label.equalsIgnoreCase("config")) {
+            if (args.length == 0) {
+                //randomblcok
+                sender.sendMessage("Usage: /config reload");
+                sender.sendMessage("Usage: /config players");
+                return true;
+            }
+            if (args.length > 0) {
+                //reload
+                if (args[0].equalsIgnoreCase("reload")) {
+                    for (String msg : this.getConfig().getStringList("reload.message")) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                                msg));
+                    }
+
+                    this.reloadConfig();
+
+                }else if (args[0].equalsIgnoreCase("players")) {
+                    for (String msg : this.getConfig().getStringList("reload.message")) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                                msg));
+                    }
+
+                    this.configManager.reloadPlayers();
+
+                }
+            }
+
+                return true;
+            }
+
+
+        return true;
+    }
+
+    public void loadConfigurationManager() {
+        configManager = new ConfigManager();
+        configManager.setUpPlayerConfig();
+        configManager.savePlayers();
+        configManager.reloadPlayers();
+    }
+
+    private void tabManager() {
+
+        this.tab = new TabManager(this);
+        this.tab.addHeader("&c&l JARON");
+//        tab.addHeader("&a&6 HELLO\n Join the &bDiscord");
+        this.tab.showTab();
+
+    }
+
+    private void loadMobsRegister() {
 
 //          MOBS Commands
         getCommand("necromancer").setExecutor(new BossesCommands());
@@ -155,10 +275,11 @@ public final class MainClass extends JavaPlugin implements Listener {
 //        getServer().getPluginManager().registerEvents(new CorpseInteract(), this);
 //        getServer().getPluginManager().registerEvents(new DeathEventCorpse(), this);
 
-        /*Item EventsManager*/
-        getServer().getPluginManager().registerEvents(new ItemBlocksEventManager(), this);
+    }
+
+    private void loadItemsRegister() {
         /*ITEMS!*/
-        ItemManager.init();
+
 
         this.getCommand("giveall").setExecutor(new ItemCommands());
         this.getCommand("givegrapplinghook").setExecutor(new ItemCommands());
@@ -188,94 +309,35 @@ public final class MainClass extends JavaPlugin implements Listener {
         this.getCommand("giveorecompass").setExecutor(new ItemCommands());
         this.getCommand("givezombieknightspawnegg").setExecutor(new ItemCommands());
 
-        this.getServer().getPluginManager().registerEvents(new TeleportSword(), this);
-        this.getServer().getPluginManager().registerEvents(new GrapplingHook(), this);
-        this.getServer().getPluginManager().registerEvents(new TheGiftingFish(), this);
-        this.getServer().getPluginManager().registerEvents(new ExplosiveBow(), this);
-        this.getServer().getPluginManager().registerEvents(new InfiniteBuckets(), this);
-        this.getServer().getPluginManager().registerEvents(new MachineGunBow(this), this);
-        this.getServer().getPluginManager().registerEvents(new MultibreakPickaxe(), this);
-        this.getServer().getPluginManager().registerEvents(new MidasPickaxe(), this);
-        this.getServer().getPluginManager().registerEvents(new Boomerang(this), this);
-        this.getServer().getPluginManager().registerEvents(new HomingBow(this), this);
-        this.getServer().getPluginManager().registerEvents(new RocketLauncher(this), this);
-        this.getServer().getPluginManager().registerEvents(new ThrowingAxe(this), this);
-        this.getServer().getPluginManager().registerEvents(new DamageMultiplierSword(this), this);
-        this.getServer().getPluginManager().registerEvents(new ThrowableTNT(), this);
-        this.getServer().getPluginManager().registerEvents(new LightningAxe(), this);
-        this.getServer().getPluginManager().registerEvents(new AutoSmeltPickaxe(), this);
-        this.getServer().getPluginManager().registerEvents(new SmokeBow(this), this);
-        this.getServer().getPluginManager().registerEvents(new Fireballs(this), this);
-        this.getServer().getPluginManager().registerEvents(new TripleShotBow(), this);
-        this.getServer().getPluginManager().registerEvents(new BomberElytra(this), this);
-        this.getServer().getPluginManager().registerEvents(new AirStrikeBow(), this);
-        this.getServer().getPluginManager().registerEvents(new ChunkMinerPickaxe(), this);
-        this.getServer().getPluginManager().registerEvents(new OreCompass(), this);
-        this.getServer().getPluginManager().registerEvents(new ZombieKnightSpawnEgg(), this);
-
-        BukkitTask AutoShootChestplate = new AutoShootChestplate(this).runTaskTimer(this, 0, 40);
-
-        this.getConfig().options().copyDefaults(true);
-        this.saveDefaultConfig();
-
-        GrapplingHookCooldown.setupCooldown();
-
-        this.getServer().getPluginManager().registerEvents(new DetectBlock(this), this);
-        this.getServer().getPluginManager().registerEvents(this, this);
-
-
-        getCommand("vanish").setExecutor(new VanishCommand(this));
-
-        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
-        getServer().getPluginManager().registerEvents(new OffHandEvent(this), this);
-
-
+       pm.registerEvents(new TeleportSword(), this);
+       pm.registerEvents(new GrapplingHook(), this);
+       pm.registerEvents(new TheGiftingFish(), this);
+       pm.registerEvents(new ExplosiveBow(), this);
+       pm.registerEvents(new InfiniteBuckets(), this);
+       pm.registerEvents(new MachineGunBow(this), this);
+       pm.registerEvents(new MultibreakPickaxe(), this);
+       pm.registerEvents(new MidasPickaxe(), this);
+       pm.registerEvents(new Boomerang(this), this);
+       pm.registerEvents(new HomingBow(this), this);
+       pm.registerEvents(new RocketLauncher(this), this);
+       pm.registerEvents(new ThrowingAxe(this), this);
+       pm.registerEvents(new DamageMultiplierSword(this), this);
+       pm.registerEvents(new ThrowableTNT(), this);
+       pm.registerEvents(new LightningAxe(), this);
+       pm.registerEvents(new AutoSmeltPickaxe(), this);
+       pm.registerEvents(new SmokeBow(this), this);
+       pm.registerEvents(new Fireballs(this), this);
+       pm.registerEvents(new TripleShotBow(), this);
+       pm.registerEvents(new BomberElytra(this), this);
+       pm.registerEvents(new AirStrikeBow(), this);
+       pm.registerEvents(new ChunkMinerPickaxe(), this);
+       pm.registerEvents(new OreCompass(), this);
+       pm.registerEvents(new ZombieKnightSpawnEgg(), this);
 
     }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-        System.out.println("Project disabled");
-
-
-//        this.getServer().getPluginManager().registerEvents(new OnQuit(), this);
-//        for (Player player : Bukkit.getOnlinePlayers()) {
-//            PacketReader reader = new PacketReader();
-//            reader.unInject(player);
-//            for (EntityPlayer npc : NPC.getNpcs())
-//                NPC.removeNPC(player, npc);
-//        }
-
-//        System.out.println("------------------SAVED-----------------------");
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("config")) {
-//            if (!sender.hasPermission("randomblock.reload")) {
-//                sender.sendMessage("NOPE");
-//                return true;
-//            }
-            if (args.length == 0) {
-                //randomblcok
-                sender.sendMessage("Usage: /config reload");
-                return true;
-            }
-            if (args.length > 0) {
-                //reload
-                if (args[0].equalsIgnoreCase("reload")) {
-                    for (String msg : this.getConfig().getStringList("reload.message")) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                msg));
-                    }
-
-                    this.reloadConfig();
-
-                }
-            }
-        }
-        return false;
+    private void loadLaunchPad() {
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
+        getServer().getPluginManager().registerEvents(new FallDamageListener(this), this);
     }
 
     public void loadNPC() {
@@ -301,21 +363,14 @@ public final class MainClass extends JavaPlugin implements Listener {
         }
     }
 
-    //Provide a player and return a menu system for that player
-    //create one if they don't already have one
-//    public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
-//        PlayerMenuUtility playerMenuUtility;
-//        if (!(playerMenuUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
-//
-//            //This player doesn't. Make one for them add add it to the hashmap
-//            playerMenuUtility = new PlayerMenuUtility(p);
-//            playerMenuUtilityMap.put(p, playerMenuUtility);
-//
-//            return playerMenuUtility;
-//        } else {
-//            return playerMenuUtilityMap.get(p); //Return the object by using the provided player
-//        }
-//    }
+    private boolean setUpEconomy() {
+        RegisteredServiceProvider<Economy> economy = getServer().
+                getServicesManager().getRegistration(
+                        net.milkbowl.vault.economy.Economy.class);
+        if (economy != null)
+            eco = economy.getProvider();
+        return (eco != null);
+    }
 
 
 }

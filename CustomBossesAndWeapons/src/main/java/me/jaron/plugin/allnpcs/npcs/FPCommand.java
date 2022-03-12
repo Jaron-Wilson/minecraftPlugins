@@ -17,7 +17,7 @@ public class FPCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (command.getName().equalsIgnoreCase("fp")) {
+            if (command.getName().equalsIgnoreCase("fp") || command.getName().equalsIgnoreCase("fakeplayer")) {
 
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("create")) {

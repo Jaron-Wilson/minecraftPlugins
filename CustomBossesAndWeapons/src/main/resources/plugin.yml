@@ -3,9 +3,12 @@ version: '${project.version}'
 main: me.jaron.plugin.MainClass
 api-version: 1.18
 description: Basic
+depend: [Vault]
 
 
 commands:
+  tag:
+    usage: /<command> start/stop
   #  MOBS
   necromancer:
     description: Create a boss that will attack you!
@@ -27,6 +30,7 @@ commands:
     usage: /<command>
   spawn:
     usage: /<command>
+    description: spawns coolboss
   #  npc:
   #    description: npc
   #    usage: /npc
@@ -114,19 +118,25 @@ commands:
     description: gives the player a zombie knight spawn egg
     usage: /<command>
   config:
-    description: reloads config
+    description: reloads configs
+    usage: /<command> reload/players
   vanish:
     description: Vanishes You
-  fp:
-    usage: /<command>
-    description: Run commands
+  fakeplayer:
+    usage: /<command> create
+    description: create fakeplayer aliases-fp
+    aliases:
+      - fp
   createnpc:
-    description: ss
+    usage: /<command> SKIN
+    description: creates npc and it stays
   destroynpc:
-    description: s
+    usage: /<command> NAME
+    description: Destorys npc and if you reload it will come back (Make sure to delete in data.yml)
   gui:
-    description: s
+    description: gui test
   bangui:
     description: Open the Ban GUI
   vault:
     description: vault
+    usage: /<command> open

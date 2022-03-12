@@ -16,9 +16,7 @@ public class OpenCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player){
-
-            Player p = (Player) sender;
+        if (sender instanceof Player p){
 
             if (args.length > 0){
                 if (args[0].equalsIgnoreCase("open")){
@@ -26,9 +24,12 @@ public class OpenCommand implements CommandExecutor {
                     ArrayList<ItemStack> vaultItems = VaultUtils.getItems(p);
 
                     Inventory vault = Bukkit.createInventory(p, 54, "Your Personal Vault");
-
-                    vaultItems.stream()
-                            .forEach(itemStack -> vault.addItem(itemStack));
+//
+//                    vaultItems.stream()
+//                            .forEach(itemStack -> vault.addItem(itemStack));
+//                    SAME AS:
+                    vaultItems
+                            .forEach(vault::addItem);
 
                     p.openInventory(vault);
 
