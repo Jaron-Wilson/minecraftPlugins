@@ -1,6 +1,6 @@
 package me.jaron.plugin.managers;
 
-import me.jaron.plugin.customRecipies.ItemRecipeManager;
+import me.jaron.plugin.custom.recipies.ItemRecipeManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;

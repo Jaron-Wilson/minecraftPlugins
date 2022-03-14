@@ -15,7 +15,7 @@ public class FallDamageListener implements Listener {
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent e){
-        if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL) && plugin.getConfig().getBoolean("disable-fall-damage")){
+        if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL) && plugin.getConfig().getBoolean("launchpads.disable-fall-damage")){
             if (plugin.jumping_players.contains(e.getEntity())){
                 plugin.jumping_players.remove(e.getEntity());
                 e.setCancelled(true);

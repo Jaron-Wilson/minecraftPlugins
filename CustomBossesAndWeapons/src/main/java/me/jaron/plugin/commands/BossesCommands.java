@@ -2,7 +2,7 @@ package me.jaron.plugin.commands;
 
 
 import me.jaron.plugin.MainClass;
-import me.jaron.plugin.mobManager.mobs.*;
+import me.jaron.plugin.custom.mobManager.mobs.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

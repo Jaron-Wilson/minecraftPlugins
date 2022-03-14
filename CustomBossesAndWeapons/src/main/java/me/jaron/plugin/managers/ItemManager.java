@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static me.jaron.plugin.customRecipies.ItemRecipeManager.*;
+import static me.jaron.plugin.custom.recipies.ItemRecipeManager.*;
 
 public class ItemManager {
 

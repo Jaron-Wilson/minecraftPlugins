@@ -21,16 +21,16 @@ public class TaggedEvent implements Listener {
 
     @EventHandler
     public void onTag(EntityDamageByEntityEvent event) {
-        if (!plugin.game.isPlaying()) return;
+        if (!plugin.tagGame.isPlaying()) return;
         if (! (event.getEntity() instanceof Player)) return;
         if (!(event.getDamager() instanceof Player)) return;
 
         event.setCancelled(true);
 
-        if ((Player) event.getDamager() != plugin.game.getIt()) return;
+        if ((Player) event.getDamager() != plugin.tagGame.getIt()) return;
         ((Player) event.getDamager()).setGlowing(false);
 
-        plugin.game.tagged((Player) event.getEntity());
+        plugin.tagGame.tagged((Player) event.getEntity());
 
         event.getEntity().getWorld().spawnParticle(Particle.FLASH, event.getEntity().getLocation(), 0);
 
@@ -40,20 +40,22 @@ public class TaggedEvent implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if (!plugin.game.isPlaying()) return;
+        if (!plugin.tagGame.isPlaying()) return;
 
-        event.getPlayer().setScoreboard(plugin.game.getBoard());
+        event.getPlayer().setScoreboard(plugin.tagGame.getBoard());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        if (!plugin.game.isPlaying()) return;
+        Player player = event.getPlayer();
+        if (!plugin.tagGame.isPlaying()) return;
 
-        if (plugin.game.getIt() == event.getPlayer()) {
-            event.getPlayer().setGlowing(false);
-            plugin.game.end();
+        if (plugin.tagGame.getIt() == player) {
+            player.setGlowing(false);
+            plugin.tagGame.end();
             Bukkit.broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD +
-            event.getPlayer().getName() + " has left the game... sore loser");
+            player.getName() + " has left the game... sore loser");
+            plugin.eco.withdrawPlayer(player, 100);
         }
     }
 

@@ -17,8 +17,7 @@ launchpads:
 nodes:
   time-delays:
     dirt/stone/cobblestone: 60
-    gravel/sand: 25
-    endstone: 70
+    enddelay: 25
 #    ENABLE RELOADING OF BLOCKS
   enable: true
   messages: true
@@ -26,11 +25,16 @@ nodes:
 #  Make it an indestructible block
   breakmaterial: "bedrock"
 #  ADD BLOCKS IN UPPERCASE AND SPACES TO _
-
   dirttypes:
     - "DIRT"
     - "STONE"
     - "GRASS_BLOCK"
+    - "CLAY"
+    - "COBBLESTONE"
+  endtypes:
+    - "END_STONE"
+    - "END_STONE_BRICKS"
+#    - ""
 
 #CONFIG RELOADS
 reload:

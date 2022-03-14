@@ -8,29 +8,31 @@ import me.jaron.plugin.allnpcs.npcs.NPCManager;
 import me.jaron.plugin.commands.BossesCommands;
 import me.jaron.plugin.commands.ItemCommands;
 import me.jaron.plugin.commands.VanishCommand;
-import me.jaron.plugin.customRecipies.ItemRecipeManager;
+import me.jaron.plugin.custom.itemEvents.bows.*;
+import me.jaron.plugin.custom.itemEvents.clickWeapons.*;
+import me.jaron.plugin.custom.mobManager.mobs.*;
+import me.jaron.plugin.custom.recipies.ItemRecipeManager;
+import me.jaron.plugin.guis.CustomInventory;
 import me.jaron.plugin.guis.GUICommand;
 import me.jaron.plugin.guis.GUIMoveItem;
 import me.jaron.plugin.guis.ban.commands.BanGUICommand;
 import me.jaron.plugin.guis.ban.listener.BanInventoryListener;
 import me.jaron.plugin.guis.vaults.commands.OpenCommand;
 import me.jaron.plugin.guis.vaults.listeners.Listeners;
-import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHook;
-import me.jaron.plugin.itemEvents.GrapplingHookFiles.GrapplingHookCooldown;
-import me.jaron.plugin.itemEvents.InfiniteBuckets;
-import me.jaron.plugin.itemEvents.armor.AutoShootChestplate;
-import me.jaron.plugin.itemEvents.armor.BomberElytra;
-import me.jaron.plugin.itemEvents.axesAndSwords.DamageMultiplierSword;
-import me.jaron.plugin.itemEvents.axesAndSwords.LightningAxe;
-import me.jaron.plugin.itemEvents.axesAndSwords.TeleportSword;
-import me.jaron.plugin.itemEvents.axesAndSwords.ThrowingAxe;
-import me.jaron.plugin.itemEvents.bows.*;
-import me.jaron.plugin.itemEvents.clickWeapons.*;
-import me.jaron.plugin.itemEvents.eggs.ZombieKnightSpawnEgg;
-import me.jaron.plugin.itemEvents.pickaxes.AutoSmeltPickaxe;
-import me.jaron.plugin.itemEvents.pickaxes.ChunkMinerPickaxe;
-import me.jaron.plugin.itemEvents.pickaxes.MidasPickaxe;
-import me.jaron.plugin.itemEvents.pickaxes.MultibreakPickaxe;
+import me.jaron.plugin.custom.itemEvents.GrapplingHookFiles.GrapplingHook;
+import me.jaron.plugin.custom.itemEvents.GrapplingHookFiles.GrapplingHookCooldown;
+import me.jaron.plugin.custom.itemEvents.InfiniteBuckets;
+import me.jaron.plugin.custom.itemEvents.armor.AutoShootChestplate;
+import me.jaron.plugin.custom.itemEvents.armor.BomberElytra;
+import me.jaron.plugin.custom.itemEvents.axesAndSwords.DamageMultiplierSword;
+import me.jaron.plugin.custom.itemEvents.axesAndSwords.LightningAxe;
+import me.jaron.plugin.custom.itemEvents.axesAndSwords.TeleportSword;
+import me.jaron.plugin.custom.itemEvents.axesAndSwords.ThrowingAxe;
+import me.jaron.plugin.custom.itemEvents.eggs.ZombieKnightSpawnEgg;
+import me.jaron.plugin.custom.itemEvents.pickaxes.AutoSmeltPickaxe;
+import me.jaron.plugin.custom.itemEvents.pickaxes.ChunkMinerPickaxe;
+import me.jaron.plugin.custom.itemEvents.pickaxes.MidasPickaxe;
+import me.jaron.plugin.custom.itemEvents.pickaxes.MultibreakPickaxe;
 import me.jaron.plugin.listeners.FallDamageListener;
 import me.jaron.plugin.listeners.JoinEvent;
 import me.jaron.plugin.listeners.OffHandEvent;
@@ -38,16 +40,13 @@ import me.jaron.plugin.listeners.PlayerMoveListener;
 import me.jaron.plugin.managers.ConfigManager;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
-import me.jaron.plugin.managers.MoneyManager;
 import me.jaron.plugin.minigames.tag.listeners.TaggedEvent;
-import me.jaron.plugin.minigames.tag.models.Game;
+import me.jaron.plugin.minigames.tag.models.TagGame;
 import me.jaron.plugin.minigames.tag.tagcommand.TagCommand;
-import me.jaron.plugin.mobManager.mobs.*;
-import me.jaron.plugin.moneyManagers.MoneyData;
 import me.jaron.plugin.privateChests.listeners.ChestOpen;
 import me.jaron.plugin.privateChests.listeners.ChestPlace;
-import me.jaron.plugin.tabManagers.TabManager;
-import me.jaron.plugin.moneyManagers.MobKillEvent;
+import me.jaron.plugin.guis.tabManagers.TabManager;
+import me.jaron.plugin.custom.mobManager.money.MobKillEvent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -74,7 +73,8 @@ public final class MainClass extends JavaPlugin implements Listener {
         data.saveConfig();
     }
 
-    public ArrayList<Player> jumping_players, invisible_list = new ArrayList<>();
+    public ArrayList<Player> jumping_players = new ArrayList<>();
+    public ArrayList<Player> invisible_list = new ArrayList<>();
     public TabManager tab;
     public CustomInventory inventory;
     public NPCManager npcManager;
@@ -87,7 +87,7 @@ public final class MainClass extends JavaPlugin implements Listener {
         this.instance = instance;
     }
 
-    public Game game = new Game();
+    public TagGame tagGame = new TagGame();
 
     public Economy eco;
     private ConfigManager configManager;
@@ -108,6 +108,7 @@ public final class MainClass extends JavaPlugin implements Listener {
         getServer().getPluginManager().disablePlugin(this);
         return;
     }
+
         pm.registerEvents(new MobKillEvent(this), this);
         
         System.out.println("§8Plugin started Properly!");
@@ -186,8 +187,8 @@ public final class MainClass extends JavaPlugin implements Listener {
     public void onDisable() {
         // Plugin shutdown logic
         System.out.println("Project disabled");
-        if (game.isPlaying()) {
-            game.end();
+        if (tagGame.isPlaying()) {
+            tagGame.end();
         }
 
 //       pm.registerEvents(new OnQuit(), this);

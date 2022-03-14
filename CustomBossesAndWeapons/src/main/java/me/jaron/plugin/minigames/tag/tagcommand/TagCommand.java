@@ -23,14 +23,14 @@ public class TagCommand implements CommandExecutor {
                 case 1:
                     //  /tag start/end
                     if (args[0].equalsIgnoreCase("start")) {
-                        plugin.game.tagged(plugin.game.pickFirstIt());
-                        player.sendMessage(ChatColor.RED + "Game Started");
+                        plugin.tagGame.tagged(plugin.tagGame.pickFirstIt());
+                        player.sendMessage(ChatColor.RED + "TagGame Started");
                         return true;
                     }
 
                     if (args[0].equalsIgnoreCase("end")) {
-                        plugin.game.end();
-                        player.sendMessage(ChatColor.RED + "Game Ended");
+                        plugin.tagGame.end();
+                        player.sendMessage(ChatColor.RED + "TagGame Ended");
                         return true;
                     }
                 default:
