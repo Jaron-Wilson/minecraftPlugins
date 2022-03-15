@@ -1,6 +1,8 @@
 package me.jaron.plugin.privateChests.listeners;
 
 import me.jaron.plugin.MainClass;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.TileState;
@@ -31,7 +33,7 @@ public class ChestOpen implements Listener {
             return;
             else {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage("You cannot open this chest!");
+            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("You cannot open this chest!"));
             }
 
     }

@@ -1,6 +1,8 @@
 package me.jaron.plugin.privateChests.listeners;
 
 import me.jaron.plugin.MainClass;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.TileState;
@@ -29,7 +31,7 @@ public class ChestPlace  implements Listener {
 
         state.update();
 
-        event.getPlayer().sendMessage("Chest locked!");
+        event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("Chest locked!"));
     }
    
 }

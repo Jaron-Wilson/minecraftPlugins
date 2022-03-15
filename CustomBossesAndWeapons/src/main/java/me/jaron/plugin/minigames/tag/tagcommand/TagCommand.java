@@ -1,6 +1,8 @@
 package me.jaron.plugin.minigames.tag.tagcommand;
 
 import me.jaron.plugin.MainClass;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,18 +25,28 @@ public class TagCommand implements CommandExecutor {
                 case 1:
                     //  /tag start/end
                     if (args[0].equalsIgnoreCase("start")) {
-                        plugin.tagGame.tagged(plugin.tagGame.pickFirstIt());
-                        player.sendMessage(ChatColor.RED + "TagGame Started");
-                        return true;
+                        if (!plugin.tagGame.isPlaying()) {
+                            plugin.tagGame.tagged(plugin.tagGame.pickFirstIt());
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "TagGame Started"));
+                            return true;
+                        }else {
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Game is running"));
+                        }
                     }
 
-                    if (args[0].equalsIgnoreCase("end")) {
-                        plugin.tagGame.end();
-                        player.sendMessage(ChatColor.RED + "TagGame Ended");
-                        return true;
+                    if (sender.isOp()) {
+                        if (args[0].equalsIgnoreCase("end")) {
+                            if (plugin.tagGame.isPlaying()) {
+                                plugin.tagGame.end();
+                                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "TagGame Ended"));
+                                return true;
+                            } else {
+                                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Tag is not running"));
+                            }
+                        }
                     }
                 default:
-                    player.sendMessage(ChatColor.RED + "Try /tag <start/end>");
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Try /tag <start/end>"));
             }
 
             return true;

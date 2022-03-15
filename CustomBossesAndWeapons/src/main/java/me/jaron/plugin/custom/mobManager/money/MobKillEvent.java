@@ -1,6 +1,8 @@
 package me.jaron.plugin.custom.mobManager.money;
 
 import me.jaron.plugin.MainClass;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Monster;
@@ -10,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.awt.*;
 import java.util.Random;
 
 public class MobKillEvent  implements Listener {
@@ -27,41 +30,32 @@ public class MobKillEvent  implements Listener {
             Random r = new Random();
             int amount = r.nextInt(10);
             plugin.eco.depositPlayer(player, amount);
-            player.sendMessage(ChatColor.GREEN + "" +
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" +
                     ChatColor.BOLD +
-                    "+ $" + amount + " for killing animals");
+                    "+ $" + amount + " for killing animals"));
         }else if (event.getEntity() instanceof Monster) {
             Player player = event.getEntity().getKiller();
             if (player == null) return;
             Random r = new Random();
             int amount = r.nextInt(100);
             plugin.eco.depositPlayer(player, amount);
-            player.sendMessage(ChatColor.GOLD + "" +
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD + "" +
                     ChatColor.BOLD +
-                    "+ $" + amount + " for killing monsters");
+                    "+ $" + amount + " for killing monsters"));
         }
     }
 
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent event) {
-        Player killerplayer = event.getEntity().getKiller();
         Player player = event.getEntity().getPlayer();
         Random r = new Random();
         int amount = r.nextInt(1000);
-
-        if (plugin.eco.getBalance(player) == amount) {
-            player.sendMessage("You payed!");
-            plugin.eco.withdrawPlayer(player, amount);
-            player.sendMessage(ChatColor.RED + "" +
-                    ChatColor.BOLD +
-                    "- $" + amount);
-        }
-
-        if (player.getKiller() == killerplayer) {
-            plugin.eco.withdrawPlayer(player, amount);
-            plugin.eco.depositPlayer(killerplayer, amount);
-            player.sendMessage("You lost: $" + amount + " and it went to:" + killerplayer.getName());
-        }
-
+            if (plugin.eco.getBalance(player) == amount) {
+                player.sendMessage("You payed!");
+                plugin.eco.withdrawPlayer(player, amount);
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "" +
+                        ChatColor.BOLD +
+                        "- $" + amount));
+            }
     }
 }
