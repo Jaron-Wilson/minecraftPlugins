@@ -20,8 +20,8 @@ public class MobKillEvent  implements Listener {
     private MainClass plugin;
 
    private Random r = new Random();
-   private int animalAmount = r.nextInt(10);
-   private int monsterAmount = r.nextInt(100);
+
+
 
 
     public MobKillEvent(MainClass plugin) {
@@ -33,6 +33,7 @@ public class MobKillEvent  implements Listener {
         if (event.getEntity() instanceof Animals) {
             Player player = event.getEntity().getKiller();
             if (player == null) return;
+            int animalAmount = r.nextInt(10);
             plugin.eco.depositPlayer(player, animalAmount);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" +
                     ChatColor.BOLD +
@@ -40,6 +41,7 @@ public class MobKillEvent  implements Listener {
         }else if (event.getEntity() instanceof Monster) {
             Player player = event.getEntity().getKiller();
             if (player == null) return;
+            int monsterAmount = r.nextInt(100);
             plugin.eco.depositPlayer(player, monsterAmount);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD + "" +
                     ChatColor.BOLD +
@@ -61,11 +63,4 @@ public class MobKillEvent  implements Listener {
             }
     }
 
-    public int getAnimalAmount() {
-        return animalAmount;
-    }
-
-    public int getMonsterAmount() {
-        return monsterAmount;
-    }
 }
