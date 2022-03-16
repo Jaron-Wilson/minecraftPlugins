@@ -5,11 +5,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class FallDamageListener implements Listener {
+public class LaunchPadFallDamageListener implements Listener {
 
     MainClass plugin;
 
-    public FallDamageListener(MainClass plugin) {
+    public LaunchPadFallDamageListener(MainClass plugin) {
         this.plugin = plugin;
     }
 

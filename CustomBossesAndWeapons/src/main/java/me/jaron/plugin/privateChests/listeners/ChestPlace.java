@@ -17,21 +17,23 @@ public class ChestPlace  implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         if (event.getBlock().getType() != Material.CHEST)
-        return;
+            return;
         if (!(event.getBlock().getState() instanceof TileState))
-        return;
+            return;
 
-        TileState state = (TileState) event.getBlock().getState();
-        PersistentDataContainer container = state.getPersistentDataContainer();
+        if (!event.getPlayer().isSneaking()) {
+            TileState state = (TileState) event.getBlock().getState();
+            PersistentDataContainer container = state.getPersistentDataContainer();
 
-        NamespacedKey key = new NamespacedKey(MainClass.getPlugin(MainClass.class),
-        "private-chests");
+            NamespacedKey key = new NamespacedKey(MainClass.getPlugin(MainClass.class),
+                    "private-chests");
 
-        container.set(key, PersistentDataType.STRING, event.getPlayer().getUniqueId().toString());
+            container.set(key, PersistentDataType.STRING, event.getPlayer().getUniqueId().toString());
 
-        state.update();
+            state.update();
 
-        event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("Chest locked!"));
+            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("Chest locked!"));
+        }
     }
    
 }

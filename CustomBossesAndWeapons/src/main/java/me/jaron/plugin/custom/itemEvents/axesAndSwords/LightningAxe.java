@@ -1,8 +1,8 @@
 package me.jaron.plugin.custom.itemEvents.axesAndSwords;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import me.jaron.plugin.MainClass;
+import me.jaron.plugin.custom.mobManager.money.MobKillEvent;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -49,7 +49,6 @@ public class LightningAxe implements Listener {
                         LivingEntity livingentity = (LivingEntity) entity;
 
                         livingentity.getWorld().strikeLightningEffect(livingentity.getLocation());
-
                         String lore = event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().get(7);
                         List<String> loresplit = new ArrayList<>(Arrays.asList(lore.split(" ")));
                         String damage = loresplit.get(1);

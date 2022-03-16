@@ -44,11 +44,14 @@ reload:
 #    -
 
 #OFFHAND
-offhand-message:
+
+offhand:
   enable: true
-  message:
-  - "&a Sorry Offhand Disabled"
-#  -
+  offhand-message:
+    enable: true
+    message:
+      - "&a Sorry Offhand Disabled"
+#     -
 
 #NPC
 #Message2: "Hello There"

@@ -18,6 +18,12 @@ import java.util.Random;
 public class MobKillEvent  implements Listener {
 
     private MainClass plugin;
+
+   private Random r = new Random();
+   private int animalAmount = r.nextInt(10);
+   private int monsterAmount = r.nextInt(100);
+
+
     public MobKillEvent(MainClass plugin) {
         this.plugin = plugin;
     }
@@ -27,26 +33,22 @@ public class MobKillEvent  implements Listener {
         if (event.getEntity() instanceof Animals) {
             Player player = event.getEntity().getKiller();
             if (player == null) return;
-            Random r = new Random();
-            int amount = r.nextInt(10);
-            plugin.eco.depositPlayer(player, amount);
+            plugin.eco.depositPlayer(player, animalAmount);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" +
                     ChatColor.BOLD +
-                    "+ $" + amount + " for killing animals"));
+                    "+ $" + animalAmount + " for killing animals"));
         }else if (event.getEntity() instanceof Monster) {
             Player player = event.getEntity().getKiller();
             if (player == null) return;
-            Random r = new Random();
-            int amount = r.nextInt(100);
-            plugin.eco.depositPlayer(player, amount);
+            plugin.eco.depositPlayer(player, monsterAmount);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD + "" +
                     ChatColor.BOLD +
-                    "+ $" + amount + " for killing monsters"));
+                    "+ $" + monsterAmount + " for killing monsters"));
         }
     }
 
     @EventHandler
-    public void onPlayerKill(PlayerDeathEvent event) {
+    public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity().getPlayer();
         Random r = new Random();
         int amount = r.nextInt(1000);
@@ -57,5 +59,13 @@ public class MobKillEvent  implements Listener {
                         ChatColor.BOLD +
                         "- $" + amount));
             }
+    }
+
+    public int getAnimalAmount() {
+        return animalAmount;
+    }
+
+    public int getMonsterAmount() {
+        return monsterAmount;
     }
 }

@@ -33,11 +33,10 @@ import me.jaron.plugin.custom.itemEvents.pickaxes.AutoSmeltPickaxe;
 import me.jaron.plugin.custom.itemEvents.pickaxes.ChunkMinerPickaxe;
 import me.jaron.plugin.custom.itemEvents.pickaxes.MidasPickaxe;
 import me.jaron.plugin.custom.itemEvents.pickaxes.MultibreakPickaxe;
-import me.jaron.plugin.listeners.FallDamageListener;
+import me.jaron.plugin.listeners.LaunchPadFallDamageListener;
 import me.jaron.plugin.listeners.JoinEvent;
 import me.jaron.plugin.listeners.OffHandEvent;
-import me.jaron.plugin.listeners.PlayerMoveListener;
-import me.jaron.plugin.managers.ConfigManager;
+import me.jaron.plugin.listeners.LaunchPadPlayerMoveListener;
 import me.jaron.plugin.managers.ItemBlocksEventManager;
 import me.jaron.plugin.managers.ItemManager;
 import me.jaron.plugin.minigames.tag.listeners.TaggedEvent;
@@ -65,6 +64,8 @@ import java.util.*;
 
 public final class MainClass extends JavaPlugin implements Listener {
 
+
+
     public static DataManager data;
     public static FileConfiguration getData() {
         return data.getConfig();
@@ -90,12 +91,12 @@ public final class MainClass extends JavaPlugin implements Listener {
     public TagGame tagGame = new TagGame();
 
     public Economy eco;
-    private ConfigManager configManager;
+//    private ConfigManager configManager;
     public PluginManager pm = getServer().getPluginManager();
 
     @Override
     public void onEnable() {
-        loadConfigurationManager();
+//        loadConfigurationManager();
         loadMobsRegister();
         loadItemsRegister();
         tabManager();
@@ -109,9 +110,9 @@ public final class MainClass extends JavaPlugin implements Listener {
         return;
     }
 
-        pm.registerEvents(new MobKillEvent(this), this);
-        
         System.out.println("§8Plugin started Properly!");
+
+        pm.registerEvents(new MobKillEvent(this), this);
 //              GUI'a
         pm.registerEvents(new CustomInventory(), this);
         this.getCommand("gui").setExecutor(new GUICommand());
@@ -153,36 +154,6 @@ public final class MainClass extends JavaPlugin implements Listener {
         GrapplingHookCooldown.setupCooldown();
     }
 
-    private void loadNPCListeners() {
-
-
-//        Fake Player
-        this.setInstance(this);
-        this.getCommand("fakeplayer").setExecutor(new FPCommand());
-        this.npcManager = new NPCManager();
-        
-        //        NPCS
-        data = new DataManager(this);
-        if (data.getConfig().contains("data")) {
-            loadNPC();
-        }
-
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            PacketReader reader = new PacketReader();
-            reader.inject(player);
-        }
-       pm.registerEvents(new OnJoin(), this);
-       pm.registerEvents(new ClickNPC(this), this);
-        this.getCommand("createnpc").setExecutor(new AddNPC());
-        this.getCommand("destroynpc").setExecutor(new DestroyNPC());
-       pm.registerEvents(new MovementListener(), this);
-        this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
-        this.getCommand("createnpc").setTabCompleter(new SkinTab());
-    }
-
-
-
     @Override
     public void onDisable() {
         // Plugin shutdown logic
@@ -208,7 +179,6 @@ public final class MainClass extends JavaPlugin implements Listener {
             if (args.length == 0) {
                 //randomblcok
                 sender.sendMessage("Usage: /config reload");
-                sender.sendMessage("Usage: /config players");
                 return true;
             }
             if (args.length > 0) {
@@ -220,15 +190,6 @@ public final class MainClass extends JavaPlugin implements Listener {
                     }
 
                     this.reloadConfig();
-
-                }else if (args[0].equalsIgnoreCase("players")) {
-                    for (String msg : this.getConfig().getStringList("reload.message")) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                msg));
-                    }
-
-                    this.configManager.reloadPlayers();
-
                 }
             }
 
@@ -239,12 +200,40 @@ public final class MainClass extends JavaPlugin implements Listener {
         return true;
     }
 
-    public void loadConfigurationManager() {
-        configManager = new ConfigManager();
-        configManager.setUpPlayerConfig();
-        configManager.savePlayers();
-        configManager.reloadPlayers();
+    private void loadNPCListeners() {
+
+
+//        Fake Player
+        this.setInstance(this);
+        this.getCommand("fakeplayer").setExecutor(new FPCommand());
+        this.npcManager = new NPCManager();
+
+        //        NPCS
+        data = new DataManager(this);
+        if (data.getConfig().contains("data")) {
+            loadNPC();
+        }
+
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            PacketReader reader = new PacketReader();
+            reader.inject(player);
+        }
+        pm.registerEvents(new OnJoin(), this);
+        pm.registerEvents(new ClickNPC(this), this);
+        this.getCommand("createnpc").setExecutor(new AddNPC());
+        this.getCommand("destroynpc").setExecutor(new DestroyNPC());
+        pm.registerEvents(new MovementListener(), this);
+        this.getCommand("destroynpc").setTabCompleter(new DestroyNpcTab());
+        this.getCommand("createnpc").setTabCompleter(new SkinTab());
     }
+
+//    public void loadConfigurationManager() {
+//        configManager = new ConfigManager();
+//        configManager.setUpPlayerConfig();
+//        configManager.savePlayers();
+//        configManager.reloadPlayers();
+//    }
 
     private void tabManager() {
 
@@ -280,8 +269,6 @@ public final class MainClass extends JavaPlugin implements Listener {
 
     private void loadItemsRegister() {
         /*ITEMS!*/
-
-
         this.getCommand("giveall").setExecutor(new ItemCommands());
         this.getCommand("givegrapplinghook").setExecutor(new ItemCommands());
         this.getCommand("giveteleportsword").setExecutor(new ItemCommands());
@@ -337,8 +324,8 @@ public final class MainClass extends JavaPlugin implements Listener {
 
     }
     private void loadLaunchPad() {
-        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
-        getServer().getPluginManager().registerEvents(new FallDamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new LaunchPadPlayerMoveListener(this), this);
+        getServer().getPluginManager().registerEvents(new LaunchPadFallDamageListener(this), this);
     }
 
     public void loadNPC() {
