@@ -11,6 +11,7 @@ import me.jaron.plugin.commands.VanishCommand;
 import me.jaron.plugin.custom.itemEvents.bows.*;
 import me.jaron.plugin.custom.itemEvents.clickWeapons.*;
 import me.jaron.plugin.custom.mobManager.mobs.*;
+//import me.jaron.plugin.custom.mobManager.wolf.SpawnEntity;
 import me.jaron.plugin.custom.recipies.ItemRecipeManager;
 import me.jaron.plugin.guis.CustomInventory;
 import me.jaron.plugin.guis.GUICommand;
@@ -96,6 +97,7 @@ public final class MainClass extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+//        pm.registerEvents(new SpawnEntity(), this);
 //        loadConfigurationManager();
         loadMobsRegister();
         loadItemsRegister();
@@ -208,7 +210,7 @@ public final class MainClass extends JavaPlugin implements Listener {
         this.getCommand("fakeplayer").setExecutor(new FPCommand());
         this.npcManager = new NPCManager();
 
-        //        NPCS
+//                NPCS
         data = new DataManager(this);
         if (data.getConfig().contains("data")) {
             loadNPC();

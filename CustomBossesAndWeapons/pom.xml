@@ -111,15 +111,30 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.18.1-R0.1-SNAPSHOT</version>
-            <!--            <classifier>remapped-mojang</classifier>-->
+<!--            <classifier>remapped-mojang</classifier>-->
             <scope>provided</scope>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.spigotmc</groupId>-->
+<!--            <artifactId>spigot</artifactId>-->
+<!--            <version>1.16.1-R0.1-SNAPSHOT</version>-->
+<!--            &lt;!&ndash;            <classifier>remapped-mojang</classifier>&ndash;&gt;-->
+<!--        <classifier>remapped-mojang</classifier>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

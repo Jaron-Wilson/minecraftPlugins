@@ -1,5 +1,6 @@
 package me.jaron.plugin.custom.itemEvents.pickaxes;
 
+import me.jaron.plugin.managers.ItemManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class MultibreakPickaxe implements Listener {
 
     List<Block> blocks = new ArrayList<>();
@@ -21,126 +21,58 @@ public class MultibreakPickaxe implements Listener {
     BlockFace blockface = null;
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event) {
-        if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+    public void onClick(PlayerInteractEvent event){
+        if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)){
             blockface = event.getBlockFace();
         }
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
-        ) {
-//            System.out.println("Not using: MultibreakPickaxe");
-//        } else {
-            Block block = event.getBlock();
-            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains("§6Multibreak:")) {
-                if (blockface.equals(BlockFace.UP) || blockface.equals(BlockFace.DOWN)) {
-                    Block block1 = block.getRelative(BlockFace.EAST);
-                    Block block2 = block.getRelative(BlockFace.WEST);
-                    Block block3 = block.getRelative(BlockFace.NORTH);
-                    Block block4 = block.getRelative(BlockFace.SOUTH);
-                    Block block5 = block.getRelative(BlockFace.SOUTH_WEST);
-                    Block block6 = block.getRelative(BlockFace.SOUTH_EAST);
-                    Block block7 = block.getRelative(BlockFace.NORTH_WEST);
-                    Block block8 = block.getRelative(BlockFace.NORTH_EAST);
-                    blocks.add(block1);
-                    blocks.add(block2);
-                    blocks.add(block3);
-                    blocks.add(block4);
-                    blocks.add(block5);
-                    blocks.add(block6);
-                    blocks.add(block7);
-                    blocks.add(block8);
-                    for (Block b : blocks) {
-                        if (b.getType().equals(Material.STONE)) {
-                            b.setType(Material.AIR);
-                            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.STONE));
-                            } else {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.COBBLESTONE));
-                            }
-                        } else if (b.getType().equals(Material.COAL_ORE)) {
-                            b.setType(Material.AIR);
-                            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.COAL_ORE));
-                            } else {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.COAL));
-                            }
-                        } else if (b.getType().equals(Material.IRON_ORE)) {
-                            b.setType(Material.AIR);
-                            block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.IRON_ORE));
-                        } else if (b.getType().equals(Material.GOLD_ORE)) {
-                            b.setType(Material.AIR);
-                            block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.GOLD_ORE));
-                        }
-                    }
-                    blocks.clear();
-                }
-                if (blockface.equals(BlockFace.EAST) || blockface.equals(BlockFace.WEST)) {
-                    Block block1 = block.getRelative(BlockFace.UP);
-                    Block block2 = block.getRelative(BlockFace.DOWN);
-                    Block block3 = block.getRelative(BlockFace.NORTH);
-                    Block block4 = block.getRelative(BlockFace.SOUTH);
-                    Block block5 = block1.getRelative(BlockFace.NORTH);
-                    Block block6 = block1.getRelative(BlockFace.SOUTH);
-                    Block block7 = block2.getRelative(BlockFace.NORTH);
-                    Block block8 = block2.getRelative(BlockFace.SOUTH);
-                    blocks.add(block1);
-                    blocks.add(block2);
-                    blocks.add(block3);
-                    blocks.add(block4);
-                    blocks.add(block5);
-                    blocks.add(block6);
-                    blocks.add(block7);
-                    blocks.add(block8);
-                    for (Block b : blocks) {
-                        if (b.getType().equals(Material.STONE)) {
-                            b.setType(Material.AIR);
-                            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.STONE));
-                            } else {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.COBBLESTONE));
-                            }
-                        }
-                    }
-                    blocks.clear();
-                }
-                if (blockface.equals(BlockFace.NORTH) || blockface.equals(BlockFace.SOUTH)) {
-                    Block block1 = block.getRelative(BlockFace.UP);
-                    Block block2 = block.getRelative(BlockFace.DOWN);
-                    Block block3 = block.getRelative(BlockFace.EAST);
-                    Block block4 = block.getRelative(BlockFace.WEST);
-                    Block block5 = block1.getRelative(BlockFace.EAST);
-                    Block block6 = block1.getRelative(BlockFace.WEST);
-                    Block block7 = block2.getRelative(BlockFace.EAST);
-                    Block block8 = block2.getRelative(BlockFace.WEST);
-                    blocks.add(block1);
-                    blocks.add(block2);
-                    blocks.add(block3);
-                    blocks.add(block4);
-                    blocks.add(block5);
-                    blocks.add(block6);
-                    blocks.add(block7);
-                    blocks.add(block8);
-                    for (Block b : blocks) {
-                        if (b.getType().equals(Material.STONE)) {
-                            b.setType(Material.AIR);
-                            if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.STONE));
-                            } else {
-                                block.getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.COBBLESTONE));
-                            }
-                        }
-                    }
-                    blocks.clear();
-                }
-            } else {
-                boolean message = false;
-                if (message == true) {
-                    System.out.println();
-                }
+    public void onBreak(BlockBreakEvent event){
+        Block block = event.getBlock();
+        if(event.getPlayer().getInventory().getItemInMainHand().getItemMeta() != null && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore() != null
+                && event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getLore().contains(ItemManager.MultibreakPickaxe.getItemMeta().getLore().get(1))){
+            if (blockface.equals(BlockFace.UP) || blockface.equals(BlockFace.DOWN)) {
+                blocks.add(block.getRelative(BlockFace.EAST));
+                blocks.add(block.getRelative(BlockFace.WEST));
+                blocks.add(block.getRelative(BlockFace.NORTH));
+                blocks.add(block.getRelative(BlockFace.SOUTH));
+                blocks.add(block.getRelative(BlockFace.SOUTH_WEST));
+                blocks.add(block.getRelative(BlockFace.SOUTH_EAST));
+                blocks.add(block.getRelative(BlockFace.NORTH_WEST));
+                blocks.add(block.getRelative(BlockFace.NORTH_EAST));
             }
+            if (blockface.equals(BlockFace.EAST) || blockface.equals(BlockFace.WEST)) {
+                blocks.add(block.getRelative(BlockFace.UP));
+                blocks.add(block.getRelative(BlockFace.DOWN));
+                blocks.add(block.getRelative(BlockFace.NORTH));
+                blocks.add(block.getRelative(BlockFace.SOUTH));
+                blocks.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.NORTH));
+                blocks.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.SOUTH));
+                blocks.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.NORTH));
+                blocks.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.SOUTH));
+            }
+            if (blockface.equals(BlockFace.NORTH) || blockface.equals(BlockFace.SOUTH)) {
+                blocks.add(block.getRelative(BlockFace.UP));
+                blocks.add(block.getRelative(BlockFace.DOWN));
+                blocks.add(block.getRelative(BlockFace.EAST));
+                blocks.add(block.getRelative(BlockFace.WEST));
+                blocks.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.EAST));
+                blocks.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.WEST));
+                blocks.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST));
+                blocks.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST));
+            }
+            for(Block b : blocks){
+                /*
+                To add exceptions, for example, certain blocks not to be mined by the Multibreak Pickaxe, you add this if statement before the block break line:
+                if(b.getType() != Material.IRON_ORE && b.getType() != Material.DIRT){
+                    b.breakNaturally(event.getPlayer().getInventory().getItemInMainHand());
+                }
+                This example used is for Iron Ore and Dirt blocks, to change the type of material to ignore, just change the name of the material.
+                */
+                b.breakNaturally(event.getPlayer().getInventory().getItemInMainHand());
+            }
+            blocks.clear();
         }
     }
 }
