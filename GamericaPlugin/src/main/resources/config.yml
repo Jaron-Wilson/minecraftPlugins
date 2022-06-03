@@ -1,0 +1,26 @@
+off-message: '&8[&2Gamerica&eFly&8] &3You can no longer fly.'
+on-message: '&8[&2Gamerica&eFly&8] &bYou can fly now. Be free!'
+
+quests:
+  kill:
+    quest1:
+      name: Zombieslayer
+      description: Kill a zombie
+      reward: 100
+      target:
+        type: ZOMBIE
+        count: 1
+    quest2:
+      name: Genocide
+      description: Kill 5 villagers
+      reward: 420
+      target:
+        type: VILLAGER
+        count: 5
+    quest3:
+      name: Kill Squidys
+      description: Kill 1 squid
+      reward: 10
+      target:
+        type: SQUID
+        count: 1

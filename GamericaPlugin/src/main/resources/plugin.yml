@@ -1,0 +1,15 @@
+name: GamericaPlugin
+version: '${project.version}'
+main: me.jaron.gamerica.plugin.GamericaPlugin
+api-version: 1.18
+authors: [ JA_RON, Jaron ]
+description: Plugin for my friends server
+depend:
+  - ProtocolLib
+commands:
+  fly:
+    description: Fly in survial
+    usage: /<command>
+  questnpc:
+    description: spawns a jeff
+
