@@ -18,6 +18,7 @@ import static org.bukkit.Bukkit.*;
 public class PreGameTimer {
 
     private GamericaPlugin main;
+    private ChatManager manager;
     public PreGameTimer(GamericaPlugin main) {
         this.main = main;
     }
@@ -26,56 +27,78 @@ public class PreGameTimer {
         new BukkitRunnable() {
 
             int waitPlayers = main.waiting.size();
-
-
-            int number = 30;
+            int time = 30;
+            
 
             @Override
             public void run() {
+                manager = new ChatManager(main);
+
                 for (int i = 0; i < waitPlayers; i++) {
-                    if (number > 0) {
+                    if (time > 0) {
+                        main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                        if (time == 30) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 30 seconds.");
+                        }
+                        if (time == 20) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 20 seconds.");
+                        }
+                        if (time == 10) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 10 seconds.");
+                        }
+                        if (time == 5) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 5 seconds.");
+                        }
+                        if (time == 4) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 4 seconds.");
+                        }
+                        if (time == 3) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 3 seconds.");
+                        }
+                        if (time == 2) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 2 seconds.");
+                        }
+                        if (time == 1) {
+//                            Check Before sending messages
+                            checkPlayers(i, time);
+//                            main.waiting.get(i).sendMessage(manager.prefix + "Game starting in 1 second.");
 
-                        if (number == 30) {
-                            main.setGamestate(main.getWorld(main.getConfig().getString("worlds.minigame")), Gamestates.PREGAME);
+                            if (main.waiting.size() == main.getPlayerAmount()) {
+                                for (int p = 0; p < waitPlayers; p++) {
+                                    main.waiting.get(p).teleport(main.loc);
+                                    main.waiting.get(p).setGameMode(GameMode.SURVIVAL);
+                                    main.alive.addAll(main.waiting);
+                                    main.waiting.remove(p);
+                                    main.alive.get(i).setCustomName("InGame " + main.alive.get(i).getDisplayName());
+                                    main.alive.get(i).setCustomNameVisible(true);
 
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 30 seconds.");
-                        }
-                        if (number == 20) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 20 seconds.");
-                        }
-                        if (number == 10) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 10 seconds.");
-                        }
-                        if (number == 5) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 5 seconds.");
-                        }
-                        if (number == 4) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 4 seconds.");
-                        }
-                        if (number == 3) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 3 seconds.");
-                        }
-                        if (number == 2) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 2 seconds.");
-                        }
-                        if (number == 1) {
-                            main.waiting.get(i).sendMessage(new ChatManager(main).prefix + "Game starting in 1 second.");
+                                }
 
-                            for (int p = 0; p < waitPlayers; p++) {
-                                main.waiting.get(p).teleport(main.loc);
-                                main.waiting.get(p).setGameMode(GameMode.SURVIVAL);
-                                main.alive.addAll(main.waiting);
-                                main.waiting.remove(p);
-
+                                // DO PREGAME THINGS, SCATTER, KITS, ETC
+                            }else {
+                                checkPlayers(i,time);
                             }
-
-                            // DO PREGAME THINGS, SCATTER, KITS, ETC
                         }
-                        number--;
+                        time--;
                     } else {
                         if (main.alive.size() != 0) {
-                            main.alive.get(i).sendMessage(new ChatManager(main).prefix + "The game has now started!");
-                            main.setGamestate(main.getWorld(main.getConfig().getString("worlds.minigame")), Gamestates.INGAME);
+
+                            main.alive.get(i).sendMessage(manager.prefix + "The game has now started!");
+                            main.setGamestate(main.miniGameLobby, Gamestates.INGAME);
                         }
 
                         cancel();
@@ -85,6 +108,15 @@ public class PreGameTimer {
             }.
 
             runTaskTimer(main,20L,20L);
+        }
+
+        private void checkPlayers(int i, int times) {
+            if (main.waiting.size() < main.getPlayerAmount()){
+                main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                broadcastMessage(manager.prefix + "Game Is Done, No Players Joined");
+            }else if (main.waiting.size() >= main.getPlayerAmount()) {
+                main.waiting.get(i).sendMessage(manager.prefix + "Game starting in " + times + " seconds.");
+            }
         }
 
 }

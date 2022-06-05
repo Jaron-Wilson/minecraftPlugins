@@ -27,10 +27,9 @@ public class CheckGameEnd implements Listener {
         Player p = event.getEntity().getPlayer();
         if (p.getWorld() != null) {
             if (p.getWorld() == (main.miniGameLobby)) {
-                Block playerDeathLocation = p.getWorld().getBlockAt(p.getLocation());
-                p.teleport(playerDeathLocation.getLocation());
-
-                event.setDeathMessage(chatManager.prefix + p.getName() + "You have died and are now spectator!");
+                p.teleport(main.miniGameLobby.getSpawnLocation());
+                event.setDeathMessage(chatManager.prefix + p.getName() + " You have died and are now spectator!");
+//                Set them to spectator
                 p.setGameMode(GameMode.SPECTATOR);
                 p.sendMessage(chatManager.prefix + " If you want to go to lobby then type " +
                         ChatColor.GOLD + ChatColor.BOLD + "/lobby");

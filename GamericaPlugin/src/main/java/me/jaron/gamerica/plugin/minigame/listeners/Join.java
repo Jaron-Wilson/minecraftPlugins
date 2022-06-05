@@ -25,12 +25,6 @@ public class Join implements Listener {
             System.out.println("Welcome to the server, " + p.getName());
 
             new PlayerManager(main).handle(p);
-
-//            if (Bukkit.getOnlinePlayers().size() >= main.getPlayerAmount()) {
-//                new PreGameTimer(main).startCountdown();
-//            } else if (main.getGamestate() == Gamestates.PREGAME) {
-//                main.waiting.add(p);
-//            }
             if (Bukkit.getServer().getWorlds().size() >= main.getPlayerAmount()) {
                 new PreGameTimer(main).startCountdown();
             } else if (main.getGamestate() == Gamestates.PREGAME) {
