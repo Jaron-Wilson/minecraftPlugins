@@ -12,4 +12,12 @@ commands:
     usage: /<command>
   questnpc:
     description: spawns a jeff
+  vanish:
+    description: vanish
+  start:
+    description: start
+  join:
+    description: joins lobby
+  lobby:
+    description: joins lobby
 

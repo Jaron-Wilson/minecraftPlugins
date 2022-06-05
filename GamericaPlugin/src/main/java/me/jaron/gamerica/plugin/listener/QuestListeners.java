@@ -38,7 +38,7 @@ public class QuestListeners implements Listener {
                     if (killQuest.getProgress() == killQuest.getAmount()) {
                         //remove the quest
                         qm.completeQuest(p);
-                    }else{
+                    } else {
                         //tell them the progress they have made so far
                         p.sendMessage("You have killed " + killQuest.getProgress() + " " + killQuest.getTarget().name().toLowerCase() + "s.");
                         //tell them how many they need still
@@ -50,4 +50,62 @@ public class QuestListeners implements Listener {
 
     }
 
+    @EventHandler
+    public void onItemCollected(EntityPickupItemEvent event) {
+        Player p = (Player) event.getEntity();
+
+        //see if the player is on a quest
+        QuestManager qm = GamericaPlugin.getPlugin().getQuestManager();
+        Quest q = qm.getQuest(p);
+        if (q != null) {
+            //see if the quest has a kill requirement
+            if (q instanceof ItemQuest itemQuest) {
+                //see if the entity killed is the same as the quest's target
+                if (event.getItem().getType().toString().equalsIgnoreCase(itemQuest.getItemType().toString())) {
+                    //increase the progress count
+                    itemQuest.setProgress(itemQuest.getProgress() + 1);
+
+                    //see if the progress count is equal to the required amount
+                    if (itemQuest.getProgress() != itemQuest.getItemAmount()) {
+                        //tell them the progress they have made so far
+                        p.sendMessage("You have got " + itemQuest.getProgress() + " " + itemQuest.getItemType().name().toLowerCase() + "s.");
+                        //tell them how many they need still
+                        p.sendMessage("You need to get " + (itemQuest.getItemAmount() - itemQuest.getProgress()) + " more " + itemQuest.getItemType().name().toLowerCase() + "s.");
+
+                    } else {
+                        //remove the quest
+                        qm.completeQuest(p);
+                       }
+                }
+            }
+        }
+
+        //    @EventHandler
+//    public void onItemCollected(EntityPickupItemEvent event) {
+//
+//        Player p = (Player) event.getEntity();
+//
+//        //see if the player is on a quest
+//        QuestManager qm = GamericaPlugin.getPlugin().getQuestManager();
+//        if (p instanceof Player) {
+//            Quest q = qm.getQuest(p);
+//            if (q != null) {
+//                //see if the quest has a kill requirement
+//                if (q instanceof ItemQuest itemQuest) {
+//                    //see if the entity killed is the same as the quest's target
+//                    if (event.getItem().equals(itemQuest.getItemType())) {
+//                        qm.completeQuest(p);
+//                    } else {
+//                        //tell them the progress they have made so far
+//                        //tell them how many they need still
+//
+//                        p.sendMessage("You need to get " + (itemQuest.getItemAmount()) + " and the item is " + itemQuest.getItemType().toString().toLowerCase() + ".");
+//                    }
+//                }
+//            }
+//        } else {
+//            return;
+//        }
+//    }
+    }
 }

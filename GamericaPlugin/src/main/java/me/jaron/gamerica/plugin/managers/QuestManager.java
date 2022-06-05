@@ -6,6 +6,7 @@ import me.jaron.gamerica.plugin.model.KillQuest;
 import me.jaron.gamerica.plugin.model.Quest;
 import me.jaron.gamerica.plugin.model.Quest;
 import me.kodysimpson.simpapi.colors.ColorTranslator;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -43,6 +44,21 @@ public class QuestManager {
             Quest quest = new KillQuest(name, description, reward, entityType1, count);
             availableQuests.add(quest);
             System.out.println(quest);
+        });
+        GamericaPlugin.getPlugin().getConfig().getConfigurationSection("quests.item").getKeys(false).forEach(questName1 -> {
+            //create a Quest object from each of these
+
+            String name = GamericaPlugin.getPlugin().getConfig().getString("quests.item." + questName1 + ".name");
+            String description = GamericaPlugin.getPlugin().getConfig().getString("quests.item." + questName1 + ".description");
+            double reward = GamericaPlugin.getPlugin().getConfig().getDouble("quests.item." + questName1 + ".reward");
+            String material = GamericaPlugin.getPlugin().getConfig().getString("quests.item." + questName1 + ".target.type");
+            int count = GamericaPlugin.getPlugin().getConfig().getInt("quests.item." + questName1 + ".target.count");
+
+            Material material1 = Material.valueOf(material);
+
+            Quest quest1 = new ItemQuest(name, description, reward, material1, count);
+            availableQuests.add(quest1);
+            System.out.println(quest1);
         });
 
         return availableQuests;

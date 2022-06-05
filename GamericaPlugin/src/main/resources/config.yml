@@ -1,5 +1,15 @@
 off-message: '&8[&2Gamerica&eFly&8] &3You can no longer fly.'
 on-message: '&8[&2Gamerica&eFly&8] &bYou can fly now. Be free!'
+worlds:
+#  Creates this mini-game world Should Be the same as minigame:
+  name: "Test"
+#  Minigame world
+  minigame: "Test"
+#  Just to check if that's the same world
+  main: "world"
+  nether: "world_nether"
+  end: "world_the_end"
+  numberofplayers: 1
 
 quests:
   kill:
@@ -24,3 +34,18 @@ quests:
       target:
         type: SQUID
         count: 1
+  item:
+    quest1:
+      name: Squid
+      description: Collect Squid ink
+      reward: 100
+      target:
+        type: INK_SAC
+        count: 1
+    quest2:
+      name: Apples
+      description: get 5 apples
+      reward: 420
+      target:
+        type: APPLE
+        count: 5

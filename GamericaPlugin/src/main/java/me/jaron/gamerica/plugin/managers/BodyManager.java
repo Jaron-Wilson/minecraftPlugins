@@ -36,6 +36,7 @@ public class BodyManager {
         //remove the armor stands
         for (ArmorStand armorStand : body.getArmorStands()) {
             armorStand.remove();
+            body.getArmorStands().remove(armorStand);
         }
     }
 

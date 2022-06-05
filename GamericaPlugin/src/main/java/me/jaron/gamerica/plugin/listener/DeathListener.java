@@ -43,11 +43,14 @@ public class DeathListener implements Listener {
 
         //spawn a corpse where the player died
         Player p = e.getEntity();
-        p.sendMessage("Bruh, the goal is to NOT die.");
-        bodied.getBodyManager().getBodies().add(spawnCorpse(p));
+        if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR){
+            return;
+        }else if(p.getGameMode() == GameMode.ADVENTURE|| p.getGameMode() == GameMode.SURVIVAL) {
+            p.sendMessage("Bruh, the goal is to NOT die.");
+            bodied.getBodyManager().getBodies().add(spawnCorpse(p));
 
-        e.getDrops().clear();
-
+            e.getDrops().clear();
+        }
     }
 
     @EventHandler

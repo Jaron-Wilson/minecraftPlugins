@@ -2,6 +2,7 @@ package me.jaron.gamerica.plugin.menu;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
 import me.jaron.gamerica.plugin.managers.QuestManager;
+import me.jaron.gamerica.plugin.model.ItemQuest;
 import me.jaron.gamerica.plugin.model.KillQuest;
 import me.jaron.gamerica.plugin.model.Quest;
 import me.kodysimpson.simpapi.colors.ColorTranslator;
@@ -42,7 +43,7 @@ public class QuestMenu extends Menu {
         Player p = playerMenuUtility.getOwner();
 
         //see what they clicked
-        if (e.getCurrentItem().getType() == Material.DIAMOND_SWORD){
+        if (e.getCurrentItem().getType() == Material.DIAMOND_SWORD || e.getCurrentItem().getType() == Material.DEBUG_STICK){
             //get the quest
             String questName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
 
@@ -101,6 +102,30 @@ public class QuestMenu extends Menu {
                         ColorTranslator.translateColorCodes("&5" + killQuest.getDescription()),
                         " ",
                         "&7Reward: &a$" + killQuest.getReward(),
+                        " ",
+                        (isOnQuest ? "&cYou are on this quest!" : "&aClick to accept!"));
+
+                inventory.addItem(item);
+            }
+
+            if (quest instanceof ItemQuest itemQuest){
+                Player p = playerMenuUtility.getOwner();
+
+                //see if this is a quest he is on
+                boolean isOnQuest = false;
+                Quest playersQuest = questManager.getQuest(p);
+                if (playersQuest != null) {
+                    //see if the quest is the same one he is on
+                    if (playersQuest.getName().equalsIgnoreCase(quest.getName())) {
+                        isOnQuest = true;
+                    }
+                }
+
+                item = makeItem(Material.DEBUG_STICK,
+                        ColorTranslator.translateColorCodes("&6&l" + itemQuest.getName()),
+                        ColorTranslator.translateColorCodes("&5" + itemQuest.getDescription()),
+                        " ",
+                        "&7Reward: &a$" + itemQuest.getReward(),
                         " ",
                         (isOnQuest ? "&cYou are on this quest!" : "&aClick to accept!"));
 
