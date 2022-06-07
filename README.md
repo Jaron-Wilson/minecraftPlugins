@@ -3,7 +3,7 @@ All my minecraft plugins
 ALL THESE HAVE TO BE SEPARATE PROJECTS! Each folder is a project.
 
 <details open> 
-   <summary> CustomBossesAndWeapons Project: </summary>
+   <summary> Gamerica Minigame Plugin Project: </summary>
    <p>GamericaPlugin Is a project that I a doing and It is to help you make minigames and I will be adding Duels.<p>
    <a href="https://www.youtube.com/watch?v=N6eRHioYZAM">My youtube Video (more to come)</a>   
    <a href=https://dev.bukkit.org/projects/gamerica_minigames_plugin>Get the plugin here</a>
