@@ -23,7 +23,7 @@ public class Build implements Listener {
     //        if (main.getMinigameWorld(p.getWorld().toString(), main.getConfig().getString("worlds.minigame"))) {
             if (main.getGamestate() == Gamestates.PREGAME) {
                 event.setCancelled(true);
-                p.sendMessage(new ChatManager(main).prefix + "You cannot build before the game!");
+                p.sendMessage(new ChatManager(main).minigameprefix + "You cannot build before the game!");
             }
         }
     }
@@ -35,7 +35,7 @@ public class Build implements Listener {
 //        if (main.getMinigameWorld(p.getWorld().toString(), main.getConfig().getString("worlds.minigame"))) {
             if (main.getGamestate() == Gamestates.PREGAME) {
                 event.setCancelled(true);
-                p.sendMessage(new ChatManager(main).prefix + "You cannot build before the game!");
+                p.sendMessage(new ChatManager(main).minigameprefix + "You cannot build before the game!");
             }
         }
     }

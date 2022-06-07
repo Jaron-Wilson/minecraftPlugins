@@ -1,18 +1,14 @@
-package me.jaron.gamerica.plugin.managers;
+package me.jaron.gamerica.plugin.questnpcAndBodys.managers;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
-import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundRotateHeadPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.UUID;
 

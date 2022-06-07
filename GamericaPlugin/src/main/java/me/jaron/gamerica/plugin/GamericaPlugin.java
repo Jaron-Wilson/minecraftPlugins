@@ -7,19 +7,27 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers;
+import me.jaron.gamerica.plugin.afk.AFKManager;
+import me.jaron.gamerica.plugin.afk.commands.AFKCommand;
+import me.jaron.gamerica.plugin.afk.commands.IsAFKCommand;
+import me.jaron.gamerica.plugin.afk.listeners.AFKListener;
+import me.jaron.gamerica.plugin.afk.tasks.MovementChecker;
 import me.jaron.gamerica.plugin.commands.Fly;
-import me.jaron.gamerica.plugin.commands.QuestNPCCommand;
-import me.jaron.gamerica.plugin.listener.QuestListeners;
-import me.jaron.gamerica.plugin.managers.BodyManager;
-import me.jaron.gamerica.plugin.managers.NPCManager;
-import me.jaron.gamerica.plugin.managers.QuestManager;
-import me.jaron.gamerica.plugin.menu.QuestMenu;
+import me.jaron.gamerica.plugin.minigame.commands.EndGameCommand;
+import me.jaron.gamerica.plugin.minigame.countdowns.GameEnd;
+import me.jaron.gamerica.plugin.questnpcAndBodys.commands.QuestNPCCommand;
+import me.jaron.gamerica.plugin.questnpcAndBodys.listener.QuestListeners;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.BodyManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.NPCManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.QuestManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.menu.QuestMenu;
 import me.jaron.gamerica.plugin.minigame.Gamestates;
 import me.jaron.gamerica.plugin.minigame.commands.JoinGameCommand;
 import me.jaron.gamerica.plugin.minigame.commands.Start;
 import me.jaron.gamerica.plugin.minigame.commands.Vanish;
 import me.jaron.gamerica.plugin.minigame.listeners.*;
-import me.jaron.gamerica.plugin.tasks.BodyRemover;
+import me.jaron.gamerica.plugin.questnpcAndBodys.tasks.BodyRemover;
+import me.jaron.gamerica.plugin.updater.Updater;
 import me.kodysimpson.simpapi.exceptions.MenuManagerException;
 import me.kodysimpson.simpapi.exceptions.MenuManagerNotSetupException;
 import me.kodysimpson.simpapi.menu.MenuManager;
@@ -39,23 +47,17 @@ public final class GamericaPlugin extends JavaPlugin   {
     private QuestManager questManager;
     private BodyRemover bodyRemover;
     private BodyManager bodyManager;
+    private AFKManager afkManager;
+    private GameEnd gameEnd;
 
 //    MINIGAMES
     private Gamestates gamestates;
 //    Make them all in the on enable so the whole plugin knows about it
+    private World newWorld = null;
     private World world = null;
     public World mainWorldLobby = null;
     public World miniGameLobby = null;
     private int amountOfPlayer = 0;
-
-
-    public Gamestates getGamestate() {
-        return gamestates;
-    }
-    public void setGamestate(World world, Gamestates gamestate) {
-        this.gamestates = gamestate;
-        this.world = world;
-    }
 
     public ArrayList<Player> alive = new ArrayList<>();
     public ArrayList<Player> spectating = new ArrayList<>();
@@ -70,6 +72,7 @@ public final class GamericaPlugin extends JavaPlugin   {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        Updater updater = new Updater(this, 631106, this.getFile(), Updater.UpdateType.DEFAULT, true);
 
         //Config
         getConfig().options().copyDefaults();
@@ -77,25 +80,41 @@ public final class GamericaPlugin extends JavaPlugin   {
 
 
         plugin = this;
+        gameEnd = new GameEnd(this);
         npcManager = new NPCManager();
-        questManager = new QuestManager();
+        questManager = new QuestManager(this);
         mainWorldLobby = Bukkit.getWorld(getConfig().getString("worlds.main"));
         miniGameLobby = Bukkit.getWorld(getConfig().getString("worlds.minigame"));
-        world =  Bukkit.getWorld(getConfig().getString("worlds.name"));
+        newWorld =  Bukkit.getWorld(getConfig().getString("worlds.new"));
         amountOfPlayer = getConfig().getInt("worlds.numberofplayers");
 
         if(miniGameLobby == null){
-            WorldCreator creator = new WorldCreator(getConfig().getString("worlds.name"));
+            WorldCreator creator = new WorldCreator(getConfig().getString("worlds.minigame"));
             creator.environment(World.Environment.NORMAL);
             creator.generateStructures(true);
-            world = creator.createWorld();
-            world.setDifficulty(Difficulty.HARD);
-            miniGameLobby = world;
-            setGamestate(world,Gamestates.PREGAME);
+            miniGameLobby = creator.createWorld();
+            miniGameLobby.setDifficulty(Difficulty.HARD);
+            setGamestate(miniGameLobby,Gamestates.PREGAME);
             this.loc = miniGameLobby.getSpawnLocation();
         }else if (getConfig().getString("worlds.minigame") != null) {
             setGamestate(miniGameLobby,Gamestates.PREGAME);
             this.loc = miniGameLobby.getSpawnLocation();
+        }
+        if (getConfig().getBoolean("worlds.createnew") != false) {
+            if (newWorld == null) {
+                WorldCreator creator = new WorldCreator(getConfig().getString("worlds.new"));
+                creator.environment(World.Environment.NORMAL);
+                creator.generateStructures(true);
+                newWorld = creator.createWorld();
+                newWorld.setDifficulty(Difficulty.HARD);
+                setGamestate(newWorld, Gamestates.SURVIVAL);
+                this.loc = newWorld.getSpawnLocation();
+            } else if (getConfig().getString("worlds.new") != null) {
+                setGamestate(newWorld, Gamestates.SURVIVAL);
+                this.loc = newWorld.getSpawnLocation();
+            }
+        }else {
+            System.out.println(ChatColor.RED + "You do not have the worlds.createnew Enabled on config.yml");
         }
 
 
@@ -111,6 +130,7 @@ public final class GamericaPlugin extends JavaPlugin   {
         getCommand("fly").setExecutor(new Fly(this));
         getCommand("questnpc").setExecutor(new QuestNPCCommand(npcManager));
         getCommand("join").setExecutor(new JoinGameCommand(this));
+        getCommand("end").setExecutor(new EndGameCommand(this));
         getCommand("lobby").setExecutor(new JoinGameCommand(this));
 
         getServer().getPluginManager().registerEvents(new QuestListeners(), this);
@@ -155,15 +175,26 @@ public final class GamericaPlugin extends JavaPlugin   {
         registerCommands();
         registerEvents();
 
-//        if (getMinigameWorld())
 
         setGamestate(mainWorldLobby,Gamestates.LOBBY);
+        setGamestate(miniGameLobby,Gamestates.PREGAME);
+
+//        AFK BY KODY SIMPSON
+        this.afkManager = new AFKManager();
+
+        getCommand("isafk").setExecutor(new IsAFKCommand(this.afkManager, this));
+        getCommand("afk").setExecutor(new AFKCommand(this.afkManager, this));
+
+        getServer().getPluginManager().registerEvents(new AFKListener(this.afkManager), this);
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new MovementChecker(this.afkManager), 0L, 600L);
 
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        gameEnd.end(null);
     }
 
     public World getWorld(final String name) {
@@ -193,11 +224,11 @@ public final class GamericaPlugin extends JavaPlugin   {
 
 
         int worlds = mainWorlds.size();
-        for (int i = 0; i < worlds; i++) {
-            if (player.getWorld().equals(mainWorlds.get(i))) {
-                setGamestate(mainWorldLobby,Gamestates.LOBBY);
-            }else {
-                setGamestate(this.world,Gamestates.PREGAME);
+        for (String s : mainWorlds) {
+            if (player.getWorld().equals(s)) {
+                setGamestate(mainWorldLobby, Gamestates.LOBBY);
+            } else {
+                setGamestate(this.miniGameLobby, Gamestates.PREGAME);
             }
 
         }
@@ -223,6 +254,14 @@ public final class GamericaPlugin extends JavaPlugin   {
 
     public BodyManager getBodyManager() {
         return bodyManager;
+    }
+
+    public Gamestates getGamestate() {
+        return gamestates;
+    }
+    public void setGamestate(World world, Gamestates gamestate) {
+        this.gamestates = gamestate;
+        this.world = world;
     }
 
 //    MINIGAMES

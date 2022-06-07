@@ -32,18 +32,18 @@ public class JoinGameCommand implements CommandExecutor {
             if (cmd.getName().equalsIgnoreCase("join")) {
 
                 if (main.waiting.size() > main.getPlayerAmount()) {
-                    p.sendMessage(manager.prefix + "The game is full please try again later.");
+                    p.sendMessage(manager.minigameprefix + "The game is full please try again later.");
                     return true;
                 }
                 else if (main.waiting.size() <= main.getPlayerAmount()) {
                     if (main.getGamestate() == Gamestates.INGAME) {
-                        p.sendMessage(manager.prefix + "There is a game going please be patient you will be notified when game is done.");
+                        p.sendMessage(manager.minigameprefix + "There is a game going please be patient you will be notified when game is done.");
                         return true;
                     }
                     else if (main.getGamestate() != Gamestates.INGAME) {
                         if (!main.waiting.contains(p)) {
                             main.waiting.add(p);
-                            p.sendMessage(new ChatManager(main).prefix + "You have joined the queue.");
+                            p.sendMessage(new ChatManager(main).minigameprefix + "You have joined the queue.");
                             if (main.waiting.size() == main.getPlayerAmount()) {
                                 new PreGameTimer(main).startCountdown();
                                 p.setGameMode(GameMode.SPECTATOR);
@@ -53,7 +53,7 @@ public class JoinGameCommand implements CommandExecutor {
                             return true;
                         }
                         else if (main.waiting.contains(p)) {
-                            p.sendMessage(manager.prefix + "You are already in the game!");
+                            p.sendMessage(manager.minigameprefix + "You are already in the game!");
                             return true;
                         }
                         p.setCustomNameVisible(true);
@@ -65,7 +65,7 @@ public class JoinGameCommand implements CommandExecutor {
                 System.out.println(main.mainWorldLobby);
                 if (main.mainWorldLobby != null) {
                     p.teleport(main.mainWorldLobby.getSpawnLocation());
-                    p.sendMessage(new ChatManager(main).prefix + "You have joined the lobby.");
+                    p.sendMessage(new ChatManager(main).minigameprefix + "You have joined the lobby.");
                     setPlayerThings(p);
                 }
             }

@@ -1,10 +1,10 @@
 package me.jaron.gamerica.plugin.minigame.listeners;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
+import me.jaron.gamerica.plugin.minigame.commands.Vanish;
 import me.jaron.gamerica.plugin.minigame.countdowns.GameEnd;
 import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,12 +28,12 @@ public class CheckGameEnd implements Listener {
         if (p.getWorld() != null) {
             if (p.getWorld() == (main.miniGameLobby)) {
                 p.teleport(main.miniGameLobby.getSpawnLocation());
-                event.setDeathMessage(chatManager.prefix + p.getName() + " You have died and are now spectator!");
+                event.setDeathMessage(chatManager.minigameprefix + p.getName() + " You have died and are now spectator!");
 //                Set them to spectator
-                p.setGameMode(GameMode.SPECTATOR);
-                p.sendMessage(chatManager.prefix + " If you want to go to lobby then type " +
+                new Vanish(main).toggleVanish(p);
+                p.sendMessage(chatManager.minigameprefix + " If you want to go to lobby then type " +
                         ChatColor.GOLD + ChatColor.BOLD + "/lobby");
-                p.sendMessage(chatManager.prefix + " or you can just stay! And watch");
+                p.sendMessage(chatManager.minigameprefix + " or you can just stay! And watch");
 //                Hide from tab list
                 p.hidePlayer(main, p);
                 if (main.waiting.contains(p)){
@@ -48,7 +48,7 @@ public class CheckGameEnd implements Listener {
 
 
             } else if (p.getWorld() == main.mainWorldLobby) {
-                p.sendMessage(chatManager.prefix + " You lost your stuff at: " + ChatColor.BOLD + ChatColor.RED +
+                p.sendMessage(chatManager.minigameprefix + " You lost your stuff at: " + ChatColor.BOLD + ChatColor.RED +
                         p.getLocation().getBlockX() + ", " +
                         p.getLocation().getBlockY() + ", " +
                         p.getLocation().getBlockZ() + ", " +

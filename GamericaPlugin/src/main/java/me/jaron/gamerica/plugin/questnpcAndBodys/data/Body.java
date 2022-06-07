@@ -1,4 +1,4 @@
-package me.jaron.gamerica.plugin.data;
+package me.jaron.gamerica.plugin.questnpcAndBodys.data;
 
 import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.entity.ArmorStand;

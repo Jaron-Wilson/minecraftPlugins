@@ -1,6 +1,4 @@
-package me.jaron.gamerica.plugin.model;
-
-import org.bukkit.entity.Player;
+package me.jaron.gamerica.plugin.questnpcAndBodys.model;
 
 public abstract class Quest {
 

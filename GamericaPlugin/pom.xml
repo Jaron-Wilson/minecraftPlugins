@@ -6,7 +6,7 @@
 
     <groupId>me.jaron.gamerica</groupId>
     <artifactId>GamericaPlugin</artifactId>
-    <version>1.0</version>
+    <version>v0.2</version>
     <packaging>jar</packaging>
 
     <name>GamericaPlugin</name>

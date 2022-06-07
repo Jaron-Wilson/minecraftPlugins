@@ -4,5 +4,6 @@ public enum Gamestates {
     LOBBY,
     PREGAME,
     INGAME,
-    ENDGAME
+    ENDGAME,
+    SURVIVAL
 }

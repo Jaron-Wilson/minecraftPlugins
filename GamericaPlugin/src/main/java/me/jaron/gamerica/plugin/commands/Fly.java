@@ -1,6 +1,7 @@
 package me.jaron.gamerica.plugin.commands;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
+import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,6 +14,7 @@ public class Fly implements CommandExecutor {
 
     private ArrayList<Player> list_of_flying_people = new ArrayList<>();
     private GamericaPlugin plugin;
+    private ChatManager chatManager;
 
     public Fly(GamericaPlugin plugin) {
         this.plugin = plugin;
@@ -20,6 +22,7 @@ public class Fly implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        chatManager = new ChatManager(plugin);
 
         if(sender instanceof Player){
             Player player = (Player) sender;
@@ -28,18 +31,18 @@ public class Fly implements CommandExecutor {
             if(player.hasPermission("gamericaperms.fly")){
                 if (list_of_flying_people.contains(player)){
                     list_of_flying_people.remove(player);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', offMessage));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',chatManager.flyprefix + offMessage));
                     player.setAllowFlight(false);
                 }else if(!list_of_flying_people.contains(player)){
                     list_of_flying_people.add(player);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', onMessage));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', chatManager.flyprefix + onMessage));
                     player.setAllowFlight(true);
                 }
             }else{
-                player.sendMessage(ChatColor.GREEN + "You don't have the " + ChatColor.YELLOW + "gamericaperms.fly " + ChatColor.GREEN + "permission required to use this command.");
+                player.sendMessage(chatManager.flyprefix + chatManager.permission);
             }
         }else{
-            System.out.println("You must be a player to fly.");
+            System.out.println(chatManager.flyprefix + "You must be a player to fly.");
         }
 
         return true;

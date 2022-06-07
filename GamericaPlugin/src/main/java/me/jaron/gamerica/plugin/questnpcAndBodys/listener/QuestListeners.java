@@ -1,20 +1,16 @@
-package me.jaron.gamerica.plugin.listener;
+package me.jaron.gamerica.plugin.questnpcAndBodys.listener;
 
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
-import me.jaron.gamerica.plugin.managers.QuestManager;
-import me.jaron.gamerica.plugin.model.ItemQuest;
-import me.jaron.gamerica.plugin.model.KillQuest;
-import me.jaron.gamerica.plugin.model.Quest;
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.QuestManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.ItemQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.KillQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class QuestListeners implements Listener {
 

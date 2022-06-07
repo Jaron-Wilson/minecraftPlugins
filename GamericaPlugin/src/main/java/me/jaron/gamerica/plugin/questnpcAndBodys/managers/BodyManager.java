@@ -1,6 +1,6 @@
-package me.jaron.gamerica.plugin.managers;
+package me.jaron.gamerica.plugin.questnpcAndBodys.managers;
 
-import me.jaron.gamerica.plugin.data.Body;
+import me.jaron.gamerica.plugin.questnpcAndBodys.data.Body;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
 import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;

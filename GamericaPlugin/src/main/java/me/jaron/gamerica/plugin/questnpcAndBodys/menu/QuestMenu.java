@@ -1,10 +1,10 @@
-package me.jaron.gamerica.plugin.menu;
+package me.jaron.gamerica.plugin.questnpcAndBodys.menu;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
-import me.jaron.gamerica.plugin.managers.QuestManager;
-import me.jaron.gamerica.plugin.model.ItemQuest;
-import me.jaron.gamerica.plugin.model.KillQuest;
-import me.jaron.gamerica.plugin.model.Quest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.QuestManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.ItemQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.KillQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.Quest;
 import me.kodysimpson.simpapi.colors.ColorTranslator;
 import me.kodysimpson.simpapi.menu.Menu;
 import me.kodysimpson.simpapi.menu.PlayerMenuUtility;

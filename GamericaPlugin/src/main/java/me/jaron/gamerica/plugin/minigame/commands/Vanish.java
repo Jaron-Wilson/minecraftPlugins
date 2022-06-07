@@ -23,14 +23,14 @@ public class Vanish implements CommandExecutor {
                 online.hidePlayer(player);
             }
             player.setGameMode(GameMode.SPECTATOR);
-            player.sendMessage(new ChatManager(main).prefix + "You have been vanished.");
+            player.sendMessage(new ChatManager(main).minigameprefix + "You have been vanished.");
         } else if (main.vanished.contains(player)) {
             main.vanished.remove(player);
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.showPlayer(player);
             }
             player.setGameMode(GameMode.SURVIVAL);
-            player.sendMessage(new ChatManager(main).prefix + "You have been un-vanished.");
+            player.sendMessage(new ChatManager(main).minigameprefix + "You have been un-vanished.");
         }
     }
 

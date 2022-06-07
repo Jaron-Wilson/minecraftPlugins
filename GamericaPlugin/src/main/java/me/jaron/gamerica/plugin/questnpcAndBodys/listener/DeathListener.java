@@ -1,9 +1,9 @@
-package me.jaron.gamerica.plugin.listener;
+package me.jaron.gamerica.plugin.questnpcAndBodys.listener;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.jaron.gamerica.plugin.GamericaPlugin;
-import me.jaron.gamerica.plugin.data.Body;
+import me.jaron.gamerica.plugin.questnpcAndBodys.data.Body;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;

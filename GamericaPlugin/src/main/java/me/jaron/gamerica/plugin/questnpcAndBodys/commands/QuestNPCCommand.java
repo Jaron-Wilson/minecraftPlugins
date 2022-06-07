@@ -1,6 +1,6 @@
-package me.jaron.gamerica.plugin.commands;
+package me.jaron.gamerica.plugin.questnpcAndBodys.commands;
 
-import me.jaron.gamerica.plugin.managers.NPCManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.NPCManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,14 +1,13 @@
-package me.jaron.gamerica.plugin.tasks;
+package me.jaron.gamerica.plugin.questnpcAndBodys.tasks;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
-import me.jaron.gamerica.plugin.data.Body;
-import me.jaron.gamerica.plugin.managers.BodyManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.data.Body;
+import me.jaron.gamerica.plugin.questnpcAndBodys.managers.BodyManager;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

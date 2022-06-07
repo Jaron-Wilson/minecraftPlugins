@@ -1,4 +1,4 @@
-package me.jaron.gamerica.plugin.model;
+package me.jaron.gamerica.plugin.questnpcAndBodys.model;
 
 import org.bukkit.Material;
 

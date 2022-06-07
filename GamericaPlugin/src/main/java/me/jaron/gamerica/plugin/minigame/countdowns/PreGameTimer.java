@@ -3,15 +3,8 @@ package me.jaron.gamerica.plugin.minigame.countdowns;
 import me.jaron.gamerica.plugin.GamericaPlugin;
 import me.jaron.gamerica.plugin.minigame.Gamestates;
 import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
-import net.minecraft.network.protocol.status.ServerStatus;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.ArrayList;
 
 import static org.bukkit.Bukkit.*;
 
@@ -97,7 +90,7 @@ public class PreGameTimer {
                     } else {
                         if (main.alive.size() != 0) {
 
-                            main.alive.get(i).sendMessage(manager.prefix + "The game has now started!");
+                            main.alive.get(i).sendMessage(manager.minigameprefix + "The game has now started!");
                             main.setGamestate(main.miniGameLobby, Gamestates.INGAME);
                         }
 
@@ -113,9 +106,9 @@ public class PreGameTimer {
         private void checkPlayers(int i, int times) {
             if (main.waiting.size() < main.getPlayerAmount()){
                 main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
-                broadcastMessage(manager.prefix + "Game Is Done, No Players Joined");
+                broadcastMessage(manager.minigameprefix + "Game Is Done, No Players Joined");
             }else if (main.waiting.size() >= main.getPlayerAmount()) {
-                main.waiting.get(i).sendMessage(manager.prefix + "Game starting in " + times + " seconds.");
+                main.waiting.get(i).sendMessage(manager.minigameprefix + "Game starting in " + times + " seconds.");
             }
         }
 

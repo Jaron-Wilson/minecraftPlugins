@@ -1,10 +1,12 @@
-off-message: '&8[&2Gamerica&eFly&8] &3You can no longer fly.'
-on-message: '&8[&2Gamerica&eFly&8] &bYou can fly now. Be free!'
+off-message: 'You can no longer fly.'
+on-message: '&bYou can fly now. Be free!'
 worlds:
 #  Creates this mini-game world Should Be the same as minigame:
-  name: "Test"
+  createnew: false
+  new: "new_world"
+  survival: "new_world"
 #  Minigame world
-  minigame: "Test"
+  minigame: "minigame"
 #  Just to check if that's the same world
   main: "world"
   nether: "world_nether"

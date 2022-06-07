@@ -17,7 +17,12 @@ commands:
   start:
     description: start
   join:
-    description: joins lobby
+    description: joins game
   lobby:
     description: joins lobby
-
+  isafk:
+    description: Check to see if you or someone else is AFK
+  afk:
+    description: Toggle your AFK status
+  end:
+    description: ends game

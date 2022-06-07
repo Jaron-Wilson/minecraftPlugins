@@ -1,16 +1,14 @@
-package me.jaron.gamerica.plugin.managers;
+package me.jaron.gamerica.plugin.questnpcAndBodys.managers;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
-import me.jaron.gamerica.plugin.model.ItemQuest;
-import me.jaron.gamerica.plugin.model.KillQuest;
-import me.jaron.gamerica.plugin.model.Quest;
-import me.jaron.gamerica.plugin.model.Quest;
+import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.ItemQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.KillQuest;
+import me.jaron.gamerica.plugin.questnpcAndBodys.model.Quest;
 import me.kodysimpson.simpapi.colors.ColorTranslator;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +18,17 @@ import java.util.List;
 public class QuestManager {
 
     private final HashMap<Player, Quest> quests;
+    private ChatManager chatManager;
+    private GamericaPlugin main;
 
-    public QuestManager() {
+    public QuestManager(GamericaPlugin main) {
+        this.main = main;
         this.quests = new HashMap<>();
     }
 
     //Load the quests from config.yml
     public List<Quest> getAvailableQuests() {
+        chatManager = new ChatManager(main);
         List<Quest> availableQuests = new ArrayList<>();
 
 
@@ -82,10 +84,10 @@ public class QuestManager {
         long timeTook = System.currentTimeMillis() - quest.getWhenStarted();
         //convert to a string with minutes and seconds
         String timeTookString = String.format("%02d:%02d", timeTook / 60000, (timeTook % 60000) / 1000);
-        p.sendMessage(ColorTranslator.translateColorCodes("&aYou completed the quest &7\"" + quest.getName() + "\"&a in " + timeTookString));
+        p.sendMessage(ColorTranslator.translateColorCodes(chatManager.questprefix + quest.getName() + "\"&a in " + timeTookString));
 
         //give them the reward
-        p.sendMessage("You received " + this.quests.get(p).getReward() + " coins!");
+        p.sendMessage(chatManager.questprefix + "You received " + this.quests.get(p).getReward() + " coins!");
 
         //remove the quest from the HashMap
         this.quests.remove(p);

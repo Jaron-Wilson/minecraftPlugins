@@ -3,10 +3,6 @@ package me.jaron.gamerica.plugin.minigame.commands;
 import me.jaron.gamerica.plugin.minigame.countdowns.PreGameTimer;
 import me.jaron.gamerica.plugin.GamericaPlugin;
 import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +25,7 @@ public class Start implements CommandExecutor {
             return true;
         } else if (cmd.getName().equalsIgnoreCase("start")) {
             new PreGameTimer(main).startCountdown();
-            p.sendMessage(new ChatManager(main).prefix + "You have started the game.");
+            p.sendMessage(new ChatManager(main).minigameprefix + "You have started the game.");
 
             for (int i = 0; i < peopleWaiting; i++) {
                 main.waiting.get(i).teleport(main.loc);
