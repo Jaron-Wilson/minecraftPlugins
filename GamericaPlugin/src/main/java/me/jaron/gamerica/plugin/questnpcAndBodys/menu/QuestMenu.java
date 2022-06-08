@@ -1,6 +1,7 @@
 package me.jaron.gamerica.plugin.questnpcAndBodys.menu;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
+import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
 import me.jaron.gamerica.plugin.questnpcAndBodys.managers.QuestManager;
 import me.jaron.gamerica.plugin.questnpcAndBodys.model.ItemQuest;
 import me.jaron.gamerica.plugin.questnpcAndBodys.model.KillQuest;
@@ -17,10 +18,14 @@ import org.bukkit.inventory.ItemStack;
 public class QuestMenu extends Menu {
 
     private final QuestManager questManager;
+    private GamericaPlugin main;
+    private ChatManager chatManager;
 
-    public QuestMenu(PlayerMenuUtility playerMenuUtility) {
+    public QuestMenu(PlayerMenuUtility playerMenuUtility, GamericaPlugin main) {
         super(playerMenuUtility);
+        this.main = main;
         this.questManager = GamericaPlugin.getPlugin().getQuestManager();
+        this.chatManager = new ChatManager(main);
     }
 
     @Override
@@ -56,17 +61,17 @@ public class QuestMenu extends Menu {
                         //see if the quest is the same one they clicked on
                         if (playersQuest.getName().equalsIgnoreCase(questName)) {
                             //tell them they already have the quest
-                            p.sendMessage(ColorTranslator.translateColorCodes("&cYou already have this quest!"));
+                            p.sendMessage(ColorTranslator.translateColorCodes(chatManager.questprefix + "&cYou already have this quest!"));
                         }else{
                             //tell them they are already on a quest
-                            p.sendMessage(ColorTranslator.translateColorCodes("&cYou are already on a different quest!"));
+                            p.sendMessage(ColorTranslator.translateColorCodes(chatManager.questprefix +"&cYou are already on a different quest!"));
                         }
                     }else{
                         //give the quest to the player
                         questManager.giveQuest(p, quest);
                         //tell them they have the quest and tell them what to do
-                        p.sendMessage(ColorTranslator.translateColorCodes("&aYou have been given the quest &e\"" + quest.getName() + "\"&a!"));
-                        p.sendMessage(ColorTranslator.translateColorCodes("&aTo complete this quest, you must &e" + quest.getDescription() + "&a!"));
+                        p.sendMessage(ColorTranslator.translateColorCodes(chatManager.questprefix +"&aYou have been given the quest &e\"" + quest.getName() + "\"&a!"));
+                        p.sendMessage(ColorTranslator.translateColorCodes(chatManager.questprefix +"&aTo complete this quest, you must &e" + quest.getDescription() + "&a!"));
                     }
 
                     p.closeInventory();
