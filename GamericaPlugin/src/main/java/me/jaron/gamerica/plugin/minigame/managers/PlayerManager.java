@@ -16,7 +16,7 @@ public class PlayerManager {
 
     public void handle(Player player) {
         if (player.getWorld().equals(main.getConfig().getString("worlds.minigame"))) {
-            if (main.getGamestate() == Gamestates.LOBBY) {
+            if (main.getGamestate(main.miniGameLobby) == Gamestates.LOBBY) {
                 main.alive.remove(player);
                 main.spectating.remove(player);
                 main.alive.add(player);
@@ -28,7 +28,9 @@ public class PlayerManager {
                 player.setAllowFlight(false);
                 player.sendMessage(new ChatManager(main).minigameprefix + "Welcome to the MiniGame!");
                 Bukkit.broadcastMessage(new ChatManager(main).minigameprefix + player.getDisplayName() + " has joined the minigame.");
-            } else if (main.getGamestate() == Gamestates.INGAME || main.getGamestate() == Gamestates.ENDGAME || main.getGamestate() == Gamestates.PREGAME) {
+            } else if (main.getGamestate(main.miniGameLobby) == Gamestates.INGAME ||
+                    main.getGamestate(main.miniGameLobby) == Gamestates.ENDGAME ||
+                    main.getGamestate(main.miniGameLobby) == Gamestates.PREGAME) {
                 main.alive.remove(player);
                 main.spectating.remove(player);
                 main.spectating.add(player);

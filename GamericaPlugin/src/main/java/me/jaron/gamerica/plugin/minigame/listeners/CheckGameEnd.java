@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class CheckGameEnd implements Listener {
 
@@ -34,8 +35,6 @@ public class CheckGameEnd implements Listener {
                 p.sendMessage(chatManager.minigameprefix + " If you want to go to lobby then type " +
                         ChatColor.GOLD + ChatColor.BOLD + "/lobby");
                 p.sendMessage(chatManager.minigameprefix + " or you can just stay! And watch");
-//                Hide from tab list
-                p.hidePlayer(main, p);
                 if (main.waiting.contains(p)){
                     main.waiting.remove(p);
                     main.spectating.add(p);
@@ -58,6 +57,31 @@ public class CheckGameEnd implements Listener {
             }
         }else {
             System.out.println(event.getEntity().getWorld());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerLeaveEvent(PlayerQuitEvent event) {
+        gameEnd = new GameEnd(main);
+        chatManager = new ChatManager(main);
+        Player p = event.getPlayer();
+        if (p.getWorld() != null) {
+            if (p.getWorld() == (main.miniGameLobby)) {
+                p.sendRawMessage(p.getUniqueId()," has Quit the Game!");
+                if (main.waiting.contains(p)){
+                    main.waiting.remove(p);
+                    gameEnd.check();
+                }else {
+                    gameEnd.check();
+                }
+
+
+
+            } else if (p.getWorld() == main.mainWorldLobby) {
+                p.sendRawMessage(p.getUniqueId()," has left the server.");
+            }
+        }else {
+            System.out.println(p.getWorld());
         }
     }
 

@@ -36,11 +36,11 @@ public class JoinGameCommand implements CommandExecutor {
                     return true;
                 }
                 else if (main.waiting.size() <= main.getPlayerAmount()) {
-                    if (main.getGamestate() == Gamestates.INGAME) {
+                    if (main.getGamestate(main.miniGameLobby) == Gamestates.INGAME) {
                         p.sendMessage(manager.minigameprefix + "There is a game going please be patient you will be notified when game is done.");
                         return true;
                     }
-                    else if (main.getGamestate() != Gamestates.INGAME) {
+                    else if (main.getGamestate(main.miniGameLobby) != Gamestates.INGAME) {
                         if (!main.waiting.contains(p)) {
                             main.waiting.add(p);
                             p.sendMessage(new ChatManager(main).minigameprefix + "You have joined the queue.");

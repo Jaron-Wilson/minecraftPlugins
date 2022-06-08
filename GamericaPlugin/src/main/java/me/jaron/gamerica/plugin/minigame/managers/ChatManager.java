@@ -20,5 +20,6 @@ public class ChatManager {
     public String flyprefix = format("&8[&2Gamerica&eFly&8] &e");
     public String mainprefix = format("&8[&2Gamerica&ePlugin&8] &e");
     public String permission = format(mainprefix + "&cYou do not have permission to access this command.");
+    public String needtobeplayer = format(mainprefix + "&cYou need to be a player to access this command.");
 
 }

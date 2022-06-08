@@ -29,7 +29,7 @@ public class GameEnd {
                 main.spectating.get(i).setGameMode(GameMode.SURVIVAL);
                 main.spectating.get(i).setCustomNameVisible(false);
                 main.spectating.remove(i);
-                main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
                 if (main.spectating.size() <= 0){
                     break;
                 }
@@ -53,7 +53,7 @@ public class GameEnd {
                     main.spectating.get(i).setGameMode(GameMode.SURVIVAL);
                     main.spectating.get(i).setCustomNameVisible(false);
                     main.spectating.remove(i);
-                    main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                    main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
                     if (main.spectating.size() <= 0) {
                         break;
                     }
@@ -65,7 +65,7 @@ public class GameEnd {
                     main.alive.get(i).teleport(main.mainWorldLobby.getSpawnLocation());
                     main.alive.get(i).setGameMode(GameMode.SURVIVAL);
                     main.alive.remove(i);
-                    main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                    main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
                     if (main.alive.size() <= 0) {
                         break;
                     }
@@ -85,25 +85,25 @@ public class GameEnd {
                     main.spectating.get(i).setGameMode(GameMode.SURVIVAL);
                     main.spectating.get(i).setCustomNameVisible(false);
                     main.spectating.remove(i);
-                    main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                    main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
                     p.sendMessage(chatManager.minigameprefix + "You have ended the game!");
                     if (main.spectating.size() <= 0) {
                         break;
                     }
                 }
             }
-            if (main.alive.size() >= 0) {
+            if (main.alive.size() > 0) {
                 for (int i = 0; i < getAlivePlayers; i++) {
                     main.alive.get(i).sendMessage(chatManager.minigameprefix + ChatColor.BOLD + ChatColor.ITALIC + ChatColor.DARK_PURPLE + "\n\n-----------Game is done!-----------\n\n");
                     main.alive.get(i).teleport(main.mainWorldLobby.getSpawnLocation());
                     main.alive.get(i).setGameMode(GameMode.SURVIVAL);
                     main.alive.remove(i);
-                    main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                    main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
                     p.sendMessage(chatManager.minigameprefix + "You have ended the game!");
-                    if (main.alive.size() <= 0) {
-                        break;
-                    }
                 }
+            }else {
+                main.setGamestate(main.miniGameLobby, Gamestates.ENDGAME);
+                p.sendMessage(chatManager.minigameprefix + "You have ended the game!");
             }
         }
 

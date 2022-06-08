@@ -1,5 +1,8 @@
 off-message: 'You can no longer fly.'
 on-message: '&bYou can fly now. Be free!'
+
+auto-update: true
+
 worlds:
 #  Creates this mini-game world Should Be the same as minigame:
   createnew: false

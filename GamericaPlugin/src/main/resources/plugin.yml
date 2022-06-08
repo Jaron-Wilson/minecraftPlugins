@@ -26,3 +26,5 @@ commands:
     description: Toggle your AFK status
   end:
     description: ends game
+  status:
+    description: status of games

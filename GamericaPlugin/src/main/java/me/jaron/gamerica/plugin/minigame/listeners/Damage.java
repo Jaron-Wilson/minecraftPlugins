@@ -21,7 +21,7 @@ public class Damage implements Listener {
             Player p = (Player) event.getEntity();
 //            if (main.getMinigameWorld(p.getWorld().toString(), main.getConfig().getString("worlds.minigame"))) {
             if (p.getWorld().equals(main.miniGameLobby)) {
-                if (main.getGamestate() == Gamestates.PREGAME) {
+                if (main.getGamestate(main.miniGameLobby) == Gamestates.PREGAME) {
                     event.setCancelled(true);
                 }
             }

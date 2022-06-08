@@ -2,6 +2,7 @@ package me.jaron.gamerica.plugin.minigame.countdowns;
 
 import me.jaron.gamerica.plugin.GamericaPlugin;
 import me.jaron.gamerica.plugin.minigame.Gamestates;
+import me.jaron.gamerica.plugin.minigame.listeners.CheckGameEnd;
 import me.jaron.gamerica.plugin.minigame.managers.ChatManager;
 import org.bukkit.GameMode;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,6 +13,7 @@ public class PreGameTimer {
 
     private GamericaPlugin main;
     private ChatManager manager;
+    GameEnd checkGameEnd;
     public PreGameTimer(GamericaPlugin main) {
         this.main = main;
     }
@@ -105,9 +107,10 @@ public class PreGameTimer {
 
         private void checkPlayers(int i, int times) {
             if (main.waiting.size() < main.getPlayerAmount()){
-                main.setGamestate(main.miniGameLobby, Gamestates.PREGAME);
+                checkGameEnd.check();
                 broadcastMessage(manager.minigameprefix + "Game Is Done, No Players Joined");
             }else if (main.waiting.size() >= main.getPlayerAmount()) {
+                checkGameEnd.check();
                 main.waiting.get(i).sendMessage(manager.minigameprefix + "Game starting in " + times + " seconds.");
             }
         }

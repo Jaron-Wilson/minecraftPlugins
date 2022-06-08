@@ -13,7 +13,7 @@ import me.jaron.gamerica.plugin.afk.commands.IsAFKCommand;
 import me.jaron.gamerica.plugin.afk.listeners.AFKListener;
 import me.jaron.gamerica.plugin.afk.tasks.MovementChecker;
 import me.jaron.gamerica.plugin.commands.Fly;
-import me.jaron.gamerica.plugin.minigame.commands.EndGameCommand;
+import me.jaron.gamerica.plugin.minigame.commands.*;
 import me.jaron.gamerica.plugin.minigame.countdowns.GameEnd;
 import me.jaron.gamerica.plugin.questnpcAndBodys.commands.QuestNPCCommand;
 import me.jaron.gamerica.plugin.questnpcAndBodys.listener.QuestListeners;
@@ -22,9 +22,6 @@ import me.jaron.gamerica.plugin.questnpcAndBodys.managers.NPCManager;
 import me.jaron.gamerica.plugin.questnpcAndBodys.managers.QuestManager;
 import me.jaron.gamerica.plugin.questnpcAndBodys.menu.QuestMenu;
 import me.jaron.gamerica.plugin.minigame.Gamestates;
-import me.jaron.gamerica.plugin.minigame.commands.JoinGameCommand;
-import me.jaron.gamerica.plugin.minigame.commands.Start;
-import me.jaron.gamerica.plugin.minigame.commands.Vanish;
 import me.jaron.gamerica.plugin.minigame.listeners.*;
 import me.jaron.gamerica.plugin.questnpcAndBodys.tasks.BodyRemover;
 import me.jaron.gamerica.plugin.updater.Updater;
@@ -51,7 +48,8 @@ public final class GamericaPlugin extends JavaPlugin   {
     private GameEnd gameEnd;
 
 //    MINIGAMES
-    private Gamestates gamestates;
+    private Gamestates minigameGamestate;
+    private Gamestates gamestate;
 //    Make them all in the on enable so the whole plugin knows about it
     private World newWorld = null;
     private World world = null;
@@ -64,6 +62,7 @@ public final class GamericaPlugin extends JavaPlugin   {
     public ArrayList<Player> vanished = new ArrayList<>();
     public ArrayList<Player> waiting = new ArrayList<>();
 
+    private Gamestates mainGamestate;
 
 //    WORLDS
     public Location loc = null;
@@ -72,12 +71,18 @@ public final class GamericaPlugin extends JavaPlugin   {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        Updater updater = new Updater(this, 631106, this.getFile(), Updater.UpdateType.DEFAULT, true);
+
 
         //Config
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+//        UPDATES
+        if (getConfig().getBoolean("auto-update")) {
+        Updater updater = new Updater(this, 631106, this.getFile(), Updater.UpdateType.DEFAULT, true);
+        }else {
+            System.out.println("You have auto-update set to: " + getConfig().getBoolean("auto-update") + ", Set to true if you want updates to automatically update.");
+        }
 
         plugin = this;
         gameEnd = new GameEnd(this);
@@ -95,9 +100,12 @@ public final class GamericaPlugin extends JavaPlugin   {
             miniGameLobby = creator.createWorld();
             miniGameLobby.setDifficulty(Difficulty.HARD);
             setGamestate(miniGameLobby,Gamestates.PREGAME);
+            minigameGamestate.equals(Gamestates.PREGAME);
             this.loc = miniGameLobby.getSpawnLocation();
-        }else if (getConfig().getString("worlds.minigame") != null) {
+        }
+        else if (getConfig().getString("worlds.minigame") != null) {
             setGamestate(miniGameLobby,Gamestates.PREGAME);
+            minigameGamestate.equals(Gamestates.PREGAME);
             this.loc = miniGameLobby.getSpawnLocation();
         }
         if (getConfig().getBoolean("worlds.createnew") != false) {
@@ -113,8 +121,9 @@ public final class GamericaPlugin extends JavaPlugin   {
                 setGamestate(newWorld, Gamestates.SURVIVAL);
                 this.loc = newWorld.getSpawnLocation();
             }
-        }else {
-            System.out.println(ChatColor.RED + "You do not have the worlds.createnew Enabled on config.yml");
+        }
+        else {
+            System.out.println("You do not have the worlds.createnew Enabled on config.yml");
         }
 
 
@@ -132,6 +141,7 @@ public final class GamericaPlugin extends JavaPlugin   {
         getCommand("join").setExecutor(new JoinGameCommand(this));
         getCommand("end").setExecutor(new EndGameCommand(this));
         getCommand("lobby").setExecutor(new JoinGameCommand(this));
+        getCommand("status").setExecutor(new GameStatusCommand(this));
 
         getServer().getPluginManager().registerEvents(new QuestListeners(), this);
         getServer().getPluginManager().registerEvents(new CheckGameEnd(this), this);
@@ -228,7 +238,7 @@ public final class GamericaPlugin extends JavaPlugin   {
             if (player.getWorld().equals(s)) {
                 setGamestate(mainWorldLobby, Gamestates.LOBBY);
             } else {
-                setGamestate(this.miniGameLobby, Gamestates.PREGAME);
+                setGamestate(miniGameLobby, Gamestates.PREGAME);
             }
 
         }
@@ -256,12 +266,33 @@ public final class GamericaPlugin extends JavaPlugin   {
         return bodyManager;
     }
 
-    public Gamestates getGamestate() {
+    public Gamestates getGamestate(World world1) {
+        Gamestates gamestates = gamestate;
+//        get the world they say
+//        take that world and get the state of the game
+        if (world1.equals(miniGameLobby)) {
+            gamestates = minigameGamestate;
+        }else if (world1.equals(mainWorldLobby)){
+            gamestates = mainGamestate;
+        }else {
+            gamestates = gamestate;
+        }
         return gamestates;
     }
+
+
     public void setGamestate(World world, Gamestates gamestate) {
-        this.gamestates = gamestate;
+        //        set the world to the world they say
         this.world = world;
+        //        set the gamestate to the world they say
+        if (world.equals(miniGameLobby)) {
+            this.minigameGamestate = gamestate;
+        }else if (world.equals(mainWorldLobby)){
+            this.mainGamestate = gamestate;
+        }else {
+            this.gamestate = gamestate;
+        }
+
     }
 
 //    MINIGAMES

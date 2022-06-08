@@ -28,7 +28,6 @@ public class EndGameCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
         if (sender instanceof Player p) {
-            main = new GamericaPlugin();
             gameEnd = new GameEnd(main);
             manager = new ChatManager(main);
             gameEnd.end(p);
