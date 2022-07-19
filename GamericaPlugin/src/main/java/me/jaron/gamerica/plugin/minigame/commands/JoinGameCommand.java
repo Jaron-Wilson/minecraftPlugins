@@ -60,7 +60,7 @@ public class JoinGameCommand implements CommandExecutor {
                     }
                 }
             }
-            else if (cmd.getName().equalsIgnoreCase("lobby")) {
+            if (cmd.getName().equalsIgnoreCase("lobby")) {
                 gameEnd = new GameEnd(main);
                 System.out.println(main.mainWorldLobby);
                 if (main.mainWorldLobby != null) {

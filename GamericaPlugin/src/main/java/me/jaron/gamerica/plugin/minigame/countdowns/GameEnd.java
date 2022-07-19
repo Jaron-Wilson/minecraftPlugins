@@ -34,6 +34,8 @@ public class GameEnd {
                     break;
                 }
             }
+        } else if (main.alive == null){
+            System.out.println();
         }
 
     }
