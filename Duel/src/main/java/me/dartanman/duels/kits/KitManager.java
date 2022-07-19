@@ -16,6 +16,7 @@ import me.dartanman.duels.Duels;
 /**
  * KitManager - Manages everything to do with kits
  * @author Austin Dart (Dartanman)
+ * @editor JA_RON
  */
 public class KitManager {
 	

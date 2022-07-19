@@ -18,13 +18,13 @@ import net.md_5.bungee.api.ChatColor;
  */
 
 public class ArenaManager {
-	
+
 	private Duels plugin;
-	
+
 	private int nextID = 0;
-	
+
 	private List<Arena> arenaList = new ArrayList();
-	
+
 	/**
 	 * Constructs the ArenaManager with access to the Main class
 	 * @param pl
@@ -32,14 +32,14 @@ public class ArenaManager {
 	public ArenaManager(Duels pl) {
 		plugin = pl;
 		try {
-			loadAllArenasFromFile();	
+			loadAllArenasFromFile();
 		}catch(Exception e) {
 			e.printStackTrace();
 			plugin.getLogger().info("Failed to load any arenas. Perhaps you haven't made one yet?");
 			plugin.getLogger().info(ChatColor.GREEN + "If this is the first time you've loaded this plugin, the above error is normal. Don't worry about it.");
 		}
 	}
-	
+
 	/**
 	 * Returns a list of all arenas
 	 * @return
@@ -47,7 +47,7 @@ public class ArenaManager {
 	public List<Arena> getArenaList(){
 		return arenaList;
 	}
-	
+
 	/**
 	 * Loads all arenas from config.yml
 	 */
@@ -78,7 +78,7 @@ public class ArenaManager {
 			saveArenaToList(arena);
 		}
 	}
-	
+
 	/**
 	 * Saves an arena to config.yml
 	 * @param arena
@@ -98,18 +98,18 @@ public class ArenaManager {
 		double s1Z = s1.getZ();
 		float s1Yaw = s1.getYaw();
 		float s1Pitch = s1.getPitch();
-		c.set(path + ".Spawn1", s1World.getName() + "/" + s1X + "/" + s1Y + "/" + s1Z + "/" + s1Yaw + "/" + s1Pitch);
+		c.set(path + ".Spawn1", s1World.getName() + "/\n" + s1X + "/\n" + s1Y + "/\n" + s1Z + "/\n" + s1Yaw + "/\n" + s1Pitch);
 		World s2World = s2.getWorld();
 		double s2X = s2.getX();
 		double s2Y = s2.getY();
 		double s2Z = s2.getZ();
 		float s2Yaw = s2.getYaw();
 		float s2Pitch = s2.getPitch();
-		c.set(path + ".Spawn2", s2World.getName() + "/" + s2X + "/" + s2Y + "/" + s2Z + "/" + s2Yaw + "/" + s2Pitch);
+		c.set(path + ".Spawn2", s2World.getName() + "/\n" + s2X + "/\n" + s2Y + "/\n" + s2Z + "/\n" + s2Yaw + "/\n" + s2Pitch);
 		plugin.saveConfig();
 		plugin.reloadConfig();
 	}
-	
+
 	/**
 	 * Adds an Arena to arenaList
 	 * @param arena
@@ -118,7 +118,7 @@ public class ArenaManager {
 	public void saveArenaToList(Arena arena) {
 		arenaList.add(arena);
 	}
-	
+
 	/**
 	 * Creates an arena with the given name
 	 * @param name
@@ -130,7 +130,7 @@ public class ArenaManager {
 		nextID++;
 		return arena;
 	}
-	
+
 	/**
 	 * Creates an arena with the given ID and name
 	 * @param id
@@ -143,7 +143,7 @@ public class ArenaManager {
 		Arena arena = new Arena(id, name, plugin);
 		return arena;
 	}
-	
+
 	/**
 	 * Finds an Arena by the given name
 	 * @param name
@@ -159,7 +159,7 @@ public class ArenaManager {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Finds an Arena by one of its players.
 	 * @param player

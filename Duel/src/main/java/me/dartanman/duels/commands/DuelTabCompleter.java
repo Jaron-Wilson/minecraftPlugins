@@ -12,6 +12,7 @@ public class DuelTabCompleter implements TabCompleter{
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		List<String> arguments = new ArrayList();
 		if(args.length == 1) {
+//			EX: 1v1 arenas
 			arguments.add("help");
 			arguments.add("join");
 			arguments.add("leaderboard");
@@ -19,10 +20,12 @@ public class DuelTabCompleter implements TabCompleter{
 			arguments.add("kits");
 		}else if(args.length == 2) {
 			if(args[1].equalsIgnoreCase("arenas")) {
+//			EX: 1v1 arenas create
 				arguments.add("create");
 				arguments.add("setspawn1");
 				arguments.add("setspawn2");
 			}else if(args[1].equalsIgnoreCase("kits")) {
+//			EX: 1v1 kits create
 				arguments.add("create");
 				arguments.add("delete");
 				arguments.add("list");
