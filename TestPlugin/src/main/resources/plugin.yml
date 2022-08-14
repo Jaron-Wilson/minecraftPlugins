@@ -1,0 +1,7 @@
+name: TestPlugin
+version: '${project.version}'
+main: me.jaron.plugin.testplugin.TestPlugin
+api-version: 1.19
+commands:
+  check:
+    description: Check command
