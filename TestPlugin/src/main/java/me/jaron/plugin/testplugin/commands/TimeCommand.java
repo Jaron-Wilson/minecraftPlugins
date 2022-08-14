@@ -29,8 +29,8 @@ public class TimeCommand implements CommandExecutor {
                     } else { //Sender had attest 1 argument, but didn't type sir as a second one!
 //args[0] also returns string, so lets send the message right back to them!
                         sender.sendMessage("Your first argument was: " + args[0]);
-                        if (Bukkit.getOnlinePlayers().contains(args[0])) {
-                            player.sendMessage(String.valueOf(plugin.getBlocksBroken().get((args[0]))));
+                        if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayerExact(args[0]))) {
+                            player.sendMessage(String.valueOf(plugin.getBlocksBroken().get(Bukkit.getPlayerExact(args[0]))));
                         }else {
                             player.sendMessage("Player is not online!");
                         }
