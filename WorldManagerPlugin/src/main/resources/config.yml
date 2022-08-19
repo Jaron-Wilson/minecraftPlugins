@@ -1,0 +1,27 @@
+
+WorldsProject:
+  worlds:
+#  Should it create a new survival world?
+    createnew: false
+    worldname: "survival_world"
+  settings:
+    generateStructures: true
+    spawnLocation: null
+#      Types of difficultys:
+    #        Difficulty.HARD
+    #        Difficulty.NORMAL
+    #        Difficulty.PEACEFUL
+    #        Difficulty.EASY
+    difficulty: Difficulty.HARD
+
+  worldslist:
+#    If set to true will make all the worlds in this list!
+    createall: true
+    worlds:
+#   PUT LISTS OF WORLD FOLDERS OR IT WILL CREATE NEWONES AND LOAD THEM IN
+#   REMOVE '#' to enable that world
+# EXAMPLE: ⬇
+#      - Survival
+#      -
+#      -
+#      -

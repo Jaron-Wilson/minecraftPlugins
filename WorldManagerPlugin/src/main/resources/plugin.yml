@@ -1,0 +1,5 @@
+name: WorldManagerPlugin
+version: '${project.version}'
+main: me.jaron.plugin.worldmanager.WorldManagerPlugin
+api-version: 1.19
+authors: [ JA_RON ]
