@@ -7,3 +7,5 @@ commands:
     description: Check command
   heal:
     description: heal players
+    aliases:
+      - reset-health

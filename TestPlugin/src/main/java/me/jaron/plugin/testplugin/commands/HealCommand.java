@@ -35,6 +35,9 @@ public class HealCommand implements CommandExecutor {
                         target.setHealth(20);
                     }
                 }
+            } else if (alias.equalsIgnoreCase("reset-health")) {
+                player.setHealthScale(20);
+
             }
         return true;
     }

@@ -1,7 +1,8 @@
 package me.jaron.plugin.testplugin;
 
 import me.jaron.plugin.testplugin.commands.HealCommand;
-import me.jaron.plugin.testplugin.commands.TimeCommand;
+import me.jaron.plugin.testplugin.commands.BlocksBrokenCommand;
+import me.jaron.plugin.testplugin.listeners.BlockBrokenQuest;
 import me.jaron.plugin.testplugin.listeners.TimeCheckerEvents;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,9 +26,10 @@ public final class TestPlugin extends JavaPlugin {
 
 
 //        LISTENERS & COMMANDS
-        getCommand("check").setExecutor(new TimeCommand(this));
+        getCommand("check").setExecutor(new BlocksBrokenCommand(this));
         getCommand("heal").setExecutor(new HealCommand(this));
         getServer().getPluginManager().registerEvents(new TimeCheckerEvents(this), this);
+        getServer().getPluginManager().registerEvents(new BlockBrokenQuest(this), this);
 
 
     }

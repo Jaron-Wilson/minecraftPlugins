@@ -67,25 +67,5 @@ public class TimeCheckerEvents implements Listener {
 ////        time.replace(e.getPlayer(), value + 1);
 //    }
 
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
 
-        if (!player.getGameMode().equals(GameMode.CREATIVE)) {
-            if (plugin.getBlocksBroken().containsKey(player)) {
-                if (plugin.getBlocksBroken().get(player) == 3) {
-                    player.sendMessage("You have joined " + ChatColor.BLUE + ChatColor.UNDERLINE +firstTime(player.getFirstPlayed()) + ChatColor.RESET + " ago.");
-
-                    player.sendMessage("Your time on the server so far is: " + ChatColor.GOLD + ChatColor.UNDERLINE + justJoined(plugin.getTimeOn().get(event.getPlayer())));
-                }
-                plugin.getBlocksBroken().put(player, plugin.getBlocksBroken().get(player) + 1);
-//                player.sendMessage("You have broken " + plugin.getBlocksBroken().get(player) + " blocks.");
-                player.sendTitle("Blocks Broken", ChatColor.RED + String.valueOf(plugin.getBlocksBroken().get(player)), 5, 20, 6);
-            } else {
-                plugin.getBlocksBroken().put(player, 1);
-                player.sendMessage("You have broken your first block. Nice.");
-
-            }
-        }
-    }
 }
