@@ -3,9 +3,7 @@ version: '${project.version}'
 main: me.jaron.plugin.testplugin.TestPlugin
 api-version: 1.19
 commands:
-  check:
-    description: Check command
-  heal:
-    description: heal players
+  player:
+    description: players commands
     aliases:
-      - reset-health
+      - p

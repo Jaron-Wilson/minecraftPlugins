@@ -10,6 +10,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.List;
+
 public class TimeCheckerEvents implements Listener {
 
     private final TestPlugin plugin;
@@ -18,21 +20,32 @@ public class TimeCheckerEvents implements Listener {
     }
 
 
-    @EventHandler
-    public void onJoinEvent(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        plugin.getTimeOn().put(event.getPlayer(), System.currentTimeMillis());
+//    @EventHandler
+//    public void onJoinEvent(PlayerJoinEvent event) {
+//        Player player = event.getPlayer();
+//        if (!plugin.getConfig().contains(player.getDisplayName())){
+//            plugin.getConfig().createSection(player.getDisplayName());
+//            List<String> words = plugin.getConfig().getStringList(player.getDisplayName());
+//
+////            words.add(System.currentTimeMillis());
+//            words.add(evaluateTime(System.currentTimeMillis()));
+//            plugin.getTimeOn().put(player, System.currentTimeMillis());
+//            plugin.getConfig().set(String.valueOf(player), words);
+//
+//
+//            player.sendMessage(firstTime(player.getFirstPlayed()));
+//        }
+//
+//
+//    }
 
-
-        player.sendMessage(firstTime(player.getFirstPlayed()));
-
-    }
-
-    @EventHandler
-    public void onLeaveEvent(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        plugin.getTimeOn().remove(event.getPlayer());
-    }
+//    @EventHandler
+//    public void onLeaveEvent(PlayerQuitEvent event) {
+//        Player player = event.getPlayer();
+//        if (plugin.getConfig().contains(player.getDisplayName())){
+//            plugin.getTimeOn().remove(player);
+//        }
+//    }
 
     public String evaluateTime(Long joinNumber) {
     Long now = System.currentTimeMillis();
