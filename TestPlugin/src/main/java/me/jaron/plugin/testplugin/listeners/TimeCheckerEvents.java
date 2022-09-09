@@ -20,32 +20,42 @@ public class TimeCheckerEvents implements Listener {
     }
 
 
-//    @EventHandler
-//    public void onJoinEvent(PlayerJoinEvent event) {
-//        Player player = event.getPlayer();
+    @EventHandler
+    public void onJoinEvent(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        if (plugin.getConfig().getBoolean("youAreAwesome")){
+            plugin.getTimeOn().put(player, System.currentTimeMillis());
+            if (player.isOp()) {
+                player.sendMessage(String.valueOf(plugin.getTimeOn().put(player, System.currentTimeMillis())));
+            }
+//            plugin.getConfig().set(String.valueOf(player), time);
+            plugin.getConfig().addDefault(player.getDisplayName(), evaluateTime(System.currentTimeMillis()));
+        }
 //        if (!plugin.getConfig().contains(player.getDisplayName())){
 //            plugin.getConfig().createSection(player.getDisplayName());
-//            List<String> words = plugin.getConfig().getStringList(player.getDisplayName());
+//            List<String> time = plugin.getConfig().getStringList(player.getDisplayName());
 //
 ////            words.add(System.currentTimeMillis());
-//            words.add(evaluateTime(System.currentTimeMillis()));
-//            plugin.getTimeOn().put(player, System.currentTimeMillis());
-//            plugin.getConfig().set(String.valueOf(player), words);
-//
-//
-//            player.sendMessage(firstTime(player.getFirstPlayed()));
-//        }
-//
-//
-//    }
+//            time.add(evaluateTime(System.currentTimeMillis()));
 
-//    @EventHandler
-//    public void onLeaveEvent(PlayerQuitEvent event) {
-//        Player player = event.getPlayer();
-//        if (plugin.getConfig().contains(player.getDisplayName())){
-//            plugin.getTimeOn().remove(player);
-//        }
-//    }
+
+
+            player.sendMessage(firstTime(player.getFirstPlayed()));
+        }
+
+    @EventHandler
+    public void onLeaveEvent(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (plugin.getConfig().getBoolean("youAreAwesome")) {
+            Long ptime = plugin.getTimeOn().get(player);
+            if (plugin.getConfig().contains(player.getDisplayName())) {
+                plugin.getConfig().set(player.getDisplayName(), evaluateTime(ptime));
+            }
+          if (plugin.getTimeOn().get(player) != null)
+                plugin.getTimeOn().remove(player);
+        }
+    }
 
     public String evaluateTime(Long joinNumber) {
     Long now = System.currentTimeMillis();
